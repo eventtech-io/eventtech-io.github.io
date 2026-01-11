@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Hedera | Licence-Free Wireless Audio Link</title>
+  <title>Event Tech Research | Audio · Control · R&D</title>
 
   <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Basic SEO -->
-  <meta name="description" content="Hedera is a licence-free wireless audio + data link for moving sound systems. Uncompressed stereo PCM, ultra-low latency, engineered for hostile RF environments." />
+  <meta name="description" content="Event Tech Research is a London-based R&D and education studio focused on modern event audio, networking, and control. We prototype practical tools for technicians and production teams, then share knowledge through documentation, training, and open-architecture design." />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Event Tech Research" />
-  <meta name="keywords" content="Hedera link, licence free wireless audio, uncompressed PCM, low latency, carnival float link, RF resilient audio, event technology" />
-  <link rel="canonical" href="https://eventtech-io.github.io/hedera.html" />
+  <meta name="keywords" content="Event Tech Research, event technology, audio networking, OSC, Dante, R&D, live sound, show control, Raspberry Pi audio, networked audio" />
+  <link rel="canonical" href="https://eventtech-io.github.io/" />
 
   <!-- Open Graph / Social sharing -->
-  <meta property="og:title" content="Hedera | Licence-Free Wireless Audio Link" />
-  <meta property="og:description" content="Uncompressed stereo PCM. Ultra-low latency. Built for hostile RF environments and moving floats." />
+  <meta property="og:title" content="Event Tech Research | Audio · Control · R&D" />
+  <meta property="og:description" content="Research-led tools for the next generation of events. Modern audio, networking, and control workflows for technicians and production teams." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://eventtech-io.github.io/hedera.html" />
+  <meta property="og:url" content="https://eventtech-io.github.io/" />
   <meta property="og:image" content="https://eventtech-io.github.io/assets/logo.png" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hedera | Licence-Free Wireless Audio Link" />
-  <meta name="twitter:description" content="Uncompressed stereo PCM. Ultra-low latency. Built for hostile RF environments and moving floats." />
+  <meta name="twitter:title" content="Event Tech Research | Audio · Control · R&D" />
+  <meta name="twitter:description" content="Research-led tools for the next generation of events. Modern audio, networking, and control workflows for technicians and production teams." />
   <meta name="twitter:image" content="https://eventtech-io.github.io/assets/logo.png" />
 
   <!-- Favicon -->
@@ -142,12 +142,6 @@
       background: #111827;
     }
 
-    .social-chip.active {
-      border-color: #e5e7eb;
-      color: #e5e7eb;
-      background: #111827;
-    }
-
     .social-dot {
       width: 6px;
       height: 6px;
@@ -168,7 +162,7 @@
       color: #e5e7eb;
     }
 
-    /* ===== MAIN ===== */
+    /* ===== MAIN / HERO ===== */
 
     main {
       flex: 1;
@@ -176,7 +170,7 @@
       max-width: 920px;
       margin: 0 auto;
       display: grid;
-      gap: 2rem;
+      gap: 1.5rem;
       position: relative;
       z-index: 1;
     }
@@ -184,13 +178,13 @@
     .hero {
       position: relative;
       text-align: center;
-      padding-top: 5.5rem;
+      padding-top: 5.6rem;
       padding-bottom: 3.2rem;
       display: grid;
-      gap: 1.25rem;
+      gap: 1.1rem;
     }
 
-    /* Circuit background – reuse your existing look */
+    /* Circuit background: full width + side fade */
     .hero::before {
       content: "";
       position: absolute;
@@ -214,6 +208,7 @@
       z-index: -1;
     }
 
+    /* Bottom fade matches the site background */
     .hero::after {
       content: "";
       position: absolute;
@@ -261,18 +256,20 @@
       font-size: 1rem;
       color: #e5e7eb;
       line-height: 1.9;
-      max-width: 54rem;
+      max-width: 52rem;
       margin: 0 auto;
       text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
     }
 
-    .quick-links {
+    .hero-links {
       display: flex;
-      gap: .6rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: .2rem;
+      margin-top: 0.2rem;
     }
+
+    /* ===== GRID + CARDS ===== */
 
     .grid {
       display: grid;
@@ -284,23 +281,17 @@
         grid-template-columns: 1.1fr 1fr;
         align-items: start;
       }
-      .grid-3 {
-        grid-template-columns: repeat(3, 1fr);
-        align-items: stretch;
-      }
     }
 
     @media (max-width: 640px) {
       header, main { padding-inline: 5vw; }
-      .hero { padding-top: 4.5rem; }
+      .hero { padding-top: 4.6rem; }
       .hero::before {
         top: -30px;
         height: calc(100% + 60px);
         background-size: 180% auto;
       }
     }
-
-    /* ===== CARDS ===== */
 
     .card {
       background: linear-gradient(to bottom, var(--card), #050609);
@@ -369,37 +360,24 @@
       color: #e5e7eb;
       line-height: 1.8;
     }
-
     ul li { margin: 0.3rem 0; }
 
-    .btn-row {
-      display: flex;
-      gap: .6rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: .4rem;
+    /* ===== POLISHED CTA BLOCK ===== */
+
+    .cta-block {
+      display: grid;
+      gap: 0.6rem;
     }
 
-    /* Small “button-like” internal chips using your existing chip style */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.45rem 0.85rem;
-      border-radius: 999px;
-      border: 1px solid #27272f;
-      font-size: 0.80rem;
-      color: #e5e7eb;
-      text-decoration: none;
-      background: rgba(9, 9, 11, 0.9);
-      transition: border-color 0.15s ease, background 0.15s ease;
+    .cta-lead {
+      margin: 0.2rem 0 0.2rem;
     }
-    .btn:hover { border-color:#e5e7eb; background:#111827; }
 
     .fine {
-      font-size: .86rem;
+      font-size: 0.86rem;
       color: var(--muted);
       line-height: 1.8;
+      margin: 0.2rem 0 0;
     }
 
     /* ===== FOOTER ===== */
@@ -415,7 +393,10 @@
       z-index: 1;
     }
 
-    footer a { color: #e5e7eb; text-decoration: none; }
+    footer a {
+      color: #e5e7eb;
+      text-decoration: none;
+    }
     footer a:hover { text-decoration: underline; }
   </style>
 </head>
@@ -424,7 +405,7 @@
   <div class="page">
 
     <header>
-      <a class="brand" href="index.html" aria-label="Back to home">
+      <a class="brand" href="index.html" aria-label="Event Tech Research home">
         <div class="logo-img">
           <img src="assets/logo.png" alt="Event Tech Research Logo">
         </div>
@@ -435,24 +416,29 @@
       </a>
 
       <nav class="social-header" aria-label="Links">
-        <a class="social-chip" href="index.html"><span class="social-dot"></span> Home</a>
-        <a class="social-chip active" href="hedera.html" aria-current="page"><span class="social-dot"></span> Hedera</a>
+        <!-- Internal Page 2 -->
+        <a class="social-chip" href="hedera.html">
+          <span class="social-dot"></span> Hedera
+        </a>
 
         <a class="social-chip"
            href="https://www.linkedin.com/in/event-tech-research-uk?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=android_app"
            target="_blank" rel="noreferrer">
           <span class="social-dot"></span> LinkedIn
         </a>
+
         <a class="social-chip"
            href="https://www.facebook.com/share/17czJerMNB/"
            target="_blank" rel="noreferrer">
           <span class="social-dot"></span> Facebook
         </a>
+
         <a class="social-chip"
            href="https://github.com/eventtech-io"
            target="_blank" rel="noreferrer">
           <span class="social-icon-gh">GH</span> GitHub
         </a>
+
         <a class="social-chip"
            href="https://www.instagram.com/eventtechresearch?igsh=MW44cWIya3Q3NGdxbg=="
            target="_blank" rel="noreferrer">
@@ -463,116 +449,102 @@
 
     <main>
       <section class="hero">
-        <span class="badge">Hedera</span>
+        <span class="badge">Company Statement</span>
         <h1>
-          Licence-free wireless audio for <span>moving sound systems</span>.
+          Research-led tools for the <span>next generation</span> of events.
         </h1>
         <p class="hero-lead">
-          Hedera is a licence-free wireless audio + data link designed to connect moving carnival floats travelling along a parade route.
-          It carries a minimum of one uncompressed stereo PCM audio stream with minimal (ideally imperceptible) latency,
-          plus a service / messaging channel to keep engineers connected between floats.
+          Event Tech Research is a London-based R&amp;D and education studio focused on modern event
+          audio, networking, and control. We prototype practical tools for technicians and production teams —
+          then share the knowledge back into the community through documentation, training, and open-architecture design.
         </p>
 
-        <div class="btn-row" aria-label="Jump links">
-          <a class="btn" href="#features"><span class="social-dot"></span> Features</a>
-          <a class="btn" href="#rf"><span class="social-dot"></span> Antenna &amp; RF</a>
-          <a class="btn" href="#timeline"><span class="social-dot"></span> Timeline</a>
-          <a class="btn" href="#roadmap"><span class="social-dot"></span> Roadmap</a>
+        <div class="hero-links" aria-label="Featured links">
+          <a class="social-chip" href="hedera.html"><span class="social-dot"></span> Read: Hedera (Page 2)</a>
+          <a class="social-chip" href="https://github.com/eventtech-io" target="_blank" rel="noreferrer">
+            <span class="social-icon-gh">GH</span> Open projects
+          </a>
         </div>
-
-        <p class="fine">
-          Built from field reality: vibration, obstructions, crowded streets, and saturated RF conditions.
-        </p>
       </section>
 
-      <section class="grid grid-2" id="features">
+      <section class="grid grid-2">
         <article class="card">
-          <div class="label">Technical Overview</div>
-          <h2>What Hedera delivers</h2>
+          <div class="label">Overview</div>
+          <h2>What we do</h2>
+          <p>
+            We explore how networked audio, OSC, and open protocols can simplify real-world workflows
+            for engineers in theatres, broadcast, and live events. Our work spans Raspberry Pi-based hardware,
+            control software, and practical guides aimed at field technicians.
+          </p>
           <ul>
-            <li><strong>Uncompressed audio:</strong> 16/24-bit PCM @ 48 kHz (minimum one stereo channel)</li>
-            <li><strong>Low latency target:</strong> 3–5 ms AD/DA (deployment-tuned for stability)</li>
-            <li><strong>Link resilience:</strong> packet redundancy and controlled buffering behaviour</li>
-            <li><strong>Analogue I/O:</strong> dual XLR stereo line in/out</li>
-            <li><strong>Digital option:</strong> stereo S/PDIF / AES input or output</li>
-            <li><strong>Service channel:</strong> messaging / coordination data link between engineers</li>
+            <li>Design and test event-focused audio &amp; control prototypes</li>
+            <li>Document robust, repeatable workflows for crews on the ground</li>
+            <li>Share tools, templates, and learning resources with the community</li>
           </ul>
-          <p class="fine">
-            Where bandwidth allows, additional audio channels can be carried.
+          <p>
+            The goal is simple: make complex technology feel approachable, reliable, and ready for showtime.
           </p>
         </article>
 
-        <article class="card" id="rf">
-          <div class="label">Antenna &amp; RF</div>
-          <h2>Why “donut” antennas fail on floats</h2>
-          <p>
-            Omnidirectional Wi-Fi antennas radiate in a donut pattern: wide horizontally, but very narrow vertically.
-            On moving floats, vibration and road pitch can shift alignment and collapse the link.
-          </p>
-          <p>
-            Hedera is designed around <strong>controlled, symmetrical coverage</strong> so coverage remains predictable in motion.
-          </p>
-          <ul>
-            <li><strong>Symmetrical beam pattern:</strong> 134°–180°</li>
-            <li><strong>Azimuth beam width (per antenna):</strong> H 67°–90° / V 67°–90°</li>
-            <li><strong>Elevation beam width (per antenna):</strong> H 67°–90° / V 67°–90°</li>
-          </ul>
-        </article>
-      </section>
-
-      <section class="grid" id="timeline">
         <article class="card">
-          <div class="label">Real-World Proven</div>
-          <h2>Notting Hill Carnival development timeline</h2>
+          <div class="label">Ethics &amp; Values</div>
+          <h2>How we operate</h2>
+          <p>
+            Event Tech Research is built on the idea that great live experiences depend on transparent,
+            well-understood systems.
+          </p>
           <ul>
-            <li><strong>2014:</strong> concept born — client demand to link floats to play “as one”</li>
-            <li><strong>2015:</strong> first live tests — uncompressed IP audio proven viable in motion</li>
-            <li><strong>2016:</strong> first proper run — antenna stability strong, commercial encoders introduced latency drift</li>
-            <li><strong>2017:</strong> shootout — compared against 1W RF and Neutrik Xirium; reliability validated</li>
-            <li><strong>2018:</strong> stable multi-day operation — latency reduced, resilience refined</li>
-            <li><strong>2019:</strong> extended separation tests — validated bridging node use in certain layouts</li>
+            <li><strong>Open thinking:</strong> clear documentation and standards-first design.</li>
+            <li><strong>Engineer-first tools:</strong> reduce stress on show day, not add to it.</li>
+            <li><strong>Honest R&amp;D:</strong> publish lessons learned, not just highlights.</li>
+            <li><strong>Sustainable practice:</strong> extend the value of existing equipment through smarter integration.</li>
           </ul>
-          <p class="fine">
-            Key field outcomes included <strong>high link stability</strong> in hostile RF, and deployment learnings centred on geometry,
-            vibration control, and predictable packet behaviour.
+          <p>
+            Every project is approached with respect for crews, audiences, and collaborators.
           </p>
         </article>
       </section>
 
-      <section class="grid grid-2" id="roadmap">
+      <section class="grid">
         <article class="card">
-          <div class="label">Roadmap</div>
-          <h2>Planned capability expansion</h2>
-          <ul>
-            <li>User-configurable interface (network GUI / onboard screen)</li>
-            <li>Dry-hire ready workflows</li>
-            <li>Live “flip-flop” broadcasting between floats</li>
-            <li>Compact variants for speaker modules</li>
-            <li>Multi-channel comms system</li>
-            <li>Network-capable stage boxes</li>
-            <li>Laser inclinometer integration</li>
-            <li>Touch-screen RF analysers</li>
-          </ul>
+          <div class="label">Featured Project</div>
+          <h2>Hedera — licence-free wireless audio for moving sound systems</h2>
+          <p>
+            Hedera is a licence-free wireless audio + data link designed to connect moving carnival floats travelling
+            along a parade route. It carries uncompressed stereo PCM audio with minimal (ideally imperceptible) latency,
+            plus a service channel for engineer-to-engineer coordination between floats.
+          </p>
+          <p>
+            <a class="social-chip" href="hedera.html"><span class="social-dot"></span> Open Hedera (Page 2)</a>
+          </p>
         </article>
+      </section>
 
-        <article class="card" id="contact">
-          <div class="label">Request</div>
-          <h2>Want the technical brief?</h2>
-          <p>
-            If you want a deeper spec, deployment patterns, or a discussion about route geometry and float spacing,
-            get in touch and we’ll send a concise technical brief.
-          </p>
-          <p class="fine">
-            Replace the email below with your preferred address.
-          </p>
-          <p>
-            <a class="btn" href="mailto:hello@yourdomain.com?subject=Hedera%20Technical%20Brief&body=Hi%2C%0A%0AI%27d%20like%20to%20request%20the%20Hedera%20technical%20brief.%0A%0AEvent%3A%0ARoute%20length%3A%0AFloat%20count%3A%0AExpected%20spacing%3A%0A%0AThanks%2C">
-              <span class="social-dot"></span> Email for Brief
-            </a>
-          </p>
-          <p class="fine">
-            <a href="index.html">← Back to the landing page</a>
-          </p>
+      <!-- Polished contact CTA -->
+      <section class="grid">
+        <article class="card">
+          <div class="label">Contact</div>
+
+          <div class="cta-block">
+            <h2>Request the Technical Brief</h2>
+            <p class="cta-lead">
+              Want the deeper specification, deployment patterns, or a quick sanity-check on float spacing and route geometry?
+              Email us and we’ll send a concise technical brief.
+            </p>
+
+            <p>
+              <a
+                class="social-chip"
+                href="mailto:event.tech.research@gmail.com?subject=Hedera%20Technical%20Brief%20Request&body=Hi%20Event%20Tech%20Research%2C%0A%0AI%27d%20like%20to%20request%20the%20Hedera%20technical%20brief.%0A%0AEvent%20name%3A%0ARoute%20length%3A%0ANumber%20of%20floats%3A%0AApproximate%20spacing%20between%20floats%3A%0A%0AThanks%2C%0A"
+              >
+                <span class="social-dot"></span> Email for Brief
+              </a>
+            </p>
+
+            <p class="fine">
+              Opens your default email client with a pre-filled request.
+            </p>
+          </div>
         </article>
       </section>
     </main>
