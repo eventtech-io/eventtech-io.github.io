@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Basic SEO -->
-  <meta name="description" content="Event Tech Research is a London-based R&D and education studio focused on modern event audio, networking, and control. We prototype practical tools for technicians and production teams, then share the knowledge back through documentation, training, and open-architecture design." />
+  <meta name="description" content="Event Tech Research is a London-based R&D and education studio focused on modern event audio, networking, and control. We prototype practical tools for technicians and production teams, then share knowledge through documentation, training, and open-architecture design." />
   <meta name="robots" content="index, follow" />
   <meta name="author" content="Event Tech Research" />
   <meta name="keywords" content="Event Tech Research, event technology, audio networking, OSC, Dante, R&D, live sound, show control, Raspberry Pi audio, networked audio" />
@@ -16,7 +16,7 @@
 
   <!-- Open Graph / Social sharing -->
   <meta property="og:title" content="Event Tech Research | Audio · Control · R&D" />
-  <meta property="og:description" content="Research-led tools for the next generation of events. Event Tech Research explores modern audio, networking, and control workflows for technicians and production teams." />
+  <meta property="og:description" content="Research-led tools for the next generation of events. Modern audio, networking, and control workflows for technicians and production teams." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://eventtech-io.github.io/" />
   <meta property="og:image" content="https://eventtech-io.github.io/assets/logo.png" />
@@ -24,7 +24,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Event Tech Research | Audio · Control · R&D" />
-  <meta name="twitter:description" content="Research-led tools for the next generation of events. Event Tech Research explores modern event audio, networking, and control workflows for technicians and production teams." />
+  <meta name="twitter:description" content="Research-led tools for the next generation of events. Modern audio, networking, and control workflows for technicians and production teams." />
   <meta name="twitter:image" content="https://eventtech-io.github.io/assets/logo.png" />
 
   <!-- Favicon -->
@@ -81,6 +81,8 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
     }
 
     .logo-img {
@@ -131,6 +133,7 @@
       text-decoration: none;
       background: rgba(9, 9, 11, 0.9);
       transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+      white-space: nowrap;
     }
 
     .social-chip:hover {
@@ -260,6 +263,15 @@
       text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
     }
 
+    /* NEW: hero links row */
+    .hero-links {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.25rem;
+    }
+
     .grid {
       display: grid;
       gap: 1.5rem;
@@ -320,12 +332,8 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .card {
-        transition: none;
-      }
-      .card:hover {
-        transform: none;
-      }
+      .card { transition: none; }
+      .card:hover { transform: none; }
     }
 
     .label {
@@ -381,11 +389,13 @@
     footer a:hover { text-decoration: underline; }
   </style>
 </head>
+
 <body>
   <div class="page">
 
     <header>
-      <div class="brand">
+      <!-- Make the brand clickable back to home -->
+      <a class="brand" href="index.html" aria-label="Event Tech Research home">
         <div class="logo-img">
           <img src="assets/logo.png" alt="Event Tech Research Logo">
         </div>
@@ -393,9 +403,14 @@
           <div class="brand-text-title">Event Tech Research</div>
           <div class="brand-text-sub">Audio · Control · R&amp;D</div>
         </div>
-      </div>
+      </a>
 
       <nav class="social-header" aria-label="Social links">
+        <!-- NEW: internal page link -->
+        <a class="social-chip" href="hedera.html">
+          <span class="social-dot"></span> Hedera
+        </a>
+
         <a class="social-chip"
            href="https://www.linkedin.com/in/event-tech-research-uk?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=android_app"
            target="_blank" rel="noreferrer">
@@ -431,6 +446,14 @@
           teams—then share the knowledge back into the community through documentation, training, and
           open-architecture design.
         </p>
+
+        <!-- NEW: clear Page 2 CTA inside the hero -->
+        <div class="hero-links" aria-label="Featured links">
+          <a class="social-chip" href="hedera.html"><span class="social-dot"></span> Read: Hedera (Page 2)</a>
+          <a class="social-chip" href="https://github.com/eventtech-io" target="_blank" rel="noreferrer">
+            <span class="social-icon-gh">GH</span> Open projects
+          </a>
+        </div>
       </section>
 
       <section class="grid grid-2">
@@ -472,6 +495,22 @@
           <p>
             Every project is approached with respect for the people running the show, the audiences
             they serve, and the partners we collaborate with.
+          </p>
+        </article>
+      </section>
+
+      <!-- NEW: Featured Project card linking to Page 2 -->
+      <section class="grid">
+        <article class="card">
+          <div class="label">Featured Project</div>
+          <h2>Hedera — licence-free wireless audio for moving sound systems</h2>
+          <p>
+            Hedera is a licence-free wireless audio + data link designed to connect moving carnival floats travelling
+            along a parade route. It carries uncompressed stereo PCM audio with minimal (ideally imperceptible) latency,
+            plus a service channel for engineer-to-engineer communication between floats.
+          </p>
+          <p>
+            <a class="social-chip" href="hedera.html"><span class="social-dot"></span> Open Hedera (Page 2)</a>
           </p>
         </article>
       </section>
