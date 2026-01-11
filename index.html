@@ -181,16 +181,17 @@
       padding-bottom: 3rem;
     }
 
-    /* Circuit background behind hero only */
+    /* Brighter circuit background behind hero only */
     .hero::before {
       content: "";
       position: absolute;
-      inset: -60px -12vw auto -12vw; /* extend slightly wider than content */
+      inset: -40px -12vw auto -12vw; /* slightly less cropping */
       height: 100%;
       background:
-        radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(2, 4, 10, 1)),
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.15), rgba(2, 4, 10, 0.75)),
         url("assets/circuit-main.png") center top / cover no-repeat;
-      opacity: 0.95;
+      opacity: 1;
+      filter: brightness(1.4) contrast(1.25); /* boost visibility */
       z-index: -2;
     }
 
@@ -271,7 +272,7 @@
     @media (max-width: 640px) {
       header, main { padding-inline: 5vw; }
       .hero::before {
-        inset: -40px -10vw auto -10vw;
+        inset: -30px -10vw auto -10vw;
         background-size: 180% auto; /* slight zoom for mobile */
       }
     }
