@@ -2,560 +2,294 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Event Tech Research | Audio · Control · R&D</title>
+  <title>Hedera | Event Tech Research</title>
 
-  <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hedera is a licence-free wireless audio and data link for moving sound systems. Uncompressed PCM, ultra-low latency, engineered for hostile RF environments." />
+  <link rel="canonical" href="https://eventresearch.io/hedera.html" />
 
-  <!-- Basic SEO -->
-  <meta name="description" content="Event Tech Research is a London-based R&D and education studio focused on modern event audio, networking, and control. We prototype practical tools for technicians and production teams, then share knowledge through documentation, training, and open-architecture design." />
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="Event Tech Research" />
-  <meta name="keywords" content="Event Tech Research, event technology, audio networking, OSC, Dante, R&D, live sound, show control, Raspberry Pi audio, networked audio" />
-  <link rel="canonical" href="https://eventtech-io.github.io/" />
-
-  <!-- Open Graph / Social sharing -->
-  <meta property="og:title" content="Event Tech Research | Audio · Control · R&D" />
-  <meta property="og:description" content="Research-led tools for the next generation of events. Modern audio, networking, and control workflows for technicians and production teams." />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Hedera | Event Tech Research" />
+  <meta property="og:description" content="Licence-free wireless audio + data link for moving sound systems." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://eventtech-io.github.io/" />
-  <meta property="og:image" content="https://eventtech-io.github.io/assets/logo.png" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Event Tech Research | Audio · Control · R&D" />
-  <meta name="twitter:description" content="Research-led tools for the next generation of events. Modern audio, networking, and control workflows for technicians and production teams." />
-  <meta name="twitter:image" content="https://eventtech-io.github.io/assets/logo.png" />
+  <meta property="og:url" content="https://eventresearch.io/hedera.html" />
+  <meta property="og:image" content="https://eventresearch.io/assets/logo.png" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="favicon/favicon-192.png" />
-  <link rel="shortcut icon" href="favicon/favicon.ico" />
+  <link rel="icon" href="/favicon/favicon.ico" />
 
   <style>
     :root {
-      --bg: #02040a;
-      --card: #10121a;
-      --accent: #f9fafb;
-      --muted: #d1d5db;
-      --border: #3f3f46;
-      --radius-lg: 14px;
+      --bg:#02040a;
+      --card:#10121a;
+      --muted:#d1d5db;
+      --border:#3f3f46;
+      --radius:14px;
     }
 
-    * { box-sizing: border-box; }
+    *{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #020617, #02040a);
-      color: var(--accent);
-      min-height: 100vh;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-      background-color: #02040a;
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:radial-gradient(circle at top,#020617,#02040a);
+      color:#f9fafb;
     }
 
     /* ===== HEADER ===== */
-
-    header {
-      padding: 1rem 7vw;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      background: rgba(3, 4, 7, 0.96);
-      border-bottom: 1px solid #111827;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      backdrop-filter: blur(16px);
+    header{
+      position:sticky;top:0;z-index:10;
+      padding:1rem 7vw;
+      display:flex;justify-content:space-between;align-items:center;
+      background:rgba(3,4,7,.96);
+      border-bottom:1px solid #111827;
+      backdrop-filter:blur(16px);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: inherit;
+    .brand{
+      display:flex;gap:.75rem;align-items:center;
+      text-decoration:none;color:inherit;
     }
 
-    .logo-img {
-      width: 46px;
-      height: 46px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .logo-img{width:42px;height:42px}
+    .logo-img img{width:100%;height:100%;object-fit:contain}
+
+    .brand-text-title{font-weight:700;text-transform:uppercase}
+    .brand-text-sub{
+      font-size:.7rem;
+      color:var(--muted);
+      letter-spacing:.18em;
+      text-transform:uppercase;
     }
 
-    .logo-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+    .social-header{display:flex;gap:.5rem;flex-wrap:wrap}
+
+    .social-chip{
+      display:inline-flex;align-items:center;gap:.35rem;
+      padding:.3rem .7rem;
+      border-radius:999px;
+      border:1px solid #27272f;
+      background:#09090b;
+      font-size:.75rem;
+      color:var(--muted);
+      text-decoration:none;
     }
 
-    .brand-text-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+    .social-chip:hover{
+      border-color:#e5e7eb;
+      color:#e5e7eb;
     }
 
-    .brand-text-sub {
-      font-size: 0.72rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
+    /* ACTIVE NAV STATE */
+    .social-chip.active{
+      border-color:#e5e7eb;
+      color:#e5e7eb;
+      background:#111827;
     }
 
-    .social-header {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+    .social-dot{
+      width:6px;height:6px;border-radius:50%;
+      background:#e5e7eb;
     }
 
-    .social-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid #27272f;
-      font-size: 0.75rem;
-      color: var(--muted);
-      text-decoration: none;
-      background: rgba(9, 9, 11, 0.9);
-      transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
-      white-space: nowrap;
+    /* ===== MAIN ===== */
+    main{
+      max-width:920px;
+      margin:auto;
+      padding:0 7vw 3rem;
+      display:grid;
+      gap:2rem;
+      position:relative;
     }
 
-    .social-chip:hover {
-      border-color: #e5e7eb;
-      color: #e5e7eb;
-      background: #111827;
+    /* HERO (MATCHES INDEX) */
+    .hero{
+      position:relative;
+      text-align:center;
+      padding-top:5.5rem;
+      padding-bottom:3.2rem;
+      display:grid;
+      gap:1.1rem;
     }
 
-    .social-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #e5e7eb;
-    }
-
-    .social-icon-gh {
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.6rem;
-      font-weight: 600;
-      color: #e5e7eb;
-    }
-
-    /* ===== MAIN / HERO ===== */
-
-    main {
-      flex: 1;
-      padding: 0 7vw 3.2rem;
-      max-width: 920px;
-      margin: 0 auto;
-      display: grid;
-      gap: 1.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero {
-      position: relative;
-      text-align: center;
-      padding-top: 5.6rem;
-      padding-bottom: 3.2rem;
-      display: grid;
-      gap: 1.1rem;
-    }
-
-    /* Circuit background: full width + side fade */
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -40px;
-      left: 50%;
-      width: 100vw;
-      height: calc(100% + 80px);
-      transform: translateX(-50%);
+    .hero::before{
+      content:"";
+      position:absolute;
+      top:-40px;
+      left:50%;
+      width:100vw;
+      height:calc(100% + 80px);
+      transform:translateX(-50%);
       background:
-        linear-gradient(to bottom, rgba(5,10,25,0.45), rgba(2,4,10,0.9)),
+        linear-gradient(to bottom,rgba(5,10,25,.45),rgba(2,4,10,.9)),
         linear-gradient(to right,
           #02040a 0%,
-          rgba(2,4,10,0.35) 18%,
-          rgba(2,4,10,0.35) 82%,
+          rgba(2,4,10,.35) 18%,
+          rgba(2,4,10,.35) 82%,
           #02040a 100%
         ),
-        url("assets/circuit-main.png") center top / cover no-repeat;
-      background-blend-mode: normal, multiply, normal;
-      opacity: 1;
-      filter: brightness(1.3) contrast(1.25);
-      z-index: -1;
+        url("/assets/circuit-main.png") center top / cover no-repeat;
+      z-index:-1;
     }
 
-    /* Bottom fade matches the site background */
-    .hero::after {
-      content: "";
-      position: absolute;
-      left: -12vw;
-      right: -12vw;
-      bottom: -1px;
-      height: 200px;
-      background: linear-gradient(to bottom, rgba(2, 4, 10, 0), #02040a);
-      z-index: -1;
+    h1{
+      font-size:clamp(2.1rem,3.6vw,2.7rem);
+      line-height:1.25;
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.25rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid #27272f;
-      background: rgba(15, 23, 42, 0.95);
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin: 0 auto;
+    .hero-lead{
+      max-width:52rem;
+      margin:auto;
+      line-height:1.9;
+      color:#e5e7eb;
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(2.1rem, 3.6vw, 2.7rem);
-      line-height: 1.25;
-      font-weight: 600;
-      color: #f9fafb;
-      text-shadow: 0 0 18px rgba(0, 0, 0, 0.9);
+    /* BREADCRUMB */
+    .breadcrumb{
+      font-size:.75rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
     }
 
-    h1 span {
-      color: #ffffff;
-      text-decoration: underline;
-      text-decoration-style: solid;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 4px;
+    .breadcrumb a{
+      color:#e5e7eb;
+      text-decoration:none;
     }
 
-    .hero-lead {
-      font-size: 1rem;
-      color: #e5e7eb;
-      line-height: 1.9;
-      max-width: 52rem;
-      margin: 0 auto;
-      text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+    .breadcrumb span{opacity:.6}
+
+    /* ===== CARDS ===== */
+    .grid{display:grid;gap:1.5rem}
+
+    @media(min-width:860px){
+      .grid-2{grid-template-columns:1.1fr 1fr}
     }
 
-    .hero-links {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 0.2rem;
+    .card{
+      background:linear-gradient(to bottom,var(--card),#050609);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:1.6rem 1.7rem;
     }
 
-    /* ===== GRID + CARDS ===== */
-
-    .grid {
-      display: grid;
-      gap: 1.5rem;
+    ul{
+      margin:.6rem 0 0;
+      padding-left:1.1rem;
+      line-height:1.8;
+      color:#e5e7eb;
     }
 
-    @media (min-width: 860px) {
-      .grid-2 {
-        grid-template-columns: 1.1fr 1fr;
-        align-items: start;
-      }
+    /* CTA */
+    .cta{
+      margin-top:.6rem;
     }
 
-    @media (max-width: 640px) {
-      header, main { padding-inline: 5vw; }
-      .hero { padding-top: 4.6rem; }
-      .hero::before {
-        top: -30px;
-        height: calc(100% + 60px);
-        background-size: 180% auto;
-      }
+    footer{
+      margin-top:2rem;
+      padding:2rem 7vw;
+      border-top:1px solid #111827;
+      font-size:.82rem;
+      color:var(--muted);
+      text-align:center;
     }
-
-    .card {
-      background: linear-gradient(to bottom, var(--card), #050609);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      padding: 1.6rem 1.7rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
-      position: relative;
-      overflow: hidden;
-      transition:
-        transform 0.18s ease-out,
-        box-shadow 0.18s ease-out,
-        border-color 0.18s ease-out,
-        background 0.18s ease-out;
-    }
-
-    .card::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, rgba(249, 250, 251, 0.5), transparent);
-      opacity: 0.7;
-    }
-
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.9);
-      border-color: #52525b;
-      background: linear-gradient(to bottom, #151824, #050609);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .card { transition: none; }
-      .card:hover { transform: none; }
-    }
-
-    .label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--muted);
-      margin-bottom: 0.35rem;
-    }
-
-    .card h2 {
-      margin: 0 0 0.7rem;
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: #f9fafb;
-    }
-
-    .card p {
-      margin: 0.25rem 0 0.5rem;
-      font-size: 0.96rem;
-      color: #f3f4f6;
-      line-height: 1.9;
-    }
-
-    ul {
-      margin: 0.5rem 0 0;
-      padding-left: 1.1rem;
-      font-size: 0.94rem;
-      color: #e5e7eb;
-      line-height: 1.8;
-    }
-    ul li { margin: 0.3rem 0; }
-
-    /* ===== POLISHED CTA BLOCK ===== */
-
-    .cta-block {
-      display: grid;
-      gap: 0.6rem;
-    }
-
-    .cta-lead {
-      margin: 0.2rem 0 0.2rem;
-    }
-
-    .fine {
-      font-size: 0.86rem;
-      color: var(--muted);
-      line-height: 1.8;
-      margin: 0.2rem 0 0;
-    }
-
-    /* ===== FOOTER ===== */
-
-    footer {
-      padding: 1.5rem 7vw 2rem;
-      border-top: 1px solid #111827;
-      font-size: 0.82rem;
-      color: var(--muted);
-      text-align: center;
-      background: #02040a;
-      position: relative;
-      z-index: 1;
-    }
-
-    footer a {
-      color: #e5e7eb;
-      text-decoration: none;
-    }
-    footer a:hover { text-decoration: underline; }
   </style>
+
+  <!-- 404-SAFE ROUTING (GitHub Pages) -->
+  <script>
+    if (location.pathname !== "/hedera.html" && location.pathname !== "/") {
+      location.replace("/hedera.html");
+    }
+  </script>
 </head>
 
 <body>
-  <div class="page">
 
-    <header>
-      <a class="brand" href="index.html" aria-label="Event Tech Research home">
-        <div class="logo-img">
-          <img src="assets/logo.png" alt="Event Tech Research Logo">
-        </div>
-        <div>
-          <div class="brand-text-title">Event Tech Research</div>
-          <div class="brand-text-sub">Audio · Control · R&amp;D</div>
-        </div>
-      </a>
+<header>
+  <a class="brand" href="/">
+    <div class="logo-img">
+      <img src="/assets/logo.png" alt="Event Tech Research">
+    </div>
+    <div>
+      <div class="brand-text-title">Event Tech Research</div>
+      <div class="brand-text-sub">Audio · Control · R&amp;D</div>
+    </div>
+  </a>
 
-      <nav class="social-header" aria-label="Links">
-        <!-- Internal Page 2 -->
-        <a class="social-chip" href="hedera.html">
-          <span class="social-dot"></span> Hedera
-        </a>
+  <nav class="social-header">
+    <a class="social-chip active" href="/hedera.html">
+      <span class="social-dot"></span> Hedera
+    </a>
+    <a class="social-chip" href="https://github.com/eventtech-io" target="_blank">
+      GH
+    </a>
+  </nav>
+</header>
 
+<main>
+
+  <section class="hero">
+    <div class="breadcrumb">
+      <a href="/">Home</a> <span>→</span> Hedera
+    </div>
+
+    <h1>Hedera</h1>
+
+    <p class="hero-lead">
+      Licence-free wireless audio + data link designed to connect moving sound systems.
+      Hedera delivers uncompressed stereo PCM audio with ultra-low latency,
+      engineered specifically for hostile RF environments and moving floats.
+    </p>
+  </section>
+
+  <section class="grid grid-2">
+    <article class="card">
+      <h2>What it does</h2>
+      <ul>
+        <li>Uncompressed stereo PCM audio @ 48 kHz</li>
+        <li>3–5 ms AD/DA latency target</li>
+        <li>Licence-free RF operation</li>
+        <li>Designed for vibration, obstruction, and urban RF noise</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h2>Why it exists</h2>
+      <p>
+        Hedera was developed in direct response to real-world failures of traditional RF links
+        during large-scale carnival deployments.
+        The system prioritises predictable behaviour, engineer visibility,
+        and graceful handling of packet loss.
+      </p>
+    </article>
+  </section>
+
+  <section class="grid">
+    <article class="card">
+      <h2>Request the Technical Brief</h2>
+      <p>
+        Need schematic detail, deployment patterns,
+        or a quick sanity-check on float spacing and route geometry?
+      </p>
+
+      <div class="cta">
         <a class="social-chip"
-           href="https://www.linkedin.com/in/event-tech-research-uk?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=android_app"
-           target="_blank" rel="noreferrer">
-          <span class="social-dot"></span> LinkedIn
+           href="mailto:event.tech.research@gmail.com?subject=Hedera%20Technical%20Brief%20Request&body=Hi%20Event%20Tech%20Research%2C%0A%0AI%27d%20like%20to%20request%20the%20Hedera%20technical%20brief.%0A%0AEvent%20name%3A%0ARoute%20length%3A%0ANumber%20of%20floats%3A%0AApproximate%20spacing%3A%0A%0AThanks%2C">
+          <span class="social-dot"></span> Email for Brief
         </a>
+      </div>
+    </article>
+  </section>
 
-        <a class="social-chip"
-           href="https://www.facebook.com/share/17czJerMNB/"
-           target="_blank" rel="noreferrer">
-          <span class="social-dot"></span> Facebook
-        </a>
+</main>
 
-        <a class="social-chip"
-           href="https://github.com/eventtech-io"
-           target="_blank" rel="noreferrer">
-          <span class="social-icon-gh">GH</span> GitHub
-        </a>
+<footer>
+  &copy; <span id="year"></span> Event Tech Research. Built on GitHub Pages.
+</footer>
 
-        <a class="social-chip"
-           href="https://www.instagram.com/eventtechresearch?igsh=MW44cWIya3Q3NGdxbg=="
-           target="_blank" rel="noreferrer">
-          <span class="social-dot"></span> Instagram
-        </a>
-      </nav>
-    </header>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 
-    <main>
-      <section class="hero">
-        <span class="badge">Company Statement</span>
-        <h1>
-          Research-led tools for the <span>next generation</span> of events.
-        </h1>
-        <p class="hero-lead">
-          Event Tech Research is a London-based R&amp;D and education studio focused on modern event
-          audio, networking, and control. We prototype practical tools for technicians and production teams —
-          then share the knowledge back into the community through documentation, training, and open-architecture design.
-        </p>
-
-        <div class="hero-links" aria-label="Featured links">
-          <a class="social-chip" href="hedera.html"><span class="social-dot"></span> Read: Hedera (Page 2)</a>
-          <a class="social-chip" href="https://github.com/eventtech-io" target="_blank" rel="noreferrer">
-            <span class="social-icon-gh">GH</span> Open projects
-          </a>
-        </div>
-      </section>
-
-      <section class="grid grid-2">
-        <article class="card">
-          <div class="label">Overview</div>
-          <h2>What we do</h2>
-          <p>
-            We explore how networked audio, OSC, and open protocols can simplify real-world workflows
-            for engineers in theatres, broadcast, and live events. Our work spans Raspberry Pi-based hardware,
-            control software, and practical guides aimed at field technicians.
-          </p>
-          <ul>
-            <li>Design and test event-focused audio &amp; control prototypes</li>
-            <li>Document robust, repeatable workflows for crews on the ground</li>
-            <li>Share tools, templates, and learning resources with the community</li>
-          </ul>
-          <p>
-            The goal is simple: make complex technology feel approachable, reliable, and ready for showtime.
-          </p>
-        </article>
-
-        <article class="card">
-          <div class="label">Ethics &amp; Values</div>
-          <h2>How we operate</h2>
-          <p>
-            Event Tech Research is built on the idea that great live experiences depend on transparent,
-            well-understood systems.
-          </p>
-          <ul>
-            <li><strong>Open thinking:</strong> clear documentation and standards-first design.</li>
-            <li><strong>Engineer-first tools:</strong> reduce stress on show day, not add to it.</li>
-            <li><strong>Honest R&amp;D:</strong> publish lessons learned, not just highlights.</li>
-            <li><strong>Sustainable practice:</strong> extend the value of existing equipment through smarter integration.</li>
-          </ul>
-          <p>
-            Every project is approached with respect for crews, audiences, and collaborators.
-          </p>
-        </article>
-      </section>
-
-      <section class="grid">
-        <article class="card">
-          <div class="label">Featured Project</div>
-          <h2>Hedera — licence-free wireless audio for moving sound systems</h2>
-          <p>
-            Hedera is a licence-free wireless audio + data link designed to connect moving carnival floats travelling
-            along a parade route. It carries uncompressed stereo PCM audio with minimal (ideally imperceptible) latency,
-            plus a service channel for engineer-to-engineer coordination between floats.
-          </p>
-          <p>
-            <a class="social-chip" href="hedera.html"><span class="social-dot"></span> Open Hedera (Page 2)</a>
-          </p>
-        </article>
-      </section>
-
-      <!-- Polished contact CTA -->
-      <section class="grid">
-        <article class="card">
-          <div class="label">Contact</div>
-
-          <div class="cta-block">
-            <h2>Request the Technical Brief</h2>
-            <p class="cta-lead">
-              Want the deeper specification, deployment patterns, or a quick sanity-check on float spacing and route geometry?
-              Email us and we’ll send a concise technical brief.
-            </p>
-
-            <p>
-              <a
-                class="social-chip"
-                href="mailto:event.tech.research@gmail.com?subject=Hedera%20Technical%20Brief%20Request&body=Hi%20Event%20Tech%20Research%2C%0A%0AI%27d%20like%20to%20request%20the%20Hedera%20technical%20brief.%0A%0AEvent%20name%3A%0ARoute%20length%3A%0ANumber%20of%20floats%3A%0AApproximate%20spacing%20between%20floats%3A%0A%0AThanks%2C%0A"
-              >
-                <span class="social-dot"></span> Email for Brief
-              </a>
-            </p>
-
-            <p class="fine">
-              Opens your default email client with a pre-filled request.
-            </p>
-          </div>
-        </article>
-      </section>
-    </main>
-
-    <footer>
-      &copy; <span id="year"></span> Event Tech Research. Built on GitHub Pages.
-    </footer>
-  </div>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
