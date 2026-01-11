@@ -176,22 +176,34 @@
       position: relative;
       display: grid;
       gap: 1.25rem;
-      text-align: center;
+      text-align: center;           /* centered on all devices */
       padding-top: 3rem;
       padding-bottom: 3rem;
     }
 
-    /* Brighter circuit background behind hero only */
+    /* Brighter circuit background – full width with edge fade, behind hero only */
     .hero::before {
       content: "";
       position: absolute;
-      inset: -40px -12vw auto -12vw; /* slightly less cropping */
-      height: 100%;
+      top: -40px;
+      left: 50%;
+      width: 100vw;                  /* always span full viewport width */
+      height: calc(100% + 80px);     /* cover hero area with a bit of bleed */
+      transform: translateX(-50%);
       background:
-        linear-gradient(to bottom, rgba(15, 23, 42, 0.15), rgba(2, 4, 10, 0.75)),
+        /* subtle top/bottom darkening */
+        linear-gradient(to bottom, rgba(15,23,42,0.15), rgba(2,4,10,0.75)),
+        /* left/right fade so PNG edges disappear on wide screens */
+        linear-gradient(to right,
+          #02040a 0%,
+          rgba(2,4,10,0.2) 20%,
+          rgba(2,4,10,0.2) 80%,
+          #02040a 100%
+        ),
         url("assets/circuit-main.png") center top / cover no-repeat;
+      background-blend-mode: normal, multiply, normal;
       opacity: 1;
-      filter: brightness(1.4) contrast(1.25); /* boost visibility */
+      filter: brightness(1.4) contrast(1.25);
       z-index: -2;
     }
 
@@ -258,21 +270,14 @@
         grid-template-columns: 1.1fr 1fr;
         align-items: start;
       }
-      .hero {
-        text-align: left;
-      }
-      .hero .badge {
-        margin-left: 0;
-      }
-      .hero-lead {
-        margin-left: 0;
-      }
+      /* hero stays centered on desktop – no overrides here */
     }
 
     @media (max-width: 640px) {
       header, main { padding-inline: 5vw; }
       .hero::before {
-        inset: -30px -10vw auto -10vw;
+        top: -30px;
+        height: calc(100% + 60px);
         background-size: 180% auto; /* slight zoom for mobile */
       }
     }
