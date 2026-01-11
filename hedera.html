@@ -5,7 +5,7 @@
   <title>Hedera | Event Tech Research</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Hedera is a licence-free wireless audio and data link for moving sound systems. Uncompressed PCM, ultra-low latency, engineered for hostile RF environments." />
+  <meta name="description" content="Hedera is a licence-free wireless audio + data link for moving sound systems. Uncompressed PCM, low latency, engineered for hostile RF environments." />
   <link rel="canonical" href="https://eventresearch.io/hedera.html" />
 
   <!-- Open Graph -->
@@ -34,13 +34,15 @@
       font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
       background:radial-gradient(circle at top,#020617,#02040a);
       color:#f9fafb;
+      min-height:100vh;
     }
 
-    /* ===== HEADER ===== */
+    /* ===== HEADER (MATCHES INDEX) ===== */
     header{
       position:sticky;top:0;z-index:10;
       padding:1rem 7vw;
       display:flex;justify-content:space-between;align-items:center;
+      gap:1rem;
       background:rgba(3,4,7,.96);
       border-bottom:1px solid #111827;
       backdrop-filter:blur(16px);
@@ -62,7 +64,12 @@
       text-transform:uppercase;
     }
 
-    .social-header{display:flex;gap:.5rem;flex-wrap:wrap}
+    .social-header{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
 
     .social-chip{
       display:inline-flex;align-items:center;gap:.35rem;
@@ -73,14 +80,17 @@
       font-size:.75rem;
       color:var(--muted);
       text-decoration:none;
+      white-space:nowrap;
+      transition:border-color .15s ease, color .15s ease, background .15s ease;
     }
 
     .social-chip:hover{
       border-color:#e5e7eb;
       color:#e5e7eb;
+      background:#111827;
     }
 
-    /* ACTIVE NAV STATE */
+    /* Active nav highlighting */
     .social-chip.active{
       border-color:#e5e7eb;
       color:#e5e7eb;
@@ -92,7 +102,7 @@
       background:#e5e7eb;
     }
 
-    /* ===== MAIN ===== */
+    /* ===== MAIN / HERO ===== */
     main{
       max-width:920px;
       margin:auto;
@@ -102,7 +112,6 @@
       position:relative;
     }
 
-    /* HERO (MATCHES INDEX) */
     .hero{
       position:relative;
       text-align:center;
@@ -112,6 +121,7 @@
       gap:1.1rem;
     }
 
+    /* same circuit hero background treatment */
     .hero::before{
       content:"";
       position:absolute;
@@ -135,6 +145,7 @@
     h1{
       font-size:clamp(2.1rem,3.6vw,2.7rem);
       line-height:1.25;
+      margin:0;
     }
 
     .hero-lead{
@@ -144,10 +155,14 @@
       color:#e5e7eb;
     }
 
-    /* BREADCRUMB */
+    /* Breadcrumb */
     .breadcrumb{
+      display:flex;
+      gap:.4rem;
+      justify-content:center;
+      flex-wrap:wrap;
       font-size:.75rem;
-      letter-spacing:.12em;
+      letter-spacing:.14em;
       text-transform:uppercase;
       color:var(--muted);
     }
@@ -157,11 +172,12 @@
       text-decoration:none;
     }
 
-    .breadcrumb span{opacity:.6}
+    .breadcrumb a:hover{
+      text-decoration:underline;
+    }
 
     /* ===== CARDS ===== */
     .grid{display:grid;gap:1.5rem}
-
     @media(min-width:860px){
       .grid-2{grid-template-columns:1.1fr 1fr}
     }
@@ -171,6 +187,7 @@
       border:1px solid var(--border);
       border-radius:var(--radius);
       padding:1.6rem 1.7rem;
+      box-shadow:0 10px 30px rgba(0,0,0,.6);
     }
 
     ul{
@@ -180,9 +197,11 @@
       color:#e5e7eb;
     }
 
-    /* CTA */
-    .cta{
-      margin-top:.6rem;
+    .fine{
+      font-size:.86rem;
+      color:var(--muted);
+      line-height:1.8;
+      margin:.35rem 0 0;
     }
 
     footer{
@@ -193,14 +212,17 @@
       color:var(--muted);
       text-align:center;
     }
-  </style>
 
-  <!-- 404-SAFE ROUTING (GitHub Pages) -->
-  <script>
-    if (location.pathname !== "/hedera.html" && location.pathname !== "/") {
-      location.replace("/hedera.html");
+    @media (max-width:640px){
+      header, main { padding-inline: 5vw; }
+      .hero{ padding-top: 4.6rem; }
+      .hero::before{
+        top:-30px;
+        height:calc(100% + 60px);
+        background-size:180% auto;
+      }
     }
-  </script>
+  </style>
 </head>
 
 <body>
@@ -216,12 +238,34 @@
     </div>
   </a>
 
-  <nav class="social-header">
+  <nav class="social-header" aria-label="Links">
+    <!-- Active internal link -->
     <a class="social-chip active" href="/hedera.html">
       <span class="social-dot"></span> Hedera
     </a>
-    <a class="social-chip" href="https://github.com/eventtech-io" target="_blank">
-      GH
+
+    <a class="social-chip"
+       href="https://www.linkedin.com/in/event-tech-research-uk/"
+       target="_blank" rel="noreferrer">
+      <span class="social-dot"></span> LinkedIn
+    </a>
+
+    <a class="social-chip"
+       href="https://www.facebook.com/people/Event-Tech-Research/61583230261617/?rdid=BHO47zEHDuyOcPt6&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17czJerMNB%2F"
+       target="_blank" rel="noreferrer">
+      <span class="social-dot"></span> Facebook
+    </a>
+
+    <a class="social-chip"
+       href="https://www.instagram.com/eventtechresearch"
+       target="_blank" rel="noreferrer">
+      <span class="social-dot"></span> Instagram
+    </a>
+
+    <a class="social-chip"
+       href="https://github.com/eventtech-io"
+       target="_blank" rel="noreferrer">
+      <span class="social-dot"></span> GitHub
     </a>
   </nav>
 </header>
@@ -229,38 +273,48 @@
 <main>
 
   <section class="hero">
-    <div class="breadcrumb">
-      <a href="/">Home</a> <span>→</span> Hedera
+    <div class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>→</span>
+      <span>Hedera</span>
     </div>
 
     <h1>Hedera</h1>
 
     <p class="hero-lead">
-      Licence-free wireless audio + data link designed to connect moving sound systems.
-      Hedera delivers uncompressed stereo PCM audio with ultra-low latency,
-      engineered specifically for hostile RF environments and moving floats.
+      Hedera is a licence-free wireless audio + data link designed to connect moving sound systems along a parade route.
+      It delivers uncompressed stereo PCM audio with minimal (ideally imperceptible) latency, plus a service channel
+      for engineer-to-engineer communication between floats.
     </p>
   </section>
 
   <section class="grid grid-2">
     <article class="card">
-      <h2>What it does</h2>
+      <h2>Core capability</h2>
       <ul>
-        <li>Uncompressed stereo PCM audio @ 48 kHz</li>
-        <li>3–5 ms AD/DA latency target</li>
-        <li>Licence-free RF operation</li>
-        <li>Designed for vibration, obstruction, and urban RF noise</li>
+        <li><strong>Uncompressed audio:</strong> 16/24-bit PCM @ 48 kHz (minimum one stereo channel)</li>
+        <li><strong>Low latency target:</strong> tuned for stable, predictable performance in motion</li>
+        <li><strong>Resilience:</strong> packet redundancy and controlled buffering behaviour</li>
+        <li><strong>I/O:</strong> dual XLR stereo line input &amp; output</li>
+        <li><strong>Digital option:</strong> stereo S/PDIF / AES input or output</li>
+        <li><strong>Service channel:</strong> messaging / coordination data link</li>
       </ul>
+      <p class="fine">
+        Where bandwidth allows, additional audio channels can be carried.
+      </p>
     </article>
 
     <article class="card">
-      <h2>Why it exists</h2>
+      <h2>RF &amp; antenna approach</h2>
       <p>
-        Hedera was developed in direct response to real-world failures of traditional RF links
-        during large-scale carnival deployments.
-        The system prioritises predictable behaviour, engineer visibility,
-        and graceful handling of packet loss.
+        Mobile floats introduce vibration, alignment shift, and constant changes in geometry.
+        Hedera is engineered around predictable coverage and field-tuned stability rather than “lab-perfect” assumptions.
       </p>
+      <ul>
+        <li><strong>Symmetrical beam pattern:</strong> 134°–180°</li>
+        <li><strong>Azimuth beam width:</strong> H 67°–90° / V 67°–90°</li>
+        <li><strong>Elevation beam width:</strong> H 67°–90° / V 67°–90°</li>
+      </ul>
     </article>
   </section>
 
@@ -268,16 +322,21 @@
     <article class="card">
       <h2>Request the Technical Brief</h2>
       <p>
-        Need schematic detail, deployment patterns,
-        or a quick sanity-check on float spacing and route geometry?
+        If you’d like deployment patterns, spec detail, or a quick sanity-check on route geometry and float spacing,
+        email us and we’ll send a concise technical brief.
       </p>
 
-      <div class="cta">
+      <p>
         <a class="social-chip"
-           href="mailto:event.tech.research@gmail.com?subject=Hedera%20Technical%20Brief%20Request&body=Hi%20Event%20Tech%20Research%2C%0A%0AI%27d%20like%20to%20request%20the%20Hedera%20technical%20brief.%0A%0AEvent%20name%3A%0ARoute%20length%3A%0ANumber%20of%20floats%3A%0AApproximate%20spacing%3A%0A%0AThanks%2C">
+           href="mailto:event.tech.research@gmail.com?subject=Hedera%20Technical%20Brief%20Request&body=Hi%20Event%20Tech%20Research%2C%0A%0AI%27d%20like%20to%20request%20the%20Hedera%20technical%20brief.%0A%0AEvent%20name%3A%0ARoute%20length%3A%0ANumber%20of%20floats%3A%0AApproximate%20spacing%3A%0A%0AThanks%2C%0A"
+        >
           <span class="social-dot"></span> Email for Brief
         </a>
-      </div>
+      </p>
+
+      <p class="fine">
+        Opens your default email client with a pre-filled request.
+      </p>
     </article>
   </section>
 
