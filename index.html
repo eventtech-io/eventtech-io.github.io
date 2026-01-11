@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Tech Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Event Tech Research – R&D, education and tools for modern event audio, control, and networking." />
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/favicon-192.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <style>
+    :root {
+      --bg: #02040a;
+      --card: #10121a;
+      --accent: #f9fafb;
+      --muted: #d1d5db;
+      --border: #3f3f46;
+      --radius-lg: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #020617, #02040a);
+      color: var(--accent);
+      min-height: 100vh;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* === Minimal animated circuit background (dimmed for readability) === */
+    .circuit-layer,
+    .circuit-layer::before {
+      position: absolute;
+      inset: -40px;
+      pointer-events: none;
+    }
+
+    .circuit-layer {
+      opacity: 0.18;
+      background-image:
+        linear-gradient(#111827 1px, transparent 1px),
+        linear-gradient(90deg, #111827 1px, transparent 1px);
+      background-size: 80px 80px, 80px 80px;
+      animation: drift-grid 40s linear infinite;
+      mix-blend-mode: soft-light;
+      z-index: 0;
+    }
+
+    .circuit-layer::before {
+      content: "";
+      opacity: 0.3;
+      background-image:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.09) 1px, transparent 1px),
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.18) 1px, transparent 2px),
+        radial-gradient(circle at 80% 65%, rgba(255, 255, 255, 0.18) 1px, transparent 2px);
+      background-size: 140px 140px, 120px 120px, 120px 120px;
+      mix-blend-mode: soft-light;
+      animation: drift-lines 55s linear infinite;
+    }
+
+    @keyframes drift-grid {
+      0%   { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-80px, -80px, 0); }
+    }
+
+    @keyframes drift-lines {
+      0%   { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(80px, -80px, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .circuit-layer,
+      .circuit-layer::before {
+        animation: none;
+      }
+    }
+
+    /* === Layout & components === */
+
+    header {
+      padding: 1rem 7vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: rgba(3, 4, 7, 0.96);
+      border-bottom: 1px solid #111827;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* New image-based logo */
+    .logo-img {
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.35));
+    }
+
+    .brand-text-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .brand-text-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .social-header {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .social-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid #27272f;
+      font-size: 0.75rem;
+      color: var(--muted);
+      text-decoration: none;
+      background: rgba(9, 9, 11, 0.9);
+      transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    }
+
+    .social-chip:hover {
+      border-color: #e5e7eb;
+      color: #e5e7eb;
+      background: #111827;
+    }
+
+    .social-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #e5e7eb;
+    }
+
+    .social-icon-gh {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    main {
+      flex: 1;
+      padding: 2.6rem 7vw 3.2rem;
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      display: grid;
+      gap: 1.25rem;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #27272f;
+      background: #0b1120;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 3.6vw, 2.7rem);
+      line-height: 1.25;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+
+    h1 span {
+      color: #ffffff;
+      text-decoration: underline;
+      text-decoration-style: solid;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    .hero-lead {
+      font-size: 1rem;
+      color: #e5e7eb;
+      line-height: 1.9;
+      max-width: 50rem;
+      margin: 0 auto;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 860px) {
+      .grid-2 {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: start;
+      }
+      .hero {
+        text-align: left;
+      }
+      .hero .badge {
+        margin-left: 0;
+      }
+      .hero-lead {
+        margin-left: 0;
+      }
+    }
+
+    /* === Cards with high contrast + subtle hover === */
+    .card {
+      background: linear-gradient(to bottom, var(--card), #050609);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 1.6rem 1.7rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75);
+      position: relative;
+      overflow: hidden;
+      transition:
+        transform 0.18s ease-out,
+        box-shadow 0.18s ease-out,
+        border-color 0.18s ease-out,
+        background 0.18s ease-out;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(249, 250, 251, 0.5), transparent);
+      opacity: 0.7;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.9);
+      border-color: #52525b;
+      background: linear-gradient(to bottom, #151824, #050609);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card {
+        transition: none;
+      }
+      .card:hover {
+        transform: none;
+      }
+    }
+
+    .label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .card h2 {
+      margin: 0 0 0.7rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+
+    .card p {
+      margin: 0.25rem 0 0.5rem;
+      font-size: 0.96rem;
+      color: #f3f4f6;
+      line-height: 1.9;
+    }
+
+    ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.1rem;
+      font-size: 0.94rem;
+      color: #e5e7eb;
+      line-height: 1.8;
+    }
+
+    ul li { margin: 0.3rem 0; }
+
+    footer {
+      padding: 1.5rem 7vw 2rem;
+      border-top: 1px solid #111827;
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-align: center;
+      background: #02040a;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer a {
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      header, main { padding-inline: 5vw; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="circuit-layer" aria-hidden="true"></div>
+
+    <header>
+      <div class="brand">
+        <div class="logo-img">
+          <!-- Make sure this file exists in your repo at /assets/logo.png -->
+          <img src="assets/logo.png" alt="Event Tech Research Logo">
+        </div>
+        <div>
+          <div class="brand-text-title">Event Tech Research</div>
+          <div class="brand-text-sub">Audio · Control · R&amp;D</div>
+        </div>
+      </div>
+
+      <nav class="social-header" aria-label="Social links">
+        <a class="social-chip"
+           href="https://www.linkedin.com/in/event-tech-research-uk?utm_source=share&amp;utm_campaign=share_via&amp;utm_content=profile&amp;utm_medium=android_app"
+           target="_blank" rel="noreferrer">
+          <span class="social-dot"></span> LinkedIn
+        </a>
+
+        <a class="social-chip"
+           href="https://www.facebook.com/share/17czJerMNB/"
+           target="_blank" rel="noreferrer">
+          <span class="social-dot"></span> Facebook
+        </a>
+
+        <a class="social-chip"
+           href="https://github.com/eventtech-io"
+           target="_blank" rel="noreferrer">
+          <span class="social-icon-gh">GH</span> GitHub
+        </a>
+
+        <a class="social-chip"
+           href="https://www.instagram.com/eventtechresearch?igsh=MW44cWIya3Q3NGdxbg=="
+           target="_blank" rel="noreferrer">
+          <span class="social-dot"></span> Instagram
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO / COMPANY STATEMENT -->
+      <section class="hero">
+        <span class="badge">Company Statement</span>
+        <h1>
+          Research-led tools for the <span>next generation</span> of events.
+        </h1>
+        <p class="hero-lead">
+          Event Tech Research is a London-based R&amp;D and education studio focused on modern event
+          audio, networking, and control. We prototype practical tools for technicians and production
+          teams—then share the knowledge back into the community through documentation, training, and
+          open-architecture design.
+        </p>
+      </section>
+
+      <!-- OVERVIEW + ETHICS -->
+      <section class="grid grid-2">
+        <article class="card">
+          <div class="label">Overview</div>
+          <h2>What we do</h2>
+          <p>
+            We explore how networked audio, OSC, and open protocols can simplify the real-world
+            workflows of engineers in theatres, broadcast, and live events. Our work spans Raspberry
+            Pi-based hardware, control software, and practical guides aimed at field technicians.
+          </p>
+          <ul>
+            <li>Design and test event-focused audio &amp; control prototypes</li>
+            <li>Document robust, repeatable workflows for crews on the ground</li>
+            <li>Share tools, templates, and learning resources with the community</li>
+          </ul>
+          <p>
+            Our goal is simple: make complex technology feel approachable, reliable, and ready for
+            showtime.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="label">Ethics &amp; Values</div>
+          <h2>How we operate</h2>
+          <p>
+            Event Tech Research is built on the idea that great live experiences depend on transparent,
+            well-understood systems. Our ethics are grounded in:
+          </p>
+          <ul>
+            <li><strong>Open thinking:</strong> we favour open standards, clear documentation, and
+              knowledge-sharing over black boxes.</li>
+            <li><strong>Engineer-first design:</strong> tools should reduce stress on show day, not add to it.</li>
+            <li><strong>Honest R&amp;D:</strong> we publish both successes and lessons learned, so others can
+              build faster and safer.</li>
+            <li><strong>Sustainability:</strong> we aim to extend the life of existing equipment through smarter
+              integration and control, not just constant replacement.</li>
+          </ul>
+          <p>
+            Every project is approached with respect for the people running the show, the audiences
+            they serve, and the partners we collaborate with.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      &copy; <span id="year"></span> Event Tech Research. Built on GitHub Pages.
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
