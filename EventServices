@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Tech Research | Bespoke Installations & Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Event Tech Research – bespoke networked audio, control, and monitoring systems for venues that need robust, modern show infrastructure.">
+  <link rel="icon" href="/favicon.ico">
+  <!-- Reuse your existing CSS bundle / Tailwind / custom styles from eventresearch.io here -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+  <div class="min-h-screen flex flex-col">
+
+    <!-- Page wrapper -->
+    <main class="flex-1">
+      <section class="max-w-3xl mx-auto px-6 py-16 md:py-24">
+        <header class="mb-10 md:mb-12">
+          <h1 class="text-3xl md:text-4xl font-semibold tracking-tight mb-2">
+            Bespoke installations & services
+          </h1>
+          <p class="text-slate-300 text-base md:text-lg max-w-2xl">
+            Custom networked audio, control, and monitoring systems for venues that need modern infrastructure
+            to be reliable, observable, and understandable on show day.
+          </p>
+        </header>
+
+        <!-- What we do style block -->
+        <section class="mb-10 md:mb-12">
+          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
+            What we do
+          </h2>
+          <p class="text-slate-200 mb-4">
+            We design and deploy bespoke systems that combine professional audio, IP networking, and show control into a
+            single, coherent backbone — tailored to your room, your shows, and your crew.
+          </p>
+          <ul class="list-disc pl-5 space-y-2 text-slate-200">
+            <li>
+              Custom AoIP and networked audio infrastructure for theatres, live music venues, studios, houses of worship, and broadcast spaces.
+            </li>
+            <li>
+              IP‑based control layers (OSC and other open standards) that bridge audio, lighting, video, and automation hardware into one control surface.
+            </li>
+            <li>
+              Embedded monitoring and utility nodes for signal paths, system health, and at‑a‑glance status when the house is full and doors are open.
+            </li>
+            <li>
+              Clean documentation, drawings, and presets so day‑to‑day operation feels simple, even when the underlying system is not.
+            </li>
+          </ul>
+        </section>
+
+        <!-- How we work / process -->
+        <section class="mb-10 md:mb-12">
+          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
+            How we work
+          </h2>
+          <p class="text-slate-200 mb-4">
+            Installations are collaborative and engineer‑led. We start from your existing inventory, workflows, and pain points,
+            then design systems that add clarity rather than more boxes in the rack.
+          </p>
+          <ul class="list-disc pl-5 space-y-2 text-slate-200">
+            <li>
+              Discovery and audit of your current audio, network, and control infrastructure — what works, what breaks, and what nobody wants to touch.
+            </li>
+            <li>
+              Concept and detailed design, including network topology, audio routing, control architecture, and resilience strategies.
+            </li>
+            <li>
+              Staged installation and commissioning, with testing in real‑world show conditions rather than only lab scenarios.
+            </li>
+            <li>
+              Training and handover for technical staff and visiting engineers, backed by clear, venue‑specific documentation.
+            </li>
+          </ul>
+        </section>
+
+        <!-- When this makes sense -->
+        <section class="mb-10 md:mb-12">
+          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
+            When this is useful
+          </h2>
+          <p class="text-slate-200 mb-4">
+            A bespoke installation is most valuable when reliability and repeatability matter more than one‑off spectacle.
+          </p>
+          <ul class="list-disc pl-5 space-y-2 text-slate-200">
+            <li>
+              You are planning a new build or refurbishment and want a modern, IP‑centric backbone from day one.
+            </li>
+            <li>
+              Your current system has grown organically and now feels fragile, opaque, or hard to support.
+            </li>
+            <li>
+              You need to integrate mixed‑vendor equipment into a single, predictable workflow for in‑house and visiting crews.
+            </li>
+            <li>
+              You want a long‑term technical partner to evolve the system as your programme and technology change.
+            </li>
+          </ul>
+        </section>
+
+        <!-- CTA block -->
+        <section class="border-t border-slate-800 pt-8 mt-6">
+          <h2 class="text-xl font-semibold tracking-tight mb-3">
+            Talk about a project
+          </h2>
+          <p class="text-slate-200 mb-4">
+            If you have a venue, studio, or space that needs a fresh approach to audio, networking, and control,
+            we can help you map a realistic path from where you are to where you need to be.
+          </p>
+          <p class="text-slate-300">
+            Email <a href="mailto:hello@eventresearch.io" class="underline decoration-slate-500 hover:decoration-slate-200">
+              hello@eventresearch.io
+            </a>
+            with a short outline of your space, current system, and timelines.
+          </p>
+        </section>
+      </section>
+    </main>
+
+    <!-- Simple footer mirroring main site tone -->
+    <footer class="border-t border-slate-900 text-xs text-slate-500">
+      <div class="max-w-3xl mx-auto px-6 py-4">
+        <span>Event Tech Research Ltd · Audio · Control · R&amp;D</span>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
