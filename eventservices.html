@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,29 +9,38 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/styles.css">
 
+  <!-- ETR hero background + card styling (Tailwind-friendly) -->
   <style>
-    /* Keep overall site dark and let the hero band do the drama */
-    body { background:#02040a; }
-
-    .etr-hero{
-      position:relative;
-      isolation:isolate;
+    :root{
+      --bg:#02040a;
+      --card:#10121a;
+      --border:#3f3f46;
+      --radius:14px;
     }
+
+    body{ background: var(--bg); }
+
+    /* Full-bleed circuit hero background */
+    .etr-hero{ position:relative; }
     .etr-hero::before{
       content:"";
       position:absolute;
       inset:0;
-      z-index:-1;
+      z-index:0; /* background layer */
       background:
-        linear-gradient(to bottom, rgba(5,10,25,.45), rgba(2,4,10,.92)),
+        linear-gradient(to bottom, rgba(5,10,25,.55), rgba(2,4,10,.95)),
         linear-gradient(to right,
           #02040a 0%,
-          rgba(2,4,10,.35) 18%,
-          rgba(2,4,10,.35) 82%,
+          rgba(2,4,10,.45) 18%,
+          rgba(2,4,10,.45) 82%,
           #02040a 100%
         ),
         url("/assets/circuit-main.png") center top / cover no-repeat;
     }
+    /* Ensure all content sits above the background */
+    .etr-hero > *{ position:relative; z-index:1; }
+
+    /* Optional: on small screens, zoom the background so it looks like Hedera */
     @media (max-width:640px){
       .etr-hero::before{
         background-size:180% auto;
@@ -44,27 +54,26 @@
   <div class="min-h-screen flex flex-col">
 
     <main class="flex-1">
-      <!-- Hero band + page content -->
+      <!-- Hero band wrapper -->
       <section class="etr-hero">
         <section class="max-w-3xl mx-auto px-6 py-16 md:py-24">
 
-          <!-- Page header (not a card) -->
+          <!-- Header -->
           <header class="mb-10 md:mb-12 text-center">
             <h1 class="text-3xl md:text-4xl font-semibold tracking-tight mb-3">
-              Bespoke installations & services
+              Bespoke installations &amp; services
             </h1>
-            <p class="text-slate-200/90 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+            <p class="text-slate-200 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               Custom networked audio, control, and monitoring systems for venues that need modern infrastructure
               to be reliable, observable, and understandable on show day.
             </p>
           </header>
 
-          <!-- Cards grid -->
+          <!-- Cards -->
           <div class="grid gap-6">
 
             <!-- Card: What we do -->
-            <section
-              class="rounded-[14px] border border-zinc-700/60 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+            <section class="rounded-[14px] border border-zinc-700/70 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)] text-slate-100">
               <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
                 What we do
               </h2>
@@ -73,24 +82,15 @@
                 single, coherent backbone — tailored to your room, your shows, and your crew.
               </p>
               <ul class="list-disc pl-5 space-y-2 text-slate-200 leading-relaxed">
-                <li>
-                  Custom AoIP and networked audio infrastructure for theatres, live music venues, studios, houses of worship, and broadcast spaces.
-                </li>
-                <li>
-                  IP-based control layers (OSC and other open standards) that bridge audio, lighting, video, and automation hardware into one control surface.
-                </li>
-                <li>
-                  Embedded monitoring and utility nodes for signal paths, system health, and at-a-glance status when the house is full and doors are open.
-                </li>
-                <li>
-                  Clean documentation, drawings, and presets so day-to-day operation feels simple, even when the underlying system is not.
-                </li>
+                <li>Custom AoIP and networked audio infrastructure for theatres, live music venues, studios, houses of worship, and broadcast spaces.</li>
+                <li>IP-based control layers (OSC and other open standards) bridging audio, lighting, video, and automation hardware into one control surface.</li>
+                <li>Embedded monitoring and utility nodes for signal paths, system health, and at-a-glance status when the house is full and doors are open.</li>
+                <li>Clean documentation, drawings, and presets so day-to-day operation feels simple, even when the underlying system is not.</li>
               </ul>
             </section>
 
             <!-- Card: How we work -->
-            <section
-              class="rounded-[14px] border border-zinc-700/60 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+            <section class="rounded-[14px] border border-zinc-700/70 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)] text-slate-100">
               <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
                 How we work
               </h2>
@@ -99,24 +99,15 @@
                 then design systems that add clarity rather than more boxes in the rack.
               </p>
               <ul class="list-disc pl-5 space-y-2 text-slate-200 leading-relaxed">
-                <li>
-                  Discovery and audit of your current audio, network, and control infrastructure — what works, what breaks, and what nobody wants to touch.
-                </li>
-                <li>
-                  Concept and detailed design, including network topology, audio routing, control architecture, and resilience strategies.
-                </li>
-                <li>
-                  Staged installation and commissioning, with testing in real-world show conditions rather than only lab scenarios.
-                </li>
-                <li>
-                  Training and handover for technical staff and visiting engineers, backed by clear, venue-specific documentation.
-                </li>
+                <li>Discovery and audit of your current audio, network, and control infrastructure — what works, what breaks, and what nobody wants to touch.</li>
+                <li>Concept and detailed design, including network topology, audio routing, control architecture, and resilience strategies.</li>
+                <li>Staged installation and commissioning, with testing in real-world show conditions rather than only lab scenarios.</li>
+                <li>Training and handover for technical staff and visiting engineers, backed by clear, venue-specific documentation.</li>
               </ul>
             </section>
 
-            <!-- Card: When this is useful -->
-            <section
-              class="rounded-[14px] border border-zinc-700/60 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+            <!-- Card: When useful -->
+            <section class="rounded-[14px] border border-zinc-700/70 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)] text-slate-100">
               <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
                 When this is useful
               </h2>
@@ -124,24 +115,15 @@
                 A bespoke installation is most valuable when reliability and repeatability matter more than one-off spectacle.
               </p>
               <ul class="list-disc pl-5 space-y-2 text-slate-200 leading-relaxed">
-                <li>
-                  You are planning a new build or refurbishment and want a modern, IP-centric backbone from day one.
-                </li>
-                <li>
-                  Your current system has grown organically and now feels fragile, opaque, or hard to support.
-                </li>
-                <li>
-                  You need to integrate mixed-vendor equipment into a single, predictable workflow for in-house and visiting crews.
-                </li>
-                <li>
-                  You want a long-term technical partner to evolve the system as your programme and technology change.
-                </li>
+                <li>You are planning a new build or refurbishment and want a modern, IP-centric backbone from day one.</li>
+                <li>Your current system has grown organically and now feels fragile, opaque, or hard to support.</li>
+                <li>You need to integrate mixed-vendor equipment into a single, predictable workflow for in-house and visiting crews.</li>
+                <li>You want a long-term technical partner to evolve the system as your programme and technology change.</li>
               </ul>
             </section>
 
             <!-- Card: CTA -->
-            <section
-              class="rounded-[14px] border border-zinc-700/60 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+            <section class="rounded-[14px] border border-zinc-700/70 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)] text-slate-100">
               <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-3">
                 Talk about a project
               </h2>
@@ -179,3 +161,4 @@
   </div>
 </body>
 </html>
+```
