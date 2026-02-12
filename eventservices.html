@@ -6,121 +6,172 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Event Tech Research – bespoke networked audio, control, and monitoring systems for venues that need robust, modern show infrastructure.">
   <link rel="icon" href="/favicon.ico">
-  <!-- Reuse your existing CSS bundle / Tailwind / custom styles from eventresearch.io here -->
   <link rel="stylesheet" href="/css/styles.css">
+
+  <style>
+    /* Keep overall site dark and let the hero band do the drama */
+    body { background:#02040a; }
+
+    .etr-hero{
+      position:relative;
+      isolation:isolate;
+    }
+    .etr-hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:
+        linear-gradient(to bottom, rgba(5,10,25,.45), rgba(2,4,10,.92)),
+        linear-gradient(to right,
+          #02040a 0%,
+          rgba(2,4,10,.35) 18%,
+          rgba(2,4,10,.35) 82%,
+          #02040a 100%
+        ),
+        url("/assets/circuit-main.png") center top / cover no-repeat;
+    }
+    @media (max-width:640px){
+      .etr-hero::before{
+        background-size:180% auto;
+        background-position:center top;
+      }
+    }
+  </style>
 </head>
-<body class="bg-slate-950 text-slate-100 antialiased">
+
+<body class="text-slate-100 antialiased">
   <div class="min-h-screen flex flex-col">
 
-    <!-- Page wrapper -->
     <main class="flex-1">
-      <section class="max-w-3xl mx-auto px-6 py-16 md:py-24">
-        <header class="mb-10 md:mb-12">
-          <h1 class="text-3xl md:text-4xl font-semibold tracking-tight mb-2">
-            Bespoke installations & services
-          </h1>
-          <p class="text-slate-300 text-base md:text-lg max-w-2xl">
-            Custom networked audio, control, and monitoring systems for venues that need modern infrastructure
-            to be reliable, observable, and understandable on show day.
-          </p>
-        </header>
+      <!-- Hero band + page content -->
+      <section class="etr-hero">
+        <section class="max-w-3xl mx-auto px-6 py-16 md:py-24">
 
-        <!-- What we do style block -->
-        <section class="mb-10 md:mb-12">
-          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
-            What we do
-          </h2>
-          <p class="text-slate-200 mb-4">
-            We design and deploy bespoke systems that combine professional audio, IP networking, and show control into a
-            single, coherent backbone — tailored to your room, your shows, and your crew.
-          </p>
-          <ul class="list-disc pl-5 space-y-2 text-slate-200">
-            <li>
-              Custom AoIP and networked audio infrastructure for theatres, live music venues, studios, houses of worship, and broadcast spaces.
-            </li>
-            <li>
-              IP‑based control layers (OSC and other open standards) that bridge audio, lighting, video, and automation hardware into one control surface.
-            </li>
-            <li>
-              Embedded monitoring and utility nodes for signal paths, system health, and at‑a‑glance status when the house is full and doors are open.
-            </li>
-            <li>
-              Clean documentation, drawings, and presets so day‑to‑day operation feels simple, even when the underlying system is not.
-            </li>
-          </ul>
-        </section>
+          <!-- Page header (not a card) -->
+          <header class="mb-10 md:mb-12 text-center">
+            <h1 class="text-3xl md:text-4xl font-semibold tracking-tight mb-3">
+              Bespoke installations & services
+            </h1>
+            <p class="text-slate-200/90 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+              Custom networked audio, control, and monitoring systems for venues that need modern infrastructure
+              to be reliable, observable, and understandable on show day.
+            </p>
+          </header>
 
-        <!-- How we work / process -->
-        <section class="mb-10 md:mb-12">
-          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
-            How we work
-          </h2>
-          <p class="text-slate-200 mb-4">
-            Installations are collaborative and engineer‑led. We start from your existing inventory, workflows, and pain points,
-            then design systems that add clarity rather than more boxes in the rack.
-          </p>
-          <ul class="list-disc pl-5 space-y-2 text-slate-200">
-            <li>
-              Discovery and audit of your current audio, network, and control infrastructure — what works, what breaks, and what nobody wants to touch.
-            </li>
-            <li>
-              Concept and detailed design, including network topology, audio routing, control architecture, and resilience strategies.
-            </li>
-            <li>
-              Staged installation and commissioning, with testing in real‑world show conditions rather than only lab scenarios.
-            </li>
-            <li>
-              Training and handover for technical staff and visiting engineers, backed by clear, venue‑specific documentation.
-            </li>
-          </ul>
-        </section>
+          <!-- Cards grid -->
+          <div class="grid gap-6">
 
-        <!-- When this makes sense -->
-        <section class="mb-10 md:mb-12">
-          <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
-            When this is useful
-          </h2>
-          <p class="text-slate-200 mb-4">
-            A bespoke installation is most valuable when reliability and repeatability matter more than one‑off spectacle.
-          </p>
-          <ul class="list-disc pl-5 space-y-2 text-slate-200">
-            <li>
-              You are planning a new build or refurbishment and want a modern, IP‑centric backbone from day one.
-            </li>
-            <li>
-              Your current system has grown organically and now feels fragile, opaque, or hard to support.
-            </li>
-            <li>
-              You need to integrate mixed‑vendor equipment into a single, predictable workflow for in‑house and visiting crews.
-            </li>
-            <li>
-              You want a long‑term technical partner to evolve the system as your programme and technology change.
-            </li>
-          </ul>
-        </section>
+            <!-- Card: What we do -->
+            <section
+              class="rounded-[14px] border border-zinc-700/60 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+              <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
+                What we do
+              </h2>
+              <p class="text-slate-200 mb-4 leading-relaxed">
+                We design and deploy bespoke systems that combine professional audio, IP networking, and show control into a
+                single, coherent backbone — tailored to your room, your shows, and your crew.
+              </p>
+              <ul class="list-disc pl-5 space-y-2 text-slate-200 leading-relaxed">
+                <li>
+                  Custom AoIP and networked audio infrastructure for theatres, live music venues, studios, houses of worship, and broadcast spaces.
+                </li>
+                <li>
+                  IP-based control layers (OSC and other open standards) that bridge audio, lighting, video, and automation hardware into one control surface.
+                </li>
+                <li>
+                  Embedded monitoring and utility nodes for signal paths, system health, and at-a-glance status when the house is full and doors are open.
+                </li>
+                <li>
+                  Clean documentation, drawings, and presets so day-to-day operation feels simple, even when the underlying system is not.
+                </li>
+              </ul>
+            </section>
 
-        <!-- CTA block -->
-        <section class="border-t border-slate-800 pt-8 mt-6">
-          <h2 class="text-xl font-semibold tracking-tight mb-3">
-            Talk about a project
-          </h2>
-          <p class="text-slate-200 mb-4">
-            If you have a venue, studio, or space that needs a fresh approach to audio, networking, and control,
-            we can help you map a realistic path from where you are to where you need to be.
-          </p>
-          <p class="text-slate-300">
-            Email <a href="mailto:hello@eventresearch.io" class="underline decoration-slate-500 hover:decoration-slate-200">
-              hello@eventresearch.io
-            </a>
-            with a short outline of your space, current system, and timelines.
-          </p>
+            <!-- Card: How we work -->
+            <section
+              class="rounded-[14px] border border-zinc-700/60 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+              <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
+                How we work
+              </h2>
+              <p class="text-slate-200 mb-4 leading-relaxed">
+                Installations are collaborative and engineer-led. We start from your existing inventory, workflows, and pain points,
+                then design systems that add clarity rather than more boxes in the rack.
+              </p>
+              <ul class="list-disc pl-5 space-y-2 text-slate-200 leading-relaxed">
+                <li>
+                  Discovery and audit of your current audio, network, and control infrastructure — what works, what breaks, and what nobody wants to touch.
+                </li>
+                <li>
+                  Concept and detailed design, including network topology, audio routing, control architecture, and resilience strategies.
+                </li>
+                <li>
+                  Staged installation and commissioning, with testing in real-world show conditions rather than only lab scenarios.
+                </li>
+                <li>
+                  Training and handover for technical staff and visiting engineers, backed by clear, venue-specific documentation.
+                </li>
+              </ul>
+            </section>
+
+            <!-- Card: When this is useful -->
+            <section
+              class="rounded-[14px] border border-zinc-700/60 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+              <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-4">
+                When this is useful
+              </h2>
+              <p class="text-slate-200 mb-4 leading-relaxed">
+                A bespoke installation is most valuable when reliability and repeatability matter more than one-off spectacle.
+              </p>
+              <ul class="list-disc pl-5 space-y-2 text-slate-200 leading-relaxed">
+                <li>
+                  You are planning a new build or refurbishment and want a modern, IP-centric backbone from day one.
+                </li>
+                <li>
+                  Your current system has grown organically and now feels fragile, opaque, or hard to support.
+                </li>
+                <li>
+                  You need to integrate mixed-vendor equipment into a single, predictable workflow for in-house and visiting crews.
+                </li>
+                <li>
+                  You want a long-term technical partner to evolve the system as your programme and technology change.
+                </li>
+              </ul>
+            </section>
+
+            <!-- Card: CTA -->
+            <section
+              class="rounded-[14px] border border-zinc-700/60 bg-gradient-to-b from-[#10121a] to-[#050609] p-6 md:p-7 shadow-[0_10px_30px_rgba(0,0,0,0.6)]">
+              <h2 class="text-xl md:text-2xl font-semibold tracking-tight mb-3">
+                Talk about a project
+              </h2>
+              <p class="text-slate-200 mb-4 leading-relaxed">
+                If you have a venue, studio, or space that needs a fresh approach to audio, networking, and control,
+                we can help you map a realistic path from where you are to where you need to be.
+              </p>
+
+              <div class="flex flex-wrap items-center gap-3">
+                <a
+                  href="mailto:hello@eventresearch.io"
+                  class="inline-flex items-center gap-2 rounded-full border border-zinc-700/70 bg-zinc-950/70 px-4 py-2 text-sm text-slate-200
+                         hover:border-slate-200 hover:text-slate-100 hover:bg-slate-900/60 transition">
+                  <span class="inline-block h-1.5 w-1.5 rounded-full bg-slate-200"></span>
+                  Email hello@eventresearch.io
+                </a>
+
+                <span class="text-xs text-slate-400">
+                  Include your space, current system, and timelines.
+                </span>
+              </div>
+            </section>
+
+          </div>
         </section>
       </section>
     </main>
 
-    <!-- Simple footer mirroring main site tone -->
-    <footer class="border-t border-slate-900 text-xs text-slate-500">
-      <div class="max-w-3xl mx-auto px-6 py-4">
+    <footer class="border-t border-slate-900/70 text-xs text-slate-500">
+      <div class="max-w-3xl mx-auto px-6 py-4 text-center">
         <span>Event Tech Research Ltd · Audio · Control · R&amp;D</span>
       </div>
     </footer>
