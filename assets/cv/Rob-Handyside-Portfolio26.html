@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rob Handyside — Senior Audio & Networked Systems Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0b;
+    --bg2: #141412;
+    --bg3: #1c1c19;
+    --amber: #c8892a;
+    --amber-light: #e8a83e;
+    --amber-dim: #8a5e1a;
+    --white: #f0ece0;
+    --muted: #7a7870;
+    --border: rgba(200, 137, 42, 0.18);
+    --border-light: rgba(200, 137, 42, 0.08);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── GRID NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(200,137,42,0.03) 39px, rgba(200,137,42,0.03) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(200,137,42,0.03) 39px, rgba(200,137,42,0.03) 40px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+  section { padding: 5rem 0; border-bottom: 1px solid var(--border-light); }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,13,11,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+  }
+  nav .inner {
+    max-width: 1100px; margin: 0 auto; padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--amber);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.78rem;
+    font-family: var(--mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber-light); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 92vh;
+    display: flex; align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding: 6rem 0 4rem;
+  }
+  .hero-inner { display: grid; grid-template-columns: 1fr 320px; gap: 4rem; align-items: end; }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--amber);
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+  .hero-summary {
+    font-size: 1.05rem;
+    color: rgba(240,236,224,0.65);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta-row { display: flex; gap: 1rem; align-items: center; }
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.8rem;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--amber);
+    color: var(--amber);
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--amber);
+    transform: translateX(-101%);
+    transition: transform 0.25s ease;
+    z-index: -1;
+  }
+  .btn:hover { color: var(--bg); }
+  .btn:hover::before { transform: translateX(0); }
+  .btn-ghost {
+    border-color: rgba(240,236,224,0.2);
+    color: var(--muted);
+  }
+  .btn-ghost:hover { color: var(--bg); }
+  .btn-ghost::before { background: rgba(240,236,224,0.7); }
+
+  .hero-stats {
+    display: flex; flex-direction: column; gap: 1px;
+    border: 1px solid var(--border);
+    background: var(--border);
+  }
+  .stat-cell {
+    background: var(--bg2);
+    padding: 1.4rem 1.5rem;
+    position: relative;
+  }
+  .stat-cell::before {
+    content: attr(data-label);
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    margin-bottom: 0.35rem;
+  }
+  .stat-val {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--amber-light);
+    line-height: 1;
+  }
+  .stat-sub {
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* ── SECTION HEADINGS ── */
+  .section-head {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--amber);
+    letter-spacing: 0.15em;
+  }
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--white);
+    font-weight: 400;
+  }
+  .section-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  /* ── EXPERTISE GRID ── */
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .exp-card {
+    background: var(--bg2);
+    padding: 1.8rem;
+    transition: background 0.2s;
+  }
+  .exp-card:hover { background: var(--bg3); }
+  .exp-icon {
+    width: 32px; height: 32px;
+    border: 1px solid var(--amber-dim);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .exp-icon svg { width: 16px; height: 16px; fill: none; stroke: var(--amber); stroke-width: 1.5; }
+  .exp-title {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.5rem;
+  }
+  .exp-body { font-size: 0.85rem; color: rgba(240,236,224,0.55); line-height: 1.6; }
+  .exp-badge {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--amber-dim);
+    color: var(--amber-dim);
+  }
+
+  /* ── TIMELINE / EXPERIENCE ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0.4rem; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+  }
+  .tl-item { margin-bottom: 3rem; position: relative; }
+  .tl-dot {
+    position: absolute;
+    left: -2.28rem; top: 0.3rem;
+    width: 8px; height: 8px;
+    background: var(--amber);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--amber-dim);
+  }
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--amber-dim);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.3rem;
+  }
+  .tl-role {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--white);
+    margin-bottom: 0.15rem;
+  }
+  .tl-company {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+  }
+  .tl-desc { font-size: 0.88rem; color: rgba(240,236,224,0.55); max-width: 640px; }
+  .tl-award {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--amber);
+    border: 1px solid var(--amber-dim);
+    padding: 0.15rem 0.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ── PRESS / LINKS ── */
+  .press-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .press-card {
+    background: var(--bg2);
+    padding: 1.8rem;
+    display: flex; flex-direction: column;
+    text-decoration: none;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .press-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--amber);
+    transition: width 0.3s ease;
+  }
+  .press-card:hover { background: var(--bg3); }
+  .press-card:hover::after { width: 100%; }
+  .press-outlet {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .press-outlet-dot {
+    width: 5px; height: 5px;
+    background: var(--amber);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .press-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--white);
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+    flex: 1;
+  }
+  .press-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .press-link-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .press-link-label::after { content: '→'; }
+
+  /* ── GEAR / CONSOLES ── */
+  .gear-section { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .gear-col h3 {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .gear-list { list-style: none; }
+  .gear-list li {
+    display: flex; align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.88rem;
+    color: rgba(240,236,224,0.7);
+    gap: 0.75rem;
+  }
+  .gear-list li::before {
+    content: '—';
+    color: var(--amber-dim);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+  .gear-tag {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--amber-dim);
+    color: var(--amber-dim);
+    white-space: nowrap;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .cert-card {
+    background: var(--bg2);
+    padding: 1.4rem 1.5rem;
+  }
+  .cert-year {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--amber-dim);
+    letter-spacing: 0.12em;
+    margin-bottom: 0.3rem;
+  }
+  .cert-name {
+    font-size: 0.88rem;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+    line-height: 1.4;
+  }
+  .cert-issuer { font-size: 0.75rem; color: var(--muted); }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .testimonial {
+    background: var(--bg2);
+    padding: 2rem;
+    position: relative;
+  }
+  .testimonial::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 5rem;
+    color: var(--amber);
+    opacity: 0.15;
+    position: absolute;
+    top: 0.5rem; left: 1.5rem;
+    line-height: 1;
+  }
+  .testimonial-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(240,236,224,0.75);
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    position: relative;
+    z-index: 1;
+  }
+  .testimonial-attr { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; color: var(--amber); }
+  .testimonial-role { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ── CONTACT ── */
+  #contact {
+    border-bottom: none;
+    padding-bottom: 3rem;
+  }
+  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .contact-item { margin-bottom: 1.2rem; }
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber-dim);
+    margin-bottom: 0.2rem;
+  }
+  .contact-value {
+    font-size: 0.95rem;
+    color: var(--white);
+  }
+  .contact-value a { color: var(--amber); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-light);
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    position: relative; z-index: 1;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-stats { display: grid; grid-template-columns: 1fr 1fr; }
+    .gear-section { grid-template-columns: 1fr; }
+    .testimonials { grid-template-columns: 1fr; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { display: none; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag { animation: fadeUp 0.6s ease 0.1s both; }
+  h1 { animation: fadeUp 0.6s ease 0.2s both; }
+  .hero-summary { animation: fadeUp 0.6s ease 0.35s both; }
+  .hero-cta-row { animation: fadeUp 0.6s ease 0.5s both; }
+  .hero-stats { animation: fadeUp 0.6s ease 0.6s both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="#" class="nav-logo">R. Handyside // Engineering</a>
+    <ul class="nav-links">
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#press">Press</a></li>
+      <li><a href="#gear">Gear</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">Senior Audio &amp; Networked Systems Engineer</div>
+        <h1>Rob<br><em>Handyside</em></h1>
+        <p class="hero-summary">
+          A senior events technical engineer with over 20 years across live, broadcast, corporate, and installation environments. From consultancy and DSP programming through to repairs, system deployment, and show delivery — practical, solutions-focused, always improving.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#press" class="btn">Featured Work</a>
+          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-cell" data-label="Industry Experience">
+          <div class="stat-val">20+</div>
+          <div class="stat-sub">Years in professional audio</div>
+        </div>
+        <div class="stat-cell" data-label="Broadcast Credentials">
+          <div class="stat-val">A1/A2</div>
+          <div class="stat-sub">Live &amp; broadcast operator</div>
+        </div>
+        <div class="stat-cell" data-label="Network Certification">
+          <div class="stat-val">Dante 3</div>
+          <div class="stat-sub">Audinate certified, AoIP specialist</div>
+        </div>
+        <div class="stat-cell" data-label="Based">
+          <div class="stat-val">London</div>
+          <div class="stat-sub">SE15, available UK-wide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">01 //</span>
+      <h2>Core Expertise</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="expertise-grid">
+
+      <div class="exp-card">
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div class="exp-title">FOH &amp; Systems Engineering</div>
+        <div class="exp-body">Large-format PA deployment, acoustic simulation, system tuning and real-time management across festivals, arenas, corporate and broadcast environments.</div>
+        <span class="exp-badge">10+ years</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div class="exp-title">Broadcast Audio</div>
+        <div class="exp-body">A1/A2 for live broadcast including Six Nations, FA Cup finals, Goodwood Revival (Gravity Media), and Cage Warriors MMA across the UK, Ireland, and Italy.</div>
+        <span class="exp-badge">10+ years</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        </div>
+        <div class="exp-title">Dante / AoIP Networks</div>
+        <div class="exp-body">Dante Level 3 certified. Full network design and deployment for live, install and broadcast — Cisco, NetGear AV Series, MADI integration, multi-room and exhibition routing.</div>
+        <span class="exp-badge">Dante Lv.3</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="exp-title">RF &amp; Wireless Systems</div>
+        <div class="exp-body">Specialist frequency planning and wireless coordination. Notting Hill and Hackney Carnivals, London Fashion Week, Goodwood events and complex multi-transmitter environments.</div>
+        <span class="exp-badge">3+ years specialist</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="exp-title">DSP &amp; Audio Matrix</div>
+        <div class="exp-body">BSS Soundweb, Yamaha MTX, Q-SYS integration and control. Programming and deployment across permanent installs and temporary event builds.</div>
+        <span class="exp-badge">10+ years</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div class="exp-title">Installations &amp; Integration</div>
+        <div class="exp-body">Full venue AV and audio infrastructure — wiring, commissioning, network build-out and handover. HTB Church (Yamaha Dante), Fox &amp; Firkin, White City Warehouse and more.</div>
+        <span class="exp-badge">Multi-site</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="exp-title">Fault Finding &amp; Diagnostics</div>
+        <div class="exp-body">Show-critical troubleshooting, signal flow diagnostics and RF system support. Bench repairs on amplifiers and loudspeakers. Trained in Smaart measurement and analysis.</div>
+        <span class="exp-badge">Smaart certified</span>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <div class="exp-title">Technical Training &amp; Docs</div>
+        <div class="exp-body">Delivery of staff and freelancer training at Blitz (GES Group). Technical documentation, QA standards, and system packaging design for large-scale events operations.</div>
+        <span class="exp-badge">HOD level</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">02 //</span>
+      <h2>Experience</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2025 — 2026</div>
+        <div class="tl-role">Technical Support Specialist — Advanced Systems</div>
+        <div class="tl-company">ORBITAL SOUND</div>
+        <p class="tl-desc">Advanced playback and show system technical support. QLab and macOS show system configuration, licensing and system validation, client technical support and training assistance.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2007 — Present</div>
+        <div class="tl-role">Senior Freelance Audio &amp; Systems Engineer</div>
+        <div class="tl-company">ROB HANDYSIDE ENGINEERING / HEDERA-IP / EVENT TECH RESEARCH</div>
+        <p class="tl-desc">A1, A2 and Systems Engineer across live, broadcast, theatre and corporate productions. Dante/AES67 network deployment, RF setup and diagnostics, warehouse QA, technical consultancy, and embedded/SBC-based audio tool development. Clients include Gravity Media, Adlib, Aztec, PF Events, Sterling, Limitless Broadcast, Eclipse, Rockit.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2018 — 2020</div>
+        <div class="tl-role">Chief Audio Engineer / Technical Project Manager</div>
+        <div class="tl-company">BLITZ (GES GROUP)</div>
+        <p class="tl-desc">Senior technical lead across sound and show systems. Equipment specification and deployment design, warehouse and on-site technical leadership, staff and freelancer training, QA standards and system packaging design.</p>
+        <div>
+          <span class="tl-award">★ Tech of the Year ×2</span>
+          <span class="tl-award" style="margin-left:0.5rem;">★ WOW Award</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2007 — 2015</div>
+        <div class="tl-role">Head of Department — Amplifiers, DSP &amp; System Networks</div>
+        <div class="tl-company">BRITANNIA ROW PRODUCTIONS</div>
+        <p class="tl-desc">Department head for amplifier and DSP systems. Rack integration, firmware and repair workflows, system network configuration and integration, and technical training delivery across one of the UK's leading production companies.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2016 — 2024</div>
+        <div class="tl-role">Audio Engineer / DJ Tech</div>
+        <div class="tl-company">JOHN HENRY'S LTD</div>
+        <p class="tl-desc">Broadcast, music and playback support, warehouse prep and technical support, backline and playback engineering across an extensive roster of events.</p>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2023</div>
+        <div class="tl-role">FOH &amp; Audio Systems Engineer</div>
+        <div class="tl-company">CAGE WARRIORS MMA</div>
+        <p class="tl-desc">FOH and system engineering for live international MMA events across the UK, Ireland and Italy. Hybrid live and broadcast audio delivery, patching, signal flow and consistent output across CW154–CW162.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRESS / FEATURED LINKS -->
+<section id="press">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">03 //</span>
+      <h2>Featured &amp; Press</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="press-grid">
+
+      <a href="https://www.tpimagazine.com/blitz-communications-invests-in-em-acoustics/" target="_blank" rel="noopener" class="press-card">
+        <div class="press-outlet"><span class="press-outlet-dot"></span>TPi Magazine</div>
+        <div class="press-title">Blitz Communications Invests in EM Acoustics</div>
+        <div class="press-desc">Press coverage of Blitz's major investment in EM Acoustics — HALO-A line arrays, point source loudspeakers, subwoofers and DSP amplifiers — during Rob's tenure as Chief Audio Engineer at Blitz (GES Group).</div>
+        <div class="press-link-label">Read article</div>
+      </a>
+
+      <a href="https://www.lsionline.com/news/blitz-installs-phantom-wireless-system/" target="_blank" rel="noopener" class="press-card">
+        <div class="press-outlet"><span class="press-outlet-dot"></span>LSi Online</div>
+        <div class="press-title">Blitz Installs Phantom Wireless System</div>
+        <div class="press-desc">Feature on Blitz's Sennheiser radio mic installation for The Phantom of the Opera at Her Majesty's Theatre, London — a major theatre sound project delivered by Rob's team at Blitz.</div>
+        <div class="press-link-label">Read article</div>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=mJ_KzfE6Pic" target="_blank" rel="noopener" class="press-card">
+        <div class="press-outlet"><span class="press-outlet-dot"></span>YouTube</div>
+        <div class="press-title">System Engineering in Action</div>
+        <div class="press-desc">Video documentation of Rob's engineering work — showcasing system deployment, signal flow and live operation across professional event environments.</div>
+        <div class="press-link-label">Watch video</div>
+      </a>
+
+      <a href="https://asia-oceania.yamaha.com/en/business/audio/case-studies/2018/0223-20-htb.html" target="_blank" rel="noopener" class="press-card">
+        <div class="press-outlet"><span class="press-outlet-dot"></span>Yamaha Pro Audio</div>
+        <div class="press-title">Holy Trinity Brompton — Yamaha MCP1 Case Study</div>
+        <div class="press-desc">Yamaha case study on the HTB church installation, featuring the Yamaha MCP1 control panels and MTX Dante network infrastructure that Rob deployed and commissioned at one of London's leading churches.</div>
+        <div class="press-link-label">Read case study</div>
+      </a>
+
+      <a href="https://uk.yamaha.com/en/business/audio/case-studies/2018/1116-10-blitz.html" target="_blank" rel="noopener" class="press-card">
+        <div class="press-outlet"><span class="press-outlet-dot"></span>Yamaha Pro Audio</div>
+        <div class="press-title">Blitz — Yamaha Audio Case Study</div>
+        <div class="press-desc">Yamaha's case study on Blitz's large-scale deployment of Yamaha audio systems across events and productions, produced during Rob's role as Chief Audio Engineer and Technical Project Manager at Blitz (GES Group).</div>
+        <div class="press-link-label">Read case study</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- GEAR -->
+<section id="gear">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">04 //</span>
+      <h2>Consoles &amp; Systems</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="gear-section">
+      <div class="gear-col">
+        <h3>Mixing Consoles</h3>
+        <ul class="gear-list">
+          <li>Yamaha <span class="gear-tag">CMDSE Certified</span></li>
+          <li>DiGiCo</li>
+          <li>Allen &amp; Heath</li>
+          <li>Midas <span class="gear-tag">CMDSE Cert.</span></li>
+          <li>Soundcraft</li>
+        </ul>
+
+        <h3 style="margin-top:2rem;">PA Systems</h3>
+        <ul class="gear-list">
+          <li>d&amp;b audiotechnik <span class="gear-tag">10+ years</span></li>
+          <li>L-Acoustics <span class="gear-tag">ST Trained</span></li>
+          <li>Coda Audio <span class="gear-tag">10+ years</span></li>
+          <li>EM Acoustics</li>
+          <li>Bose ShowMatch <span class="gear-tag">Certified</span></li>
+        </ul>
+      </div>
+      <div class="gear-col">
+        <h3>Networks &amp; Protocols</h3>
+        <ul class="gear-list">
+          <li>Dante / AES67 <span class="gear-tag">Level 3</span></li>
+          <li>MADI</li>
+          <li>Cisco SG300</li>
+          <li>NetGear AV M4250 / M4300</li>
+          <li>AES67 / AoIP</li>
+        </ul>
+
+        <h3 style="margin-top:2rem;">DSP &amp; Control</h3>
+        <ul class="gear-list">
+          <li>BSS Soundweb</li>
+          <li>Yamaha MTX</li>
+          <li>Q-SYS</li>
+          <li>QLab / macOS Show Systems</li>
+          <li>Clear-Com <span class="gear-tag">10+ years</span></li>
+          <li>ELC GreenGo</li>
+          <li>Riedel</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">05 //</span>
+      <h2>Certifications</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-year">2020</div>
+        <div class="cert-name">AV Technologist Certificate</div>
+        <div class="cert-issuer">AVIXA</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2020</div>
+        <div class="cert-name">Dante Certified Level 3</div>
+        <div class="cert-issuer">Audinate</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2020</div>
+        <div class="cert-name">Smaart Operator Fundamentals</div>
+        <div class="cert-issuer">Rational Acoustics</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2019</div>
+        <div class="cert-name">ShowMatch System Certified</div>
+        <div class="cert-issuer">Bose Corporation</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2016</div>
+        <div class="cert-name">CMDSE Certification</div>
+        <div class="cert-issuer">Midas</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2016</div>
+        <div class="cert-name">HCAA Design Level 1</div>
+        <div class="cert-issuer">Harman International</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-year">2015</div>
+        <div class="cert-name">System Training (ST)</div>
+        <div class="cert-issuer">L-Acoustics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">06 //</span>
+      <h2>Testimonials</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial">
+        <div class="testimonial-text">Rob Handyside brings a huge amount of knowledge and skill, coupled with an impeccable work ethic. He is an excellent team member who is highly valued at Blitz — any project he works on is in safe hands.</div>
+        <div class="testimonial-attr">Aron Ross</div>
+        <div class="testimonial-role">Director of Sound, Blitz a GES Company</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-text">Rob is an honest, very hard-working person — a great professional.</div>
+        <div class="testimonial-attr">Johnny Henry</div>
+        <div class="testimonial-role">CEO, John Henry's Ltd</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-num">07 //</span>
+      <h2>Get in Touch</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="contact-inner">
+      <div>
+        <p style="color: rgba(240,236,224,0.55); font-size: 0.95rem; line-height: 1.8; margin-bottom: 2rem; max-width: 420px;">
+          Available for freelance and contract roles in technical audio engineering, systems engineering, broadcast sound, and installation projects across the UK and internationally.
+        </p>
+        <a href="mailto:rob.handyside.engineering@gmail.com" class="btn">Send an Email</a>
+      </div>
+      <div>
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:rob.handyside.engineering@gmail.com">rob.handyside.engineering@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Mobile</div>
+          <div class="contact-value"><a href="tel:+447903671159">07903 671159</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Web</div>
+          <div class="contact-value"><a href="https://eventresearch.io" target="_blank" rel="noopener">eventresearch.io</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Nunhead, London SE15 — Available UK-wide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <span style="color: var(--amber-dim);">ROB HANDYSIDE ENGINEERING</span> &nbsp;·&nbsp; Senior Audio &amp; Networked Systems Engineer &nbsp;·&nbsp; London, UK
+  </div>
+</footer>
+
+</body>
+</html>
