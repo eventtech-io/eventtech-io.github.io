@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Projects | Event Tech Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Current research and engineering projects from Event Tech Research." />
+  <link rel="canonical" href="https://eventresearch.io/projects.html" />
+  <meta property="og:title" content="Projects | Event Tech Research" />
+  <meta property="og:description" content="Current research and engineering projects from Event Tech Research." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://eventresearch.io/projects.html" />
+  <meta property="og:image" content="https://eventresearch.io/assets/logo.png" />
+  <link rel="icon" href="/favicon/favicon.ico" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="logo-img"><img src="/assets/logo.png" alt="Event Tech Research"></span>
+      <span>
+        <span class="brand-text-title">Event Tech Research</span>
+        <span class="brand-text-sub">Audio / Control / R&amp;D</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="/eventservices.html">Services</a>
+      <a class="nav-link" href="/software.html">Software</a>
+      <a class="nav-link" href="/hardware.html">Hardware</a>
+      <a class="nav-link" aria-current="page" href="/projects.html">Projects</a>
+      <a class="nav-link" href="/about.html">About</a>
+      <a class="nav-link" href="/hedera.html">Hedera</a>
+      <a class="nav-link" href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main" class="site-main">
+    <section class="hero compact">
+      <div class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>Projects</span>
+      </div>
+      <p class="kicker"><span class="dot"></span> Research in progress</p>
+      <h1>Projects built around real production problems.</h1>
+      <p class="lead">
+        These projects turn field pressure into practical systems, tools, and documentation that can be used
+        by technicians, venues, and production teams.
+      </p>
+    </section>
+
+    <section class="grid grid-3">
+      <article class="card">
+        <p class="section-title">Wireless audio</p>
+        <h2>Hedera</h2>
+        <p>
+          Licence-free wireless audio and service data for moving sound systems, designed around parade routes
+          and hostile RF conditions.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="/hedera.html"><span class="dot"></span> Read project</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <p class="section-title">Control systems</p>
+        <h2>Venue control backbone</h2>
+        <p>
+          A design pattern for joining audio, lighting, video, and automation equipment into one predictable,
+          operator-friendly control layer.
+        </p>
+        <ul>
+          <li>OSC-first thinking</li>
+          <li>Clear status and fault states</li>
+          <li>Repeatable show presets</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <p class="section-title">Operational tools</p>
+        <h2>Monitoring toolkit</h2>
+        <p>
+          Lightweight monitoring concepts for technical teams who need to see signal paths, network health,
+          and system state quickly during live operation.
+        </p>
+        <ul>
+          <li>Rack and desk status views</li>
+          <li>Simple logs for support handover</li>
+          <li>Documentation tied to the system</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <p class="section-title">Software</p>
+        <h2>Engineer utilities</h2>
+        <p>
+          Software concepts for control surfaces, monitoring views, routing records, and field-ready
+          troubleshooting workflows.
+        </p>
+        <div class="actions">
+          <a class="button" href="/software.html"><span class="dot"></span> View software</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <p class="section-title">Hardware</p>
+        <h2>Hedera Link</h2>
+        <p>
+          Wireless audio bridge hardware for processional events, built around analogue endpoints,
+          embedded audio transport, and 5 GHz field links.
+        </p>
+        <div class="actions">
+          <a class="button" href="/hardware.html"><span class="dot"></span> View hardware</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Open research and collaboration</h2>
+      <p>
+        Some work becomes a field guide, some becomes a working prototype, and some becomes a private design
+        for a venue or event. The common thread is practical usefulness for engineers under time pressure.
+      </p>
+      <div class="actions">
+        <a class="button" href="https://github.com/eventtech-io" target="_blank" rel="noreferrer"><span class="dot"></span> View GitHub</a>
+        <a class="button primary" href="/contact.html"><span class="dot"></span> Talk about a project</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="year"></span> Event Tech Research. Built on GitHub Pages.</span>
+      <nav class="footer-links" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/event-tech-research-uk/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/eventtechresearch" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://github.com/eventtech-io" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

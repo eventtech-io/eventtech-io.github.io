@@ -2,429 +2,200 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Event Tech Research | Audio · Control · R&D</title>
-
+  <title>Event Tech Research | Audio, Control, R&amp;D</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Event Tech Research is a London-based R&D and education studio focused on modern event audio, networking, and control. Field-tested tools, open-architecture design, and practical documentation for engineers." />
+  <meta name="description" content="Event Tech Research is a London-based R&amp;D and education studio focused on modern event audio, networking, and control." />
   <link rel="canonical" href="https://eventresearch.io/" />
-
-  <!-- Open Graph -->
   <meta property="og:title" content="Event Tech Research" />
-  <meta property="og:description" content="Research-led tools for the next generation of events — audio, networking, control, and practical field engineering." />
+  <meta property="og:description" content="Research-led tools for audio, networking, control, and practical field engineering." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://eventresearch.io/" />
   <meta property="og:image" content="https://eventresearch.io/assets/logo.png" />
-
-  <!-- Favicon -->
   <link rel="icon" href="/favicon/favicon.ico" />
-
-  <style>
-    :root{
-      --bg:#02040a;
-      --card:#10121a;
-      --muted:#d1d5db;
-      --border:#3f3f46;
-      --radius:14px;
-      --soft:#111827;
-    }
-
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      background:radial-gradient(circle at top,#020617,#02040a);
-      color:#f9fafb;
-      min-height:100vh;
-    }
-
-    /* ===== HEADER ===== */
-    header{
-      position:sticky;top:0;z-index:10;
-      padding:1rem 7vw;
-      display:flex;justify-content:space-between;align-items:center;
-      gap:1rem;
-      background:rgba(3,4,7,.96);
-      border-bottom:1px solid #111827;
-      backdrop-filter:blur(16px);
-    }
-
-    .brand{
-      display:flex;gap:.75rem;align-items:center;
-      text-decoration:none;color:inherit;
-    }
-
-    .logo-img{width:42px;height:42px;display:flex;align-items:center;justify-content:center}
-    .logo-img img{width:100%;height:100%;object-fit:contain}
-
-    .brand-text-title{font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-    .brand-text-sub{
-      font-size:.7rem;color:var(--muted);
-      letter-spacing:.18em;text-transform:uppercase;
-    }
-
-    .social-header{
-      display:flex;gap:.5rem;flex-wrap:wrap;justify-content:flex-end;
-    }
-
-    .social-chip{
-      display:inline-flex;align-items:center;gap:.35rem;
-      padding:.3rem .7rem;
-      border-radius:999px;
-      border:1px solid #27272f;
-      background:#09090b;
-      font-size:.75rem;
-      color:var(--muted);
-      text-decoration:none;
-      white-space:nowrap;
-      transition:border-color .15s ease, color .15s ease, background .15s ease, transform .15s ease;
-    }
-    .social-chip:hover{
-      border-color:#e5e7eb;
-      color:#e5e7eb;
-      background:#111827;
-      transform:translateY(-1px);
-    }
-
-    .social-dot{width:6px;height:6px;border-radius:50%;background:#e5e7eb}
-
-    /* ===== MAIN ===== */
-    main{
-      max-width:980px;
-      margin:auto;
-      padding:0 7vw 3.2rem;
-      display:grid;
-      gap:1.5rem;
-      position:relative;
-    }
-
-    /* ===== HERO ===== */
-    .hero{
-      position:relative;
-      text-align:center;
-      padding-top:5.7rem;
-      padding-bottom:3.2rem;
-      display:grid;
-      gap:1rem;
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      top:-40px;
-      left:50%;
-      width:100vw;
-      height:calc(100% + 80px);
-      transform:translateX(-50%);
-      background:
-        linear-gradient(to bottom,rgba(5,10,25,.45),rgba(2,4,10,.92)),
-        linear-gradient(to right,
-          #02040a 0%,
-          rgba(2,4,10,.35) 18%,
-          rgba(2,4,10,.35) 82%,
-          #02040a 100%
-        ),
-        url("/assets/circuit-main.png") center top / cover no-repeat;
-      z-index:-1;
-    }
-
-    .badge{
-      display:inline-flex;
-      padding:.25rem .9rem;
-      border-radius:999px;
-      border:1px solid #27272f;
-      background:rgba(15,23,42,.92);
-      font-size:.78rem;
-      letter-spacing:.15em;
-      text-transform:uppercase;
-      color:var(--muted);
-      margin:0 auto;
-    }
-
-    h1{
-      margin:0;
-      font-size:clamp(2.2rem,3.8vw,2.9rem);
-      line-height:1.22;
-    }
-    h1 span{
-      text-decoration:underline;
-      text-decoration-thickness:2px;
-      text-underline-offset:4px;
-    }
-
-    .hero-lead{
-      max-width:56rem;
-      margin:0 auto;
-      line-height:1.9;
-      color:#e5e7eb;
-      font-size:1rem;
-    }
-
-    .hero-links{
-      display:flex;
-      gap:.5rem;
-      flex-wrap:wrap;
-      justify-content:center;
-      margin-top:.25rem;
-    }
-
-    /* ===== SECTIONS ===== */
-    .section-title{
-      margin:0 0 .5rem;
-      font-size:1.05rem;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      color:var(--muted);
-    }
-
-    .grid{display:grid;gap:1.2rem}
-    @media(min-width:900px){ .grid-2{grid-template-columns:1.1fr 1fr} }
-    @media(min-width:900px){ .grid-3{grid-template-columns:repeat(3,1fr)} }
-
-    .card{
-      background:linear-gradient(to bottom,var(--card),#050609);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:1.55rem 1.7rem;
-      box-shadow:0 10px 30px rgba(0,0,0,.6);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .card::after{
-      content:"";
-      position:absolute;top:0;left:0;right:0;height:1px;
-      background:linear-gradient(to right,transparent,rgba(249,250,251,.45),transparent);
-      opacity:.7;
-    }
-
-    .card h2{margin:.1rem 0 .6rem;font-size:1.2rem}
-    .card p{margin:.25rem 0 .6rem;line-height:1.9;color:#f3f4f6}
-    .muted{color:var(--muted)}
-
-    ul{margin:.6rem 0 0;padding-left:1.1rem;line-height:1.85;color:#e5e7eb}
-    li{margin:.25rem 0}
-
-    .kpi-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:.5rem;
-      justify-content:center;
-      margin-top:.25rem;
-    }
-    .kpi{
-      display:inline-flex;
-      align-items:center;
-      gap:.45rem;
-      padding:.35rem .7rem;
-      border-radius:999px;
-      border:1px solid #27272f;
-      background:rgba(9,9,11,.7);
-      color:#e5e7eb;
-      font-size:.82rem;
-    }
-    .kpi b{font-weight:700}
-    .kpi .dot{width:6px;height:6px;border-radius:50%;background:#e5e7eb}
-
-    .fine{
-      font-size:.86rem;
-      color:var(--muted);
-      line-height:1.8;
-      margin:.35rem 0 0;
-    }
-
-    footer{
-      margin-top:2rem;
-      padding:2rem 7vw;
-      border-top:1px solid #111827;
-      font-size:.82rem;
-      color:var(--muted);
-      text-align:center;
-    }
-
-    @media (max-width:640px){
-      header, main { padding-inline: 5vw; }
-      .hero{ padding-top: 4.8rem; }
-      .hero::before{
-        top:-30px;
-        height:calc(100% + 60px);
-        background-size:180% auto;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css" />
 </head>
 
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<header>
-  <a class="brand" href="/">
-    <div class="logo-img"><img src="/assets/logo.png" alt="Event Tech Research"></div>
-    <div>
-      <div class="brand-text-title">Event Tech Research</div>
-      <div class="brand-text-sub">Audio · Control · R&amp;D</div>
-    </div>
-  </a>
-
-  <nav class="social-header" aria-label="Links">
-    <a class="social-chip" href="/hedera.html"><span class="social-dot"></span> Hedera</a>
-
-    <a class="social-chip"
-       href="https://www.linkedin.com/in/event-tech-research-uk/"
-       target="_blank" rel="noreferrer">
-      <span class="social-dot"></span> LinkedIn
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="logo-img"><img src="/assets/logo.png" alt="Event Tech Research"></span>
+      <span>
+        <span class="brand-text-title">Event Tech Research</span>
+        <span class="brand-text-sub">Audio / Control / R&amp;D</span>
+      </span>
     </a>
 
-    <a class="social-chip"
-       href="https://www.facebook.com/people/Event-Tech-Research/61583230261617/?rdid=BHO47zEHDuyOcPt6&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17czJerMNB%2F"
-       target="_blank" rel="noreferrer">
-      <span class="social-dot"></span> Facebook
-    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="nav-link" aria-current="page" href="/">Home</a>
+      <a class="nav-link" href="/eventservices.html">Services</a>
+      <a class="nav-link" href="/software.html">Software</a>
+      <a class="nav-link" href="/hardware.html">Hardware</a>
+      <a class="nav-link" href="/projects.html">Projects</a>
+      <a class="nav-link" href="/about.html">About</a>
+      <a class="nav-link" href="/hedera.html">Hedera</a>
+      <a class="nav-link" href="/contact.html">Contact</a>
+    </nav>
+  </header>
 
-    <a class="social-chip"
-       href="https://www.instagram.com/eventtechresearch"
-       target="_blank" rel="noreferrer">
-      <span class="social-dot"></span> Instagram
-    </a>
-
-    <a class="social-chip"
-       href="https://github.com/eventtech-io"
-       target="_blank" rel="noreferrer">
-      <span class="social-dot"></span> GitHub
-    </a>
-  </nav>
-</header>
-
-<main>
-
-  <!-- HERO -->
-  <section class="hero">
-    <span class="badge">Research · Field Engineering · Education</span>
-
-    <h1>
-      Research-led tools for the <span>next generation</span> of events.
-    </h1>
-
-    <p class="hero-lead">
-      Event Tech Research is a London-based R&amp;D and education studio focused on modern event audio, networking,
-      and control. We prototype practical tools for technicians and production teams — then share the knowledge back
-      through documentation, training, and open-architecture design.
-    </p>
-
-    <div class="hero-links" aria-label="Primary actions">
-      <a class="social-chip" href="/hedera.html"><span class="social-dot"></span> Explore Hedera</a>
-      <a class="social-chip" href="https://github.com/eventtech-io" target="_blank" rel="noreferrer">
-        <span class="social-dot"></span> View on GitHub
-      </a>
-    </div>
-
-    <div class="kpi-row" aria-label="Highlights">
-      <span class="kpi"><span class="dot"></span> <b>Field-tested</b> workflows</span>
-      <span class="kpi"><span class="dot"></span> <b>Open standards</b> mindset</span>
-      <span class="kpi"><span class="dot"></span> <b>Engineer-first</b> tools</span>
-      <span class="kpi"><span class="dot"></span> <b>Documentation</b> + training</span>
-    </div>
-  </section>
-
-  <!-- OVERVIEW -->
-  <section class="grid grid-2">
-    <article class="card">
-      <div class="section-title">Overview</div>
-      <h2>What we do</h2>
-      <p>
-        We explore how networked audio, OSC, and open protocols can simplify real-world workflows for engineers
-        in live events, theatre, and broadcast — especially when reliability, speed, and clarity matter most.
+  <main id="main" class="site-main">
+    <section class="hero">
+      <p class="kicker"><span class="dot"></span> Research / Field Engineering / Education</p>
+      <h1>Research-led tools for the <span class="accent">next generation</span> of events.</h1>
+      <p class="lead">
+        Event Tech Research is a London-based R&amp;D and education studio focused on modern event audio,
+        networking, and control. We prototype practical tools for technicians and production teams, then
+        turn the learning into documentation, training, and open-architecture design.
       </p>
-      <ul>
-        <li>Event-focused R&amp;D and prototyping</li>
-        <li>Audio networking &amp; monitoring tools</li>
-        <li>Show control, device integration, and automation</li>
-        <li>Practical templates, guides, and educational resources</li>
-      </ul>
-      <p class="fine">
-        The goal is simple: reduce friction on show day and make complex systems feel approachable.
-      </p>
-    </article>
 
-    <article class="card">
-      <div class="section-title">Principles</div>
-      <h2>How we work</h2>
-      <p>
-        Our approach is grounded in real deployments — the kind where RF noise is brutal, time is short,
-        and the show still has to go on.
-      </p>
-      <ul>
-        <li><b>Engineer-first design:</b> minimise cognitive load</li>
-        <li><b>Observability:</b> status, logs, and clear diagnostics</li>
-        <li><b>Graceful failure:</b> predictable behaviour under stress</li>
-        <li><b>Open architecture:</b> standards and interoperability over silos</li>
-      </ul>
-    </article>
-  </section>
-
-  <!-- CAPABILITIES -->
-  <section class="grid">
-    <div class="section-title">Capabilities</div>
-    <div class="grid grid-3">
-      <article class="card">
-        <h2>Audio</h2>
-        <p class="muted">Transport · monitoring · low-latency engineering</p>
-        <ul>
-          <li>Uncompressed PCM workflows</li>
-          <li>Dante / AES67 thinking</li>
-          <li>Field capture and diagnostics</li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h2>Control</h2>
-        <p class="muted">OSC · scene workflows · universal control concepts</p>
-        <ul>
-          <li>Cross-vendor control ideas</li>
-          <li>Automation and monitoring displays</li>
-          <li>Operator-friendly UI patterns</li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h2>Networking</h2>
-        <p class="muted">VLANs · PoE · resilient edge deployments</p>
-        <ul>
-          <li>Festival / venue network design</li>
-          <li>RF-aware infrastructure</li>
-          <li>Repeatable deployment methods</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section class="grid">
-    <div class="section-title">Featured project</div>
-    <article class="card">
-      <h2>Hedera — licence-free wireless audio for moving sound systems</h2>
-      <p>
-        Hedera is designed to link moving floats along a parade route. It carries uncompressed stereo audio with minimal
-        latency, plus a service channel for engineering coordination — engineered for hostile RF environments.
-      </p>
-      <div class="hero-links" aria-label="Project actions">
-        <a class="social-chip" href="/hedera.html"><span class="social-dot"></span> Read the Hedera page</a>
-        <a class="social-chip" href="mailto:event.tech.research@gmail.com?subject=Hedera%20Technical%20Brief%20Request">
-          <span class="social-dot"></span> Request brief
-        </a>
+      <div class="actions" aria-label="Primary actions">
+        <a class="button primary" href="/hedera.html"><span class="dot"></span> Explore Hedera</a>
+        <a class="button" href="/eventservices.html"><span class="dot"></span> View services</a>
+        <a class="button" href="/software.html"><span class="dot"></span> Software tools</a>
+        <a class="button" href="/hardware.html"><span class="dot"></span> Hardware systems</a>
+        <a class="button" href="/contact.html"><span class="dot"></span> Start a conversation</a>
       </div>
-      <p class="fine">Tip: the “Request brief” link opens your email client with a pre-filled subject.</p>
-    </article>
-  </section>
+    </section>
 
-</main>
+    <div class="pill-row" aria-label="Highlights">
+      <span class="pill"><span class="dot"></span> Field-tested workflows</span>
+      <span class="pill"><span class="dot"></span> Open standards mindset</span>
+      <span class="pill"><span class="dot"></span> Engineer-first tools</span>
+      <span class="pill"><span class="dot"></span> Documentation and training</span>
+    </div>
 
-<footer>
-  &copy; <span id="year"></span> Event Tech Research. Built on GitHub Pages.
-</footer>
+    <section class="grid grid-2" aria-labelledby="overview-title">
+      <article class="card">
+        <p class="section-title" id="overview-title">Overview</p>
+        <h2>What we do</h2>
+        <p>
+          We explore how networked audio, OSC, and open protocols can simplify real-world workflows for
+          engineers in live events, theatre, and broadcast, especially when reliability, speed, and clarity
+          matter most.
+        </p>
+        <ul>
+          <li>Event-focused R&amp;D and prototyping</li>
+          <li>Audio networking and monitoring tools</li>
+          <li>Show control, device integration, and automation</li>
+          <li>Practical templates, guides, and educational resources</li>
+        </ul>
+      </article>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+      <article class="card">
+        <p class="section-title">Principles</p>
+        <h2>How we work</h2>
+        <p>
+          Our approach is grounded in real deployments, where RF noise is high, time is short, and the
+          show still has to go on.
+        </p>
+        <ul>
+          <li><strong>Engineer-first design:</strong> minimise cognitive load</li>
+          <li><strong>Observability:</strong> status, logs, and clear diagnostics</li>
+          <li><strong>Graceful failure:</strong> predictable behaviour under stress</li>
+          <li><strong>Open architecture:</strong> standards and interoperability over silos</li>
+        </ul>
+      </article>
+    </section>
 
+    <section class="grid" aria-labelledby="capabilities-title">
+      <div class="section-heading">
+        <p class="section-title" id="capabilities-title">Capabilities</p>
+        <p>Focused technical support for teams building reliable show systems.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <h2>Audio</h2>
+          <p class="muted">Transport, monitoring, and low-latency engineering.</p>
+          <ul>
+            <li>Uncompressed PCM workflows</li>
+            <li>Dante and AES67 thinking</li>
+            <li>Field capture and diagnostics</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Control</h2>
+          <p class="muted">OSC, scene workflows, and universal control concepts.</p>
+          <ul>
+            <li>Cross-vendor control ideas</li>
+            <li>Automation and monitoring displays</li>
+            <li>Operator-friendly UI patterns</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2>Networking</h2>
+          <p class="muted">VLANs, PoE, and resilient edge deployments.</p>
+          <ul>
+            <li>Festival and venue network design</li>
+            <li>RF-aware infrastructure</li>
+            <li>Repeatable deployment methods</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="grid" aria-labelledby="software-title">
+      <p class="section-title" id="software-title">Software</p>
+      <article class="card">
+        <h2>Field tools for control, monitoring, and documentation</h2>
+        <p>
+          Software work focuses on practical utilities for engineers: status dashboards, OSC control helpers,
+          routing documentation, and lightweight tools that make complex show systems easier to operate.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="/software.html"><span class="dot"></span> Explore software</a>
+          <a class="button" href="https://github.com/eventtech-io" target="_blank" rel="noreferrer"><span class="dot"></span> View GitHub</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid" aria-labelledby="hardware-title">
+      <p class="section-title" id="hardware-title">Hardware</p>
+      <article class="card">
+        <h2>Wireless audio hardware for moving sound systems</h2>
+        <p>
+          Hardware work includes field-ready audio endpoints, RF links, antenna choices, and appliance designs
+          for live systems that have to keep working while the geometry, crowd, and RF environment keep changing.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="/hardware.html"><span class="dot"></span> Explore hardware</a>
+          <a class="button" href="/Hedera-Link-Teaser.html" target="_blank" rel="noreferrer"><span class="dot"></span> View Hedera Link teaser</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid" aria-labelledby="featured-title">
+      <p class="section-title" id="featured-title">Featured project</p>
+      <article class="card">
+        <h2>Hedera - licence-free wireless audio for moving sound systems</h2>
+        <p>
+          Hedera is designed to link moving floats along a parade route. It carries uncompressed stereo audio
+          with minimal latency, plus a service channel for engineering coordination.
+        </p>
+        <div class="actions" aria-label="Project actions">
+          <a class="button primary" href="/hedera.html"><span class="dot"></span> Read the Hedera page</a>
+          <a class="button" href="mailto:event.tech.research@gmail.com?subject=Hedera%20Technical%20Brief%20Request"><span class="dot"></span> Request brief</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="year"></span> Event Tech Research. Built on GitHub Pages.</span>
+      <nav class="footer-links" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/event-tech-research-uk/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/eventtechresearch" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://github.com/eventtech-io" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
