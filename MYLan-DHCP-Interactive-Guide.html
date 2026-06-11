@@ -1,187 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Understanding DHCP — An Interactive Guide by MYLan</title>
-<style>
-:root{--base:#0a0a18;--panel:#111128;--panel2:#161636;--line:#252550;--text:#f0f0f5;--muted:#8888aa;--soft:#c0c0d8;--cyan:#00b4d8;--cyan-dim:rgba(0,180,216,.12);--green:#4caf50;--red:#f44336;--orange:#ff9800;--blue:#3d5afe}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--base);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.65;overflow-x:hidden}
-body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 15% 5%,rgba(0,180,216,.06),transparent 40%),radial-gradient(ellipse at 85% 80%,rgba(76,175,80,.04),transparent 35%);z-index:0}
+  <meta charset="UTF-8" />
+  <title>MYLan DHCP Interactive Guide | Event Tech Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="An Event Tech Research interactive guide to DHCP, the DORA handshake, packet structure, lease management, and field use of MYLan." />
+  <link rel="canonical" href="https://eventresearch.io/MYLan-DHCP-Interactive-Guide.html" />
+  <meta property="og:title" content="MYLan DHCP Interactive Guide | Event Tech Research" />
+  <meta property="og:description" content="Learn DHCP through an interactive Event Tech Research guide built around MYLan as a practical field network tool." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://eventresearch.io/MYLan-DHCP-Interactive-Guide.html" />
+  <meta property="og:image" content="https://eventresearch.io/assets/logo.png" />
+  <link rel="icon" href="/favicon/favicon.ico" />
+  <link rel="stylesheet" href="/assets/site.css" />
 
-/* Layout */
-.wrap{max-width:920px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
-header{padding:48px 0 32px;border-bottom:1px solid var(--line)}
-header .brand{font-family:"JetBrains Mono","Courier New",monospace;font-size:36px;font-weight:800;letter-spacing:-.04em}
-header .sub{color:var(--muted);font-size:14px;margin-top:6px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em}
-header p.intro{margin-top:20px;font-size:17px;color:var(--soft);max-width:640px;line-height:1.7}
+  <style>
+    .dhcp-main{max-width:1100px}
+    .dhcp-main .hero{padding-bottom:2.25rem}
+    .guide-toc{
+      position:sticky;top:76px;z-index:12;margin:-.4rem auto 1.2rem;padding:.65rem;
+      display:flex;gap:.45rem;overflow-x:auto;border:1px solid var(--line-soft);
+      border-radius:var(--radius);background:rgba(3,4,7,.88);backdrop-filter:blur(16px);
+      box-shadow:0 10px 30px rgba(0,0,0,.28);scrollbar-width:none
+    }
+    .guide-toc::-webkit-scrollbar{display:none}
+    .guide-toc a{flex:0 0 auto;text-decoration:none;color:var(--muted);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line-soft);border-radius:999px;padding:.35rem .7rem;background:rgba(9,9,11,.68)}
+    .guide-toc a:hover,.guide-toc a.active{color:#f9fafb;border-color:rgba(112,240,207,.7);background:rgba(112,240,207,.1)}
+    .dhcp-guide{display:grid;gap:1.2rem}
+    .dhcp-guide section{scroll-margin-top:140px;background:linear-gradient(to bottom,var(--panel),var(--panel-dark));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.55rem 1.7rem;position:relative;overflow:hidden}
+    .dhcp-guide section::after{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(to right,transparent,rgba(249,250,251,.44),transparent);opacity:.72}
+    .dhcp-guide h2{font-size:1.35rem;letter-spacing:.01em;margin:0 0 .9rem;padding-bottom:.75rem;border-bottom:1px solid var(--line-soft);text-transform:none}
+    .dhcp-guide h3{font-size:1rem;margin:1.25rem 0 .35rem;text-transform:none}
+    .dhcp-guide p{color:#f3f4f6;line-height:1.82;margin:0 0 .75rem;font-size:.98rem}
+    .dhcp-guide code{color:var(--accent);background:rgba(112,240,207,.08);border:1px solid rgba(112,240,207,.16);padding:.08rem .28rem;border-radius:4px}
+    .cyan{color:var(--accent)}.green{color:#86efac}.red{color:#fca5a5}.orange{color:var(--accent-warm)}
+    .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem;margin:1rem 0}
+    .guide-card{background:#09090b;border:1px solid var(--line-soft);padding:1rem;border-radius:var(--radius);transition:border-color .15s ease,transform .15s ease}
+    .guide-card:hover{border-color:rgba(112,240,207,.5);transform:translateY(-1px)}
+    .guide-card h4{font-size:.86rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:.05rem 0 .4rem}
+    .guide-card p{font-size:.88rem;color:var(--muted);margin:0;line-height:1.65}
+    .guide-panel{border:1px solid var(--line-soft);background:#09090b;padding:1.25rem;margin:1rem 0;border-radius:var(--radius)}
+    details{border:1px solid var(--line-soft);margin:.9rem 0;border-radius:var(--radius);background:#09090b;overflow:hidden}
+    details summary{cursor:pointer;padding:.95rem 1rem;font-size:.82rem;letter-spacing:.11em;text-transform:uppercase;color:#e5e7eb;list-style:none;display:flex;align-items:center;gap:.55rem}
+    details summary::before{content:"▸";color:var(--accent);transition:transform .2s}details[open] summary::before{transform:rotate(90deg)}
+    details summary:hover{color:#fff;background:rgba(112,240,207,.05)}.details-content{padding:.25rem 1rem 1rem}
+    .mylan-ref{border-left:3px solid var(--accent);background:rgba(112,240,207,.08);padding:1rem 1.1rem;margin:1rem 0;border-radius:0 var(--radius) var(--radius) 0;color:#e5e7eb}
+    .mylan-ref strong{color:var(--accent);font-size:.76rem;display:block;margin-bottom:.35rem;letter-spacing:.12em;text-transform:uppercase}
+    /* Interactive DORA */
+    .dora-sim{position:relative;padding:.5rem 0}.dora-actors{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}.dora-device{text-align:center;width:120px}.dora-device .icon{font-size:38px;margin-bottom:.25rem}.dora-device .label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.dora-device .ip{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;color:var(--accent);margin-top:.2rem;min-height:18px}
+    .dora-lane{position:relative;min-height:280px;border-left:1px dashed var(--line);border-right:1px dashed var(--line);margin:0 60px}.dora-msg{position:absolute;left:0;right:0;display:flex;align-items:center;opacity:0;transition:opacity .5s,transform .5s;transform:translateY(10px)}.dora-msg.show{opacity:1;transform:translateY(0)}.dora-msg.to-client{flex-direction:row-reverse}.dora-arrow{flex:1;height:2px;position:relative}.dora-arrow::after{content:"";position:absolute;right:-1px;top:-5px;border:6px solid transparent;border-left:8px solid var(--accent)}.to-client .dora-arrow::after{right:auto;left:-1px;border-left:none;border-right:8px solid #86efac}.dora-arrow .line{height:2px;width:0;transition:width .6s ease-out}.dora-msg.show .dora-arrow .line{width:100%}.to-server .dora-arrow .line{background:var(--accent)}.to-client .dora-arrow .line{background:#86efac}.dora-label{font-size:.8rem;font-weight:700;padding:.35rem .75rem;border-radius:999px;white-space:nowrap;border:1px solid var(--line-soft);background:#02040a}.to-server .dora-label{color:var(--accent)}.to-client .dora-label{color:#86efac}
+    .dora-controls,.sim-controls{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem;align-items:center}.dora-controls button,.sim-controls button,.dhcp-guide button{font:inherit;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;padding:.55rem .85rem;border:1px solid var(--line-soft);background:#111827;color:#f3f4f6;cursor:pointer;border-radius:999px;transition:all .15s}.dora-controls button:hover,.sim-controls button:hover,.dhcp-guide button:hover{border-color:rgba(112,240,207,.7);color:#fff;background:rgba(112,240,207,.1)}.dora-info{margin-top:1rem;padding:1rem;background:#050609;border:1px solid var(--line-soft);border-radius:var(--radius);min-height:80px;font-size:.92rem;color:#e5e7eb}.dora-step-num{color:var(--accent);font-weight:700;margin-right:.5rem}
+    .packet-grid{display:grid;grid-template-columns:repeat(16,1fr);gap:2px;margin:1rem 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.7rem}.packet-byte{text-align:center;padding:.48rem .1rem;background:#050609;border:1px solid var(--line-soft);color:var(--muted);cursor:pointer;border-radius:3px;transition:all .15s;user-select:none}.packet-byte:hover{border-color:var(--accent);color:#fff;z-index:2;transform:scale(1.08)}.packet-byte.hl-op{background:rgba(112,240,207,.12);color:var(--accent)}.packet-byte.hl-xid{background:rgba(245,200,111,.12);color:var(--accent-warm)}.packet-byte.hl-yi{background:rgba(134,239,172,.1);color:#86efac}.packet-byte.hl-si{background:rgba(147,197,253,.1);color:#93c5fd}.packet-byte.hl-ch{background:rgba(252,165,165,.1);color:#fca5a5}.packet-byte.hl-magic{background:rgba(216,180,254,.1);color:#d8b4fe}.packet-legend{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0}.packet-legend span{display:flex;align-items:center;gap:.4rem;font-size:.75rem;cursor:pointer;padding:.3rem .55rem;border-radius:999px;border:1px solid var(--line-soft);background:#050609}.packet-legend .dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}.packet-detail{padding:1rem;background:#050609;border:1px solid var(--line-soft);border-radius:var(--radius);margin:.8rem 0;min-height:60px;color:#e5e7eb}
+    .lease-table{width:100%;border-collapse:collapse;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;margin:1rem 0}.lease-table th{text-align:left;padding:.7rem .8rem;border-bottom:1px solid var(--line);color:var(--muted);text-transform:uppercase;font-size:.7rem}.lease-table td{padding:.7rem .8rem;border-bottom:1px solid rgba(255,255,255,.06);color:#e5e7eb}.lease-table tr.new{animation:leaseFlash .8s ease-out}@keyframes leaseFlash{0%{background:rgba(112,240,207,.18)}100%{background:transparent}}.lease-table .status{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.4rem}.lease-table .status.active{background:#86efac}.lease-table .status.expired{background:var(--muted)}
+    .quiz-q{border:1px solid var(--line-soft);background:#09090b;padding:1rem;margin:.8rem 0;border-radius:var(--radius)}.quiz-q h4{font-size:.8rem;text-transform:uppercase;color:var(--accent);letter-spacing:.1em;margin:0 0 .6rem}.quiz-opts{display:flex;flex-direction:column;gap:.5rem}.quiz-opt{display:block;padding:.75rem .9rem;background:#050609;border:1px solid var(--line-soft);border-radius:var(--radius);cursor:pointer;font-size:.9rem;color:#e5e7eb;transition:all .15s}.quiz-opt:hover{border-color:var(--accent);color:#fff}.quiz-opt.correct{border-color:#86efac;background:rgba(134,239,172,.1);color:#86efac}.quiz-opt.wrong{border-color:#fca5a5;background:rgba(252,165,165,.08);color:#fca5a5}.quiz-opt.disabled{pointer-events:none;opacity:.72}.quiz-result{margin-top:.6rem;font-size:.82rem;min-height:20px}.score-bar{margin:1.1rem 0;padding:1.2rem;background:#09090b;border:1px solid var(--line-soft);border-radius:var(--radius);text-align:center}.score-bar .score-num{font-size:2.8rem;font-weight:800;color:var(--accent)}.score-bar .score-label{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em}
+    @media(max-width:760px){.guide-toc{top:128px}.dhcp-guide section{padding:1.2rem}.dora-lane{margin:0 28px}.dora-device{width:84px}.packet-grid{grid-template-columns:repeat(8,1fr)}.lease-table{font-size:.68rem}.lease-table th,.lease-table td{padding:.55rem .45rem}}
+  </style>
 
-/* Nav */
-.toc{position:sticky;top:0;z-index:100;background:rgba(10,10,24,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:10px 0;margin-bottom:32px}
-.toc-inner{display:flex;gap:4px;overflow-x:auto;padding:0 24px;max-width:920px;margin:0 auto;scrollbar-width:none}
-.toc-inner::-webkit-scrollbar{display:none}
-.toc a{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;color:var(--muted);text-decoration:none;white-space:nowrap;padding:6px 12px;border:1px solid transparent;border-radius:4px;transition:all .2s}
-.toc a:hover,.toc a.active{color:var(--cyan);border-color:var(--line);background:var(--cyan-dim)}
-
-/* Sections */
-section{margin:0 0 48px;scroll-margin-top:52px}
-h2{font-family:"JetBrains Mono","Courier New",monospace;font-size:26px;font-weight:700;letter-spacing:-.03em;text-transform:uppercase;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:20px}
-h3{font-family:"JetBrains Mono",monospace;font-size:16px;font-weight:600;color:var(--text);margin:24px 0 10px;text-transform:uppercase;letter-spacing:-.02em}
-p{margin-bottom:14px;color:#ccc;font-size:15px}
-.cyan{color:var(--cyan)}.green{color:var(--green)}.red{color:var(--red)}.orange{color:var(--orange)}
-.tag{display:inline-block;border:1px solid var(--line);padding:5px 10px;margin:3px 3px 3px 0;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);text-transform:uppercase;background:rgba(255,255,255,.02)}
-
-/* Cards */
-.panel{border:1px solid var(--line);background:var(--panel);padding:24px;margin:20px 0;border-radius:6px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:16px 0}
-.card{background:var(--panel2);border:1px solid var(--line);padding:18px;border-radius:6px;transition:border-color .2s}
-.card:hover{border-color:rgba(0,180,216,.4)}
-.card h4{font-family:"JetBrains Mono",monospace;font-size:13px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px;letter-spacing:-.01em}
-.card p{font-size:13px;color:var(--muted);margin:0}
-
-/* Interactive DORA */
-.dora-sim{position:relative;padding:20px 0}
-.dora-actors{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
-.dora-device{text-align:center;width:120px}
-.dora-device .icon{font-size:42px;margin-bottom:6px}
-.dora-device .label{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;color:var(--muted)}
-.dora-device .ip{font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--cyan);margin-top:4px;min-height:18px}
-.dora-lane{position:relative;min-height:280px;border-left:2px dashed var(--line);border-right:2px dashed var(--line);margin:0 60px}
-.dora-msg{position:absolute;left:0;right:0;display:flex;align-items:center;opacity:0;transition:opacity .5s,transform .5s;transform:translateY(10px)}
-.dora-msg.show{opacity:1;transform:translateY(0)}
-.dora-msg.to-server{flex-direction:row}
-.dora-msg.to-client{flex-direction:row-reverse}
-.dora-arrow{flex:1;height:2px;position:relative}
-.dora-arrow::after{content:"";position:absolute;right:-1px;top:-5px;border:6px solid transparent;border-left:8px solid var(--cyan)}
-.to-client .dora-arrow::after{right:auto;left:-1px;border-left:none;border-right:8px solid var(--green)}
-.dora-arrow .line{height:2px;width:0;transition:width .6s ease-out}
-.dora-msg.show .dora-arrow .line{width:100%}
-.to-server .dora-arrow .line{background:var(--cyan)}
-.to-client .dora-arrow .line{background:var(--green)}
-.dora-label{font-family:"JetBrains Mono",monospace;font-size:13px;font-weight:600;padding:6px 14px;border-radius:4px;white-space:nowrap}
-.to-server .dora-label{background:var(--cyan-dim);color:var(--cyan)}
-.to-client .dora-label{background:rgba(76,175,80,.12);color:var(--green)}
-.dora-controls{display:flex;gap:10px;margin-top:16px;align-items:center}
-.dora-controls button{font-family:"JetBrains Mono",monospace;font-size:12px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--line);background:var(--panel2);color:var(--text);cursor:pointer;border-radius:4px;transition:all .2s}
-.dora-controls button:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim)}
-.dora-controls button.active{background:var(--cyan);color:var(--base);border-color:var(--cyan)}
-.dora-info{margin-top:16px;padding:16px;background:var(--panel2);border:1px solid var(--line);border-radius:6px;min-height:80px;font-size:14px;color:var(--soft);transition:opacity .3s}
-.dora-step-num{font-family:"JetBrains Mono",monospace;color:var(--cyan);font-weight:700;margin-right:8px}
-
-/* Packet explorer */
-.packet-grid{display:grid;grid-template-columns:repeat(16,1fr);gap:2px;margin:16px 0;font-family:"JetBrains Mono",monospace;font-size:11px}
-.packet-byte{text-align:center;padding:8px 2px;background:var(--panel2);border:1px solid var(--line);color:var(--muted);cursor:pointer;border-radius:2px;transition:all .15s;user-select:none}
-.packet-byte:hover{border-color:var(--cyan);color:var(--text);z-index:2;transform:scale(1.1)}
-.packet-byte.hl-op{background:rgba(0,180,216,.15);color:var(--cyan);border-color:rgba(0,180,216,.4)}
-.packet-byte.hl-xid{background:rgba(255,152,0,.12);color:var(--orange);border-color:rgba(255,152,0,.4)}
-.packet-byte.hl-yi{background:rgba(76,175,80,.12);color:var(--green);border-color:rgba(76,175,80,.4)}
-.packet-byte.hl-si{background:rgba(61,90,254,.12);color:var(--blue);border-color:rgba(61,90,254,.4)}
-.packet-byte.hl-ch{background:rgba(244,67,54,.12);color:var(--red);border-color:rgba(244,67,54,.4)}
-.packet-byte.hl-magic{background:rgba(156,39,176,.12);color:#ce93d8;border-color:rgba(156,39,176,.4)}
-.packet-legend{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
-.packet-legend span{display:flex;align-items:center;gap:6px;font-family:"JetBrains Mono",monospace;font-size:11px;cursor:pointer;padding:4px 8px;border-radius:3px;transition:background .15s}
-.packet-legend span:hover{background:rgba(255,255,255,.05)}
-.packet-legend .dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
-.packet-detail{padding:16px;background:var(--panel2);border:1px solid var(--line);border-radius:6px;margin:12px 0;min-height:60px;font-size:14px}
-
-/* Lease sim */
-.lease-table{width:100%;border-collapse:collapse;font-family:"JetBrains Mono",monospace;font-size:12px;margin:16px 0}
-.lease-table th{text-align:left;padding:10px 14px;border-bottom:2px solid var(--line);color:var(--muted);text-transform:uppercase;font-size:11px}
-.lease-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--soft)}
-.lease-table tr.new{animation:leaseFlash .8s ease-out}
-@keyframes leaseFlash{0%{background:rgba(0,180,216,.2)}100%{background:transparent}}
-.lease-table .status{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
-.lease-table .status.active{background:var(--green)}
-.lease-table .status.expired{background:var(--muted)}
-.sim-controls{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
-.sim-controls button{font-family:"JetBrains Mono",monospace;font-size:11px;text-transform:uppercase;padding:8px 16px;border:1px solid var(--line);background:var(--panel2);color:var(--soft);cursor:pointer;border-radius:4px;transition:all .2s}
-.sim-controls button:hover{border-color:var(--cyan);color:var(--cyan)}
-
-/* Quiz */
-.quiz-q{border:1px solid var(--line);background:var(--panel);padding:20px;margin:14px 0;border-radius:6px}
-.quiz-q h4{font-family:"JetBrains Mono",monospace;font-size:13px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
-.quiz-opts{display:flex;flex-direction:column;gap:8px}
-.quiz-opt{display:block;padding:12px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:4px;cursor:pointer;font-size:14px;color:var(--soft);transition:all .15s;font-family:Inter,sans-serif}
-.quiz-opt:hover{border-color:var(--cyan);color:var(--text)}
-.quiz-opt.correct{border-color:var(--green);background:rgba(76,175,80,.1);color:var(--green)}
-.quiz-opt.wrong{border-color:var(--red);background:rgba(244,67,54,.08);color:var(--red)}
-.quiz-opt.disabled{pointer-events:none;opacity:.6}
-.quiz-result{margin-top:10px;font-size:13px;font-family:"JetBrains Mono",monospace;min-height:20px}
-.score-bar{margin:20px 0;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:6px;text-align:center}
-.score-bar .score-num{font-family:"JetBrains Mono",monospace;font-size:48px;font-weight:800;color:var(--cyan)}
-.score-bar .score-label{color:var(--muted);font-size:13px;text-transform:uppercase;font-family:"JetBrains Mono",monospace}
-
-/* MYLan ref */
-.mylan-ref{border-left:3px solid var(--cyan);background:var(--cyan-dim);padding:16px 20px;margin:20px 0;border-radius:0 6px 6px 0;font-size:14px}
-.mylan-ref strong{color:var(--cyan);font-family:"JetBrains Mono",monospace;text-transform:uppercase;font-size:12px;display:block;margin-bottom:6px}
-
-/* Footer */
-footer{padding:48px 0;border-top:1px solid var(--line);margin-top:60px;text-align:center;color:var(--muted);font-size:13px}
-footer .brand{font-family:"JetBrains Mono",monospace;font-size:22px;font-weight:800;color:var(--text);margin-bottom:8px}
-
-/* Collapsible */
-details{border:1px solid var(--line);margin:14px 0;border-radius:6px;background:var(--panel)}
-details summary{cursor:pointer;padding:16px 20px;font-family:"JetBrains Mono",monospace;font-size:14px;text-transform:uppercase;color:var(--soft);list-style:none;display:flex;align-items:center;gap:10px}
-details summary::before{content:"▸";color:var(--cyan);transition:transform .2s}
-details[open] summary::before{transform:rotate(90deg)}
-details summary:hover{color:var(--cyan)}
-.details-content{padding:4px 20px 20px}
-
-/* Responsive */
-@media(max-width:600px){
-  header .brand{font-size:26px}
-  h2{font-size:20px}
-  .packet-grid{grid-template-columns:repeat(8,1fr)}
-  .dora-lane{margin:0 30px}
-  .dora-device{width:80px}
-  .dora-device .icon{font-size:28px}
-}
-</style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="logo-img"><img src="/assets/logo.png" alt="Event Tech Research"></span>
+      <span>
+        <span class="brand-text-title">Event Tech Research</span>
+        <span class="brand-text-sub">Audio / Control / R&amp;D</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="/eventservices.html">Services</a>
+      <a class="nav-link" aria-current="page" href="/software.html">Software</a>
+      <a class="nav-link" href="/hardware.html">Hardware</a>
+      <a class="nav-link" href="/projects.html">Projects</a>
+      <a class="nav-link" href="/about.html">About</a>
+      <a class="nav-link" href="/hedera.html">Hedera</a>
+      <a class="nav-link" href="/contact.html">Contact</a>
+    </nav>
+  </header>
 
-<div class="wrap">
-<header>
-  <div class="brand"><span class="cyan">MY</span>LAN</div>
-  <div class="sub">Understanding DHCP — An Interactive Guide</div>
-  <p class="intro">Every device on a network needs an IP address before it can talk. DHCP is the protocol that makes that happen automatically. This guide explains how it works, why it matters, and how to use MYLan to deploy it in the field.</p>
-  <div style="margin-top:14px">
-    <span class="tag">Interactive</span>
-    <span class="tag">DHCP Protocol</span>
-    <span class="tag">MYLan v2.1</span>
-    <span class="tag">Event Tech Research</span>
-  </div>
-</header>
-</div>
+  <main id="main" class="site-main dhcp-main">
+    <section class="hero compact">
+      <div class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><a href="/software.html">Software</a><span>/</span><span>MYLan DHCP Guide</span>
+      </div>
+      <p class="kicker"><span class="dot"></span> MYLan / DHCP education</p>
+      <h1>Understanding DHCP through a practical field network tool.</h1>
+      <p class="lead">
+        Every device on a network needs an IP address before it can talk. This Event Tech Research guide explains how DHCP works, why it matters, and how MYLan can support temporary audio, production, and engineering networks.
+      </p>
+      <div class="pill-row" aria-label="Guide tags">
+        <span class="pill"><span class="dot"></span> Interactive</span>
+        <span class="pill">DHCP Protocol</span>
+        <span class="pill">MYLan</span>
+        <span class="pill">Field Networks</span>
+      </div>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/Event-Tech-Research-Ltd/MYLan" target="_blank" rel="noreferrer"><span class="dot"></span> View MYLan on GitHub</a>
+        <a class="button" href="/software.html"><span class="dot"></span> Back to software</a>
+      </div>
+    </section>
 
-<nav class="toc">
-  <div class="toc-inner">
-    <a href="#problem">The Problem</a>
-    <a href="#dora">DORA Handshake</a>
-    <a href="#packet">Packet Structure</a>
-    <a href="#leases">Lease Management</a>
-    <a href="#options">DHCP Options</a>
-    <a href="#mylan">Using MYLan</a>
-    <a href="#troubleshoot">Troubleshooting</a>
-    <a href="#quiz">Test Yourself</a>
-  </div>
-</nav>
+    <nav class="guide-toc" aria-label="MYLan guide navigation">
+      <a href="#problem">The Problem</a>
+      <a href="#dora">DORA Handshake</a>
+      <a href="#packet">Packet Structure</a>
+      <a href="#leases">Lease Management</a>
+      <a href="#options">DHCP Options</a>
+      <a href="#mylan">Using MYLan</a>
+      <a href="#troubleshoot">Troubleshooting</a>
+      <a href="#quiz">Test Yourself</a>
+    </nav>
 
-<div class="wrap">
-
+    <div class="dhcp-guide">
 <!-- ═══ THE PROBLEM ═══ -->
 <section id="problem">
 <h2>Why DHCP Exists</h2>
 <p>Every device on an IP network needs a unique address to send and receive data. Without one, it cannot participate — it is invisible.</p>
 <p>There are two ways a device can get an IP address:</p>
-<div class="grid">
-  <div class="card">
+<div class="guide-grid">
+  <div class="guide-card">
     <h4>Manual (Static)</h4>
     <p>Someone types the address into each device by hand. Works for small setups. Breaks at scale — one typo, one duplicate, and the network has a conflict.</p>
   </div>
-  <div class="card">
+  <div class="guide-card">
     <h4>Automatic (DHCP)</h4>
     <p>A server listens for new devices and hands out unique addresses from a pool. No human involvement. No duplicates. Devices just connect and work.</p>
   </div>
@@ -199,7 +141,7 @@ details summary:hover{color:var(--cyan)}
 <h2>The DORA Handshake</h2>
 <p>When a device connects to a network and needs an IP address, it performs a four-step conversation with the DHCP server. This is called <strong>DORA</strong>:</p>
 
-<div class="panel">
+<div class="guide-panel">
   <div class="dora-sim">
     <div class="dora-actors">
       <div class="dora-device"><div class="icon">💻</div><div class="label">Client</div><div class="ip" id="dora-client-ip">No IP</div></div>
@@ -253,7 +195,7 @@ details summary:hover{color:var(--cyan)}
 <h2>Inside a DHCP Packet</h2>
 <p>DHCP messages are carried inside UDP datagrams using the BOOTP packet format. Every message — Discover, Offer, Request, Acknowledge — uses the same structure. Click on any field group to learn what it does.</p>
 
-<div class="panel">
+<div class="guide-panel">
   <div class="packet-legend" id="pkt-legend">
     <span onclick="pktHighlight('op')"><span class="dot" style="background:var(--cyan)"></span>Op / HW</span>
     <span onclick="pktHighlight('xid')"><span class="dot" style="background:var(--orange)"></span>Transaction ID</span>
@@ -288,7 +230,7 @@ details summary:hover{color:var(--cyan)}
 <h2>Lease Management</h2>
 <p>When a server assigns an IP, it does not give it away permanently. It creates a <strong>lease</strong> — a time-limited reservation that ties a MAC address to an IP address. This is the core data structure of any DHCP server.</p>
 
-<div class="panel">
+<div class="guide-panel">
   <h3 style="margin-top:0">Live Lease Simulator</h3>
   <p style="font-size:13px;color:var(--muted)">Simulate devices connecting to a MYLan server. Watch how the lease table fills.</p>
   <div class="sim-controls">
@@ -325,14 +267,14 @@ details summary:hover{color:var(--cyan)}
 <p>After the fixed header and magic cookie, DHCP packets carry a variable list of <strong>options</strong> — key-value pairs that configure the client. Each option has a number, a length, and a value. Click any option to learn more.</p>
 
 <div class="panel" id="options-panel">
-  <div class="grid" id="options-grid"></div>
+  <div class="guide-grid" id="options-grid"></div>
   <div class="packet-detail" id="opt-detail">Click an option above to see what it does and how MYLan uses it.</div>
 </div>
 </section>
 
 <!-- ═══ USING MYLAN ═══ -->
 <section id="mylan">
-<h2>Using MYLan</h2>
+<h2>Using MYLan in the Field</h2>
 <p>MYLan is a portable DHCP server built for field deployment. It runs on Windows and macOS, requires no installation, and provides a complete DHCP service from a single executable.</p>
 
 <details open>
@@ -347,12 +289,12 @@ details summary:hover{color:var(--cyan)}
   <summary>Step 2 — Select Adapter and Configure</summary>
   <div class="details-content">
     <p>Select the correct network adapter from the dropdown. Click <strong>Refresh NICs</strong> if you plugged in after launching. Review the network configuration:</p>
-    <div class="grid">
-      <div class="card"><h4>Server IP</h4><p>The address MYLan assigns to itself. Default: 192.168.1.1</p></div>
-      <div class="card"><h4>Subnet Mask</h4><p>Defines the network boundary. Default: 255.255.255.0 (/24)</p></div>
-      <div class="card"><h4>Pool Range</h4><p>The range of addresses available for clients. Default: .50 – .150</p></div>
-      <div class="card"><h4>Gateway</h4><p>The default route for client traffic. Auto-syncs with Server IP.</p></div>
-      <div class="card"><h4>DNS</h4><p>Domain name resolution server. Default: 8.8.8.8 (Google Public DNS)</p></div>
+    <div class="guide-grid">
+      <div class="guide-card"><h4>Server IP</h4><p>The address MYLan assigns to itself. Default: 192.168.1.1</p></div>
+      <div class="guide-card"><h4>Subnet Mask</h4><p>Defines the network boundary. Default: 255.255.255.0 (/24)</p></div>
+      <div class="guide-card"><h4>Pool Range</h4><p>The range of addresses available for clients. Default: .50 – .150</p></div>
+      <div class="guide-card"><h4>Gateway</h4><p>The default route for client traffic. Auto-syncs with Server IP.</p></div>
+      <div class="guide-card"><h4>DNS</h4><p>Domain name resolution server. Default: 8.8.8.8 (Google Public DNS)</p></div>
     </div>
     <p style="margin-top:14px">For Dante audio networks, a common configuration uses <code>10.0.0.1</code> with a pool of <code>10.0.0.10 – 10.0.0.200</code>.</p>
   </div>
@@ -398,15 +340,23 @@ details summary:hover{color:var(--cyan)}
 </div>
 </section>
 
-<footer>
-  <div class="brand"><span class="cyan">MY</span>LAN</div>
-  <p>Built as software. Developed as a field tool. Shared as education.</p>
-  <p style="margin-top:8px">Event Tech Research Ltd — Rob Handyside</p>
-</footer>
 
-</div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="year"></span> Event Tech Research. Built on GitHub Pages.</span>
+      <nav class="footer-links" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/event-tech-research-uk/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/eventtechresearch" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://github.com/eventtech-io" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </footer>
 
 <script>
+
 /* ═══════════════════════════════════════
    DORA SIMULATION
    ═══════════════════════════════════════ */
@@ -642,7 +592,7 @@ function resetQuiz() {
    ═══════════════════════════════════════ */
 function updateToc() {
   const sections = document.querySelectorAll('section[id]');
-  const links = document.querySelectorAll('.toc a');
+  const links = document.querySelectorAll('.guide-toc a');
   let current = '';
   sections.forEach(s => {
     if (window.scrollY >= s.offsetTop - 80) current = s.id;
@@ -662,6 +612,7 @@ document.addEventListener('DOMContentLoaded', () => {
   buildQuiz();
   updateToc();
 });
+
 </script>
 </body>
 </html>
