@@ -440,6 +440,74 @@ li{margin:.3rem 0}
 
 .contact-list a:hover{text-decoration:underline}
 
+.notice{
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent-warm);
+  border-radius:var(--radius);
+  background:rgba(245,200,111,.08);
+  padding:1.1rem 1.3rem;
+  color:#f3e6c4;
+  font-size:1.02rem;
+  line-height:1.75;
+}
+
+.notice.warn{
+  border-left-color:var(--accent-warm);
+}
+
+.notice strong{
+  display:inline;
+  color:#fff;
+}
+
+.tablewrap{
+  overflow:auto;
+  border:1px solid var(--line-soft);
+  border-radius:8px;
+  margin:1rem 0 .4rem;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:520px;
+  font-size:.98rem;
+}
+
+th{
+  text-align:left;
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding:.85rem 1rem;
+  border-bottom:1px solid var(--line);
+}
+
+td{
+  padding:.85rem 1rem;
+  border-bottom:1px solid var(--line-soft);
+  color:#e5e7eb;
+  vertical-align:top;
+}
+
+tr:last-child td{border-bottom:none}
+
+.principle-list{
+  margin:.4rem 0 1rem;
+  padding-left:1.2rem;
+  color:#e5e7eb;
+  font-size:1.05rem;
+  line-height:1.85;
+}
+
+.principle-list li{margin:.4rem 0}
+
+.card .actions{
+  justify-content:flex-start;
+  margin-top:1rem;
+}
+
 .site-footer{
   margin-top:2.5rem;
   padding:2.2rem 5vw;
@@ -538,4 +606,15 @@ li{margin:.3rem 0}
   .brand{
     min-width:0;
   }
+}
+
+
+.paper-embed .paper-frame{
+  width:100%;
+  height:min(86vh, 1100px);
+  min-height:640px;
+  margin-top:1rem;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#050505;
 }
