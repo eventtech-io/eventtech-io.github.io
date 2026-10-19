@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MYLan DHCP Interactive Guide | Event Tech Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="An Event Tech Research interactive guide to DHCP, the DORA handshake, packet structure, lease management, and field use of MYLan." />
+  <link rel="canonical" href="https://eventresearch.io/MYLan-DHCP-Interactive-Guide.html" />
+  <meta property="og:title" content="MYLan DHCP Interactive Guide | Event Tech Research" />
+  <meta property="og:description" content="Learn DHCP through an interactive Event Tech Research guide built around MYLan as a practical field network tool." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://eventresearch.io/MYLan-DHCP-Interactive-Guide.html" />
+  <meta property="og:image" content="https://eventresearch.io/assets/logo.png" />
+  <link rel="icon" href="/favicon/favicon.ico" />
+  <link rel="stylesheet" href="/assets/site.css" />
+
+  <style>
+    .dhcp-main{max-width:1100px}
+    .dhcp-main .hero{padding-bottom:2.25rem}
+    .guide-toc{
+      position:sticky;top:76px;z-index:12;margin:-.4rem auto 1.2rem;padding:.65rem;
+      display:flex;gap:.45rem;overflow-x:auto;border:1px solid var(--line-soft);
+      border-radius:var(--radius);background:rgba(3,4,7,.88);backdrop-filter:blur(16px);
+      box-shadow:0 10px 30px rgba(0,0,0,.28);scrollbar-width:none
+    }
+    .guide-toc::-webkit-scrollbar{display:none}
+    .guide-toc a{flex:0 0 auto;text-decoration:none;color:var(--muted);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line-soft);border-radius:999px;padding:.35rem .7rem;background:rgba(9,9,11,.68)}
+    .guide-toc a:hover,.guide-toc a.active{color:#f9fafb;border-color:rgba(112,240,207,.7);background:rgba(112,240,207,.1)}
+    .dhcp-guide{display:grid;gap:1.2rem}
+    .dhcp-guide section{scroll-margin-top:140px;background:linear-gradient(to bottom,var(--panel),var(--panel-dark));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.55rem 1.7rem;position:relative;overflow:hidden}
+    .dhcp-guide section::after{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(to right,transparent,rgba(249,250,251,.44),transparent);opacity:.72}
+    .dhcp-guide h2{font-size:1.35rem;letter-spacing:.01em;margin:0 0 .9rem;padding-bottom:.75rem;border-bottom:1px solid var(--line-soft);text-transform:none}
+    .dhcp-guide h3{font-size:1rem;margin:1.25rem 0 .35rem;text-transform:none}
+    .dhcp-guide p{color:#f3f4f6;line-height:1.82;margin:0 0 .75rem;font-size:.98rem}
+    .dhcp-guide code{color:var(--accent);background:rgba(112,240,207,.08);border:1px solid rgba(112,240,207,.16);padding:.08rem .28rem;border-radius:4px}
+    .cyan{color:var(--accent)}.green{color:#86efac}.red{color:#fca5a5}.orange{color:var(--accent-warm)}
+    .guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.85rem;margin:1rem 0}
+    .guide-card{background:#09090b;border:1px solid var(--line-soft);padding:1rem;border-radius:var(--radius);transition:border-color .15s ease,transform .15s ease}
+    .guide-card:hover{border-color:rgba(112,240,207,.5);transform:translateY(-1px)}
+    .guide-card h4{font-size:.86rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin:.05rem 0 .4rem}
+    .guide-card p{font-size:.88rem;color:var(--muted);margin:0;line-height:1.65}
+    .guide-panel{border:1px solid var(--line-soft);background:#09090b;padding:1.25rem;margin:1rem 0;border-radius:var(--radius)}
+    details{border:1px solid var(--line-soft);margin:.9rem 0;border-radius:var(--radius);background:#09090b;overflow:hidden}
+    details summary{cursor:pointer;padding:.95rem 1rem;font-size:.82rem;letter-spacing:.11em;text-transform:uppercase;color:#e5e7eb;list-style:none;display:flex;align-items:center;gap:.55rem}
+    details summary::before{content:"▸";color:var(--accent);transition:transform .2s}details[open] summary::before{transform:rotate(90deg)}
+    details summary:hover{color:#fff;background:rgba(112,240,207,.05)}.details-content{padding:.25rem 1rem 1rem}
+    .mylan-ref{border-left:3px solid var(--accent);background:rgba(112,240,207,.08);padding:1rem 1.1rem;margin:1rem 0;border-radius:0 var(--radius) var(--radius) 0;color:#e5e7eb}
+    .mylan-ref strong{color:var(--accent);font-size:.76rem;display:block;margin-bottom:.35rem;letter-spacing:.12em;text-transform:uppercase}
+    /* Interactive DORA */
+    .dora-sim{position:relative;padding:.5rem 0}.dora-actors{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem}.dora-device{text-align:center;width:120px}.dora-device .icon{font-size:38px;margin-bottom:.25rem}.dora-device .label{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.dora-device .ip{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;color:var(--accent);margin-top:.2rem;min-height:18px}
+    .dora-lane{position:relative;min-height:280px;border-left:1px dashed var(--line);border-right:1px dashed var(--line);margin:0 60px}.dora-msg{position:absolute;left:0;right:0;display:flex;align-items:center;opacity:0;transition:opacity .5s,transform .5s;transform:translateY(10px)}.dora-msg.show{opacity:1;transform:translateY(0)}.dora-msg.to-client{flex-direction:row-reverse}.dora-arrow{flex:1;height:2px;position:relative}.dora-arrow::after{content:"";position:absolute;right:-1px;top:-5px;border:6px solid transparent;border-left:8px solid var(--accent)}.to-client .dora-arrow::after{right:auto;left:-1px;border-left:none;border-right:8px solid #86efac}.dora-arrow .line{height:2px;width:0;transition:width .6s ease-out}.dora-msg.show .dora-arrow .line{width:100%}.to-server .dora-arrow .line{background:var(--accent)}.to-client .dora-arrow .line{background:#86efac}.dora-label{font-size:.8rem;font-weight:700;padding:.35rem .75rem;border-radius:999px;white-space:nowrap;border:1px solid var(--line-soft);background:#02040a}.to-server .dora-label{color:var(--accent)}.to-client .dora-label{color:#86efac}
+    .dora-controls,.sim-controls{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem;align-items:center}.dora-controls button,.sim-controls button,.dhcp-guide button{font:inherit;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;padding:.55rem .85rem;border:1px solid var(--line-soft);background:#111827;color:#f3f4f6;cursor:pointer;border-radius:999px;transition:all .15s}.dora-controls button:hover,.sim-controls button:hover,.dhcp-guide button:hover{border-color:rgba(112,240,207,.7);color:#fff;background:rgba(112,240,207,.1)}.dora-info{margin-top:1rem;padding:1rem;background:#050609;border:1px solid var(--line-soft);border-radius:var(--radius);min-height:80px;font-size:.92rem;color:#e5e7eb}.dora-step-num{color:var(--accent);font-weight:700;margin-right:.5rem}
+    .packet-grid{display:grid;grid-template-columns:repeat(16,1fr);gap:2px;margin:1rem 0;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.7rem}.packet-byte{text-align:center;padding:.48rem .1rem;background:#050609;border:1px solid var(--line-soft);color:var(--muted);cursor:pointer;border-radius:3px;transition:all .15s;user-select:none}.packet-byte:hover{border-color:var(--accent);color:#fff;z-index:2;transform:scale(1.08)}.packet-byte.hl-op{background:rgba(112,240,207,.12);color:var(--accent)}.packet-byte.hl-xid{background:rgba(245,200,111,.12);color:var(--accent-warm)}.packet-byte.hl-yi{background:rgba(134,239,172,.1);color:#86efac}.packet-byte.hl-si{background:rgba(147,197,253,.1);color:#93c5fd}.packet-byte.hl-ch{background:rgba(252,165,165,.1);color:#fca5a5}.packet-byte.hl-magic{background:rgba(216,180,254,.1);color:#d8b4fe}.packet-legend{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0}.packet-legend span{display:flex;align-items:center;gap:.4rem;font-size:.75rem;cursor:pointer;padding:.3rem .55rem;border-radius:999px;border:1px solid var(--line-soft);background:#050609}.packet-legend .dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}.packet-detail{padding:1rem;background:#050609;border:1px solid var(--line-soft);border-radius:var(--radius);margin:.8rem 0;min-height:60px;color:#e5e7eb}
+    .lease-table{width:100%;border-collapse:collapse;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;margin:1rem 0}.lease-table th{text-align:left;padding:.7rem .8rem;border-bottom:1px solid var(--line);color:var(--muted);text-transform:uppercase;font-size:.7rem}.lease-table td{padding:.7rem .8rem;border-bottom:1px solid rgba(255,255,255,.06);color:#e5e7eb}.lease-table tr.new{animation:leaseFlash .8s ease-out}@keyframes leaseFlash{0%{background:rgba(112,240,207,.18)}100%{background:transparent}}.lease-table .status{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.4rem}.lease-table .status.active{background:#86efac}.lease-table .status.expired{background:var(--muted)}
+    .quiz-q{border:1px solid var(--line-soft);background:#09090b;padding:1rem;margin:.8rem 0;border-radius:var(--radius)}.quiz-q h4{font-size:.8rem;text-transform:uppercase;color:var(--accent);letter-spacing:.1em;margin:0 0 .6rem}.quiz-opts{display:flex;flex-direction:column;gap:.5rem}.quiz-opt{display:block;padding:.75rem .9rem;background:#050609;border:1px solid var(--line-soft);border-radius:var(--radius);cursor:pointer;font-size:.9rem;color:#e5e7eb;transition:all .15s}.quiz-opt:hover{border-color:var(--accent);color:#fff}.quiz-opt.correct{border-color:#86efac;background:rgba(134,239,172,.1);color:#86efac}.quiz-opt.wrong{border-color:#fca5a5;background:rgba(252,165,165,.08);color:#fca5a5}.quiz-opt.disabled{pointer-events:none;opacity:.72}.quiz-result{margin-top:.6rem;font-size:.82rem;min-height:20px}.score-bar{margin:1.1rem 0;padding:1.2rem;background:#09090b;border:1px solid var(--line-soft);border-radius:var(--radius);text-align:center}.score-bar .score-num{font-size:2.8rem;font-weight:800;color:var(--accent)}.score-bar .score-label{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em}
+    @media(max-width:760px){.guide-toc{top:128px}.dhcp-guide section{padding:1.2rem}.dora-lane{margin:0 28px}.dora-device{width:84px}.packet-grid{grid-template-columns:repeat(8,1fr)}.lease-table{font-size:.68rem}.lease-table th,.lease-table td{padding:.55rem .45rem}}
+  </style>
+
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="/">
+      <span class="logo-img"><img src="/assets/logo.png" alt="Event Tech Research"></span>
+      <span>
+        <span class="brand-text-title">Event Tech Research</span>
+        <span class="brand-text-sub">Audio / Control / R&amp;D</span>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="/eventservices.html">Services</a>
+      <a class="nav-link" aria-current="page" href="/software.html">Software</a>
+      <a class="nav-link" href="/hardware.html">Hardware</a>
+      <a class="nav-link" href="/projects.html">Projects</a>
+      <a class="nav-link" href="/about.html">About</a>
+      <a class="nav-link" href="/hedera.html">Hedera</a>
+      <a class="nav-link" href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main" class="site-main dhcp-main">
+    <section class="hero compact">
+      <div class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><a href="/software.html">Software</a><span>/</span><span>MYLan DHCP Guide</span>
+      </div>
+      <p class="kicker"><span class="dot"></span> MYLan / DHCP education</p>
+      <h1>Understanding DHCP through a practical field network tool.</h1>
+      <p class="lead">
+        Every device on a network needs an IP address before it can talk. This Event Tech Research guide explains how DHCP works, why it matters, and how MYLan can support temporary audio, production, and engineering networks.
+      </p>
+      <div class="pill-row" aria-label="Guide tags">
+        <span class="pill"><span class="dot"></span> Interactive</span>
+        <span class="pill">DHCP Protocol</span>
+        <span class="pill">MYLan</span>
+        <span class="pill">Field Networks</span>
+      </div>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/Event-Tech-Research-Ltd/MYLan" target="_blank" rel="noreferrer"><span class="dot"></span> View MYLan on GitHub</a>
+        <a class="button" href="/software.html"><span class="dot"></span> Back to software</a>
+      </div>
+    </section>
+
+    <nav class="guide-toc" aria-label="MYLan guide navigation">
+      <a href="#problem">The Problem</a>
+      <a href="#dora">DORA Handshake</a>
+      <a href="#packet">Packet Structure</a>
+      <a href="#leases">Lease Management</a>
+      <a href="#options">DHCP Options</a>
+      <a href="#mylan">Using MYLan</a>
+      <a href="#troubleshoot">Troubleshooting</a>
+      <a href="#quiz">Test Yourself</a>
+    </nav>
+
+    <div class="dhcp-guide">
+<!-- ═══ THE PROBLEM ═══ -->
+<section id="problem">
+<h2>Why DHCP Exists</h2>
+<p>Every device on an IP network needs a unique address to send and receive data. Without one, it cannot participate — it is invisible.</p>
+<p>There are two ways a device can get an IP address:</p>
+<div class="guide-grid">
+  <div class="guide-card">
+    <h4>Manual (Static)</h4>
+    <p>Someone types the address into each device by hand. Works for small setups. Breaks at scale — one typo, one duplicate, and the network has a conflict.</p>
+  </div>
+  <div class="guide-card">
+    <h4>Automatic (DHCP)</h4>
+    <p>A server listens for new devices and hands out unique addresses from a pool. No human involvement. No duplicates. Devices just connect and work.</p>
+  </div>
+</div>
+<p style="margin-top:16px">DHCP — <strong>Dynamic Host Configuration Protocol</strong> — is the automatic method. It has been the standard since 1993 (RFC 1531) and is used on virtually every network in the world, from home Wi-Fi to live event production.</p>
+
+<div class="mylan-ref">
+  <strong>MYLan in practice</strong>
+  You are setting up a temporary Dante audio network for a live show. 40 devices need IP addresses: consoles, stage boxes, amplifiers, wireless receivers. You plug in your laptop, launch MYLan, click Start. Every device that connects receives an address automatically. No spreadsheet. No conflicts.
+</div>
+</section>
+
+<!-- ═══ DORA HANDSHAKE ═══ -->
+<section id="dora">
+<h2>The DORA Handshake</h2>
+<p>When a device connects to a network and needs an IP address, it performs a four-step conversation with the DHCP server. This is called <strong>DORA</strong>:</p>
+
+<div class="guide-panel">
+  <div class="dora-sim">
+    <div class="dora-actors">
+      <div class="dora-device"><div class="icon">💻</div><div class="label">Client</div><div class="ip" id="dora-client-ip">No IP</div></div>
+      <div class="dora-device"><div class="icon">🖧</div><div class="label">MYLan Server</div><div class="ip" id="dora-server-ip">192.168.1.1</div></div>
+    </div>
+    <div class="dora-lane" id="dora-lane">
+      <div class="dora-msg to-server" id="dm-1" style="top:10px"><div class="dora-label">D — Discover</div><div class="dora-arrow"><div class="line"></div></div></div>
+      <div class="dora-msg to-client" id="dm-2" style="top:80px"><div class="dora-arrow"><div class="line"></div></div><div class="dora-label">O — Offer</div></div>
+      <div class="dora-msg to-server" id="dm-3" style="top:150px"><div class="dora-label">R — Request</div><div class="dora-arrow"><div class="line"></div></div></div>
+      <div class="dora-msg to-client" id="dm-4" style="top:220px"><div class="dora-arrow"><div class="line"></div></div><div class="dora-label">A — Acknowledge</div></div>
+    </div>
+    <div class="dora-controls">
+      <button id="dora-play" onclick="doraPlay()">▶ Play</button>
+      <button id="dora-step" onclick="doraStep()">Step →</button>
+      <button onclick="doraReset()">↻ Reset</button>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-left:auto" id="dora-counter">Step 0 / 4</span>
+    </div>
+    <div class="dora-info" id="dora-info">Click <strong>Play</strong> to watch the full handshake, or <strong>Step</strong> to advance one message at a time.</div>
+  </div>
+</div>
+
+<details>
+  <summary>What happens at each step</summary>
+  <div class="details-content">
+    <h3>1. Discover</h3>
+    <p>The client has no IP address yet. It cannot send to a specific server because it does not know if one exists. So it broadcasts to the entire network: <em>"Is there a DHCP server out there?"</em></p>
+    <p>This broadcast goes to the special address <code class="cyan">255.255.255.255</code> on UDP port 67. Every device on the network segment receives it, but only DHCP servers respond.</p>
+
+    <h3>2. Offer</h3>
+    <p>The server receives the Discover and selects an available IP from its pool. It broadcasts an Offer back: <em>"I can give you 192.168.1.50 with these settings."</em></p>
+    <p>The Offer includes the proposed IP, the subnet mask, the gateway, the DNS server, and how long the lease is valid for.</p>
+
+    <h3>3. Request</h3>
+    <p>The client broadcasts a Request confirming it wants the offered address: <em>"Yes, I accept 192.168.1.50 from server 192.168.1.1."</em></p>
+    <p>This is broadcast (not unicast) because there might be multiple DHCP servers on the network. The Request tells all of them which offer was accepted.</p>
+
+    <h3>4. Acknowledge</h3>
+    <p>The server confirms the lease and commits it to its records: <em>"Confirmed. 192.168.1.50 is yours for 8 hours."</em></p>
+    <p>The client can now configure its network stack with the assigned address and begin communicating on the network.</p>
+  </div>
+</details>
+
+<div class="mylan-ref">
+  <strong>MYLan's activity log</strong>
+  When you watch MYLan's log during a real connection, you see exactly this sequence: DISCOVER from [MAC] → Sent OFFER → REQUEST from [MAC] → Sent ACK. Each line is timestamped so you can trace exactly when each device joined the network.
+</div>
+</section>
+
+<!-- ═══ PACKET STRUCTURE ═══ -->
+<section id="packet">
+<h2>Inside a DHCP Packet</h2>
+<p>DHCP messages are carried inside UDP datagrams using the BOOTP packet format. Every message — Discover, Offer, Request, Acknowledge — uses the same structure. Click on any field group to learn what it does.</p>
+
+<div class="guide-panel">
+  <div class="packet-legend" id="pkt-legend">
+    <span onclick="pktHighlight('op')"><span class="dot" style="background:var(--cyan)"></span>Op / HW</span>
+    <span onclick="pktHighlight('xid')"><span class="dot" style="background:var(--orange)"></span>Transaction ID</span>
+    <span onclick="pktHighlight('yi')"><span class="dot" style="background:var(--green)"></span>Your IP (yiaddr)</span>
+    <span onclick="pktHighlight('si')"><span class="dot" style="background:var(--blue)"></span>Server IP (siaddr)</span>
+    <span onclick="pktHighlight('ch')"><span class="dot" style="background:var(--red)"></span>Client MAC (chaddr)</span>
+    <span onclick="pktHighlight('magic')"><span class="dot" style="background:#ce93d8"></span>Magic Cookie</span>
+  </div>
+  <div class="packet-grid" id="pkt-grid"></div>
+  <div class="packet-detail" id="pkt-detail">Click a coloured field group above to explore that part of the packet.</div>
+</div>
+
+<details>
+  <summary>Key fields explained</summary>
+  <div class="details-content">
+    <h3>Op (byte 0)</h3>
+    <p><code>1</code> = BOOTREQUEST (client → server). <code>2</code> = BOOTREPLY (server → client). MYLan only processes requests and only sends replies.</p>
+    <h3>Transaction ID — xid (bytes 4–7)</h3>
+    <p>A random 32-bit number chosen by the client. The server copies it into the reply so the client can match responses to requests, even if multiple DORA handshakes are in flight simultaneously.</p>
+    <h3>yiaddr — "Your" IP Address (bytes 16–19)</h3>
+    <p>In an Offer or Acknowledge, this is the IP the server is assigning to the client. In a Discover, it is all zeros because the client has no address yet.</p>
+    <h3>chaddr — Client Hardware Address (bytes 28–33)</h3>
+    <p>The client's MAC address. This is how the server identifies which device is which — it is the key that the lease table is indexed by.</p>
+    <h3>Magic Cookie (bytes 236–239)</h3>
+    <p>The fixed value <code>99.130.83.99</code> (hex <code>63.82.53.63</code>). This marks the boundary between the fixed BOOTP header and the variable DHCP options that follow. Every valid DHCP packet contains this exact sequence.</p>
+  </div>
+</details>
+</section>
+
+<!-- ═══ LEASE MANAGEMENT ═══ -->
+<section id="leases">
+<h2>Lease Management</h2>
+<p>When a server assigns an IP, it does not give it away permanently. It creates a <strong>lease</strong> — a time-limited reservation that ties a MAC address to an IP address. This is the core data structure of any DHCP server.</p>
+
+<div class="guide-panel">
+  <h3 style="margin-top:0">Live Lease Simulator</h3>
+  <p style="font-size:13px;color:var(--muted)">Simulate devices connecting to a MYLan server. Watch how the lease table fills.</p>
+  <div class="sim-controls">
+    <button onclick="simConnect()">+ Connect Device</button>
+    <button onclick="simRelease()">− Release Last</button>
+    <button onclick="simExpire()">⏱ Expire Oldest</button>
+    <button onclick="simReset()">↻ Reset</button>
+  </div>
+  <table class="lease-table">
+    <thead><tr><th>Status</th><th>MAC Address</th><th>IP Address</th><th>Expires</th></tr></thead>
+    <tbody id="lease-body"></tbody>
+  </table>
+  <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-top:10px">Pool: 192.168.1.50 – 192.168.1.150 · <span id="lease-count">0</span> / 101 addresses used</div>
+</div>
+
+<details>
+  <summary>Why leases expire</summary>
+  <div class="details-content">
+    <p>If leases were permanent, a device that disconnected would hold its IP address forever. Over time, all addresses would be consumed by devices that are no longer on the network.</p>
+    <p>Expiry solves this. MYLan uses an 8-hour default lease. When the lease expires, the IP returns to the pool and can be assigned to the next device that connects.</p>
+    <p>Active clients renew their lease automatically before it expires — they send a new REQUEST and receive a fresh ACK with a reset timer. The user never notices this happening.</p>
+  </div>
+</details>
+
+<div class="mylan-ref">
+  <strong>MYLan v2.1 — Lease persistence</strong>
+  MYLan saves active leases to <code>mylan-leases.json</code> on disk. If the server stops and restarts — even mid-show — it reloads the lease table and remembers which devices have which addresses. This prevents the duplicate IP issue that affects simpler DHCP implementations.
+</div>
+</section>
+
+<!-- ═══ DHCP OPTIONS ═══ -->
+<section id="options">
+<h2>DHCP Options</h2>
+<p>After the fixed header and magic cookie, DHCP packets carry a variable list of <strong>options</strong> — key-value pairs that configure the client. Each option has a number, a length, and a value. Click any option to learn more.</p>
+
+<div class="panel" id="options-panel">
+  <div class="guide-grid" id="options-grid"></div>
+  <div class="packet-detail" id="opt-detail">Click an option above to see what it does and how MYLan uses it.</div>
+</div>
+</section>
+
+<!-- ═══ USING MYLAN ═══ -->
+<section id="mylan">
+<h2>Using MYLan in the Field</h2>
+<p>MYLan is a portable DHCP server built for field deployment. It runs on Windows and macOS, requires no installation, and provides a complete DHCP service from a single executable.</p>
+
+<details open>
+  <summary>Step 1 — Connect and Launch</summary>
+  <div class="details-content">
+    <p>Connect your laptop to the target network via Ethernet. Launch MYLan with elevated privileges — <strong>Run as Administrator</strong> on Windows, or <code>sudo ./MYLan</code> on macOS. The application window appears with the status indicator showing <span class="muted">Idle</span>.</p>
+    <p>If you do not run with elevated privileges, MYLan displays a warning in the footer bar. DHCP requires binding to UDP port 67, which is a privileged port on all operating systems.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Step 2 — Select Adapter and Configure</summary>
+  <div class="details-content">
+    <p>Select the correct network adapter from the dropdown. Click <strong>Refresh NICs</strong> if you plugged in after launching. Review the network configuration:</p>
+    <div class="guide-grid">
+      <div class="guide-card"><h4>Server IP</h4><p>The address MYLan assigns to itself. Default: 192.168.1.1</p></div>
+      <div class="guide-card"><h4>Subnet Mask</h4><p>Defines the network boundary. Default: 255.255.255.0 (/24)</p></div>
+      <div class="guide-card"><h4>Pool Range</h4><p>The range of addresses available for clients. Default: .50 – .150</p></div>
+      <div class="guide-card"><h4>Gateway</h4><p>The default route for client traffic. Auto-syncs with Server IP.</p></div>
+      <div class="guide-card"><h4>DNS</h4><p>Domain name resolution server. Default: 8.8.8.8 (Google Public DNS)</p></div>
+    </div>
+    <p style="margin-top:14px">For Dante audio networks, a common configuration uses <code>10.0.0.1</code> with a pool of <code>10.0.0.10 – 10.0.0.200</code>.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Step 3 — Start and Monitor</summary>
+  <div class="details-content">
+    <p>Click <span class="cyan">▶ Start</span>. MYLan configures the adapter with a static IP and begins listening for DHCP broadcasts. The status indicator turns <span class="green">green</span> and the activity log begins recording.</p>
+    <p>Connect client devices. Watch the log for the DORA sequence. Each successful connection appears as four log entries (DISCOVER → OFFER → REQUEST → ACK) and a new row in the Active Leases table.</p>
+  </div>
+</details>
+
+<details>
+  <summary>Step 4 — Stop and Tear Down</summary>
+  <div class="details-content">
+    <p>Click <span class="red">■ Stop</span>. MYLan saves all active leases to disk and closes the UDP listener. Existing clients keep their addresses for the remaining lease duration (8 hours by default).</p>
+    <p>After stopping, restore the adapter to automatic (DHCP) configuration via your OS network settings if you need to reconnect to other networks.</p>
+  </div>
+</details>
+</section>
+
+<!-- ═══ TROUBLESHOOTING ═══ -->
+<section id="troubleshoot">
+<h2>Troubleshooting</h2>
+<p>Click a symptom to see the diagnosis and resolution.</p>
+
+<div id="troubleshoot-cards"></div>
+</section>
+
+<!-- ═══ QUIZ ═══ -->
+<section id="quiz">
+<h2>Test Yourself</h2>
+<p>Seven questions to check your understanding. Select the best answer for each.</p>
+
+<div id="quiz-container"></div>
+<div class="score-bar" id="score-bar" style="display:none">
+  <div class="score-num" id="score-num">0</div>
+  <div class="score-label" id="score-label">Correct out of 7</div>
+</div>
+<div style="text-align:center;margin-top:14px">
+  <button onclick="resetQuiz()" style="font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;padding:10px 24px;border:1px solid var(--line);background:var(--panel2);color:var(--soft);cursor:pointer;border-radius:4px">↻ Reset Quiz</button>
+</div>
+</section>
+
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="year"></span> Event Tech Research. Built on GitHub Pages.</span>
+      <nav class="footer-links" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/event-tech-research-uk/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/eventtechresearch" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://github.com/eventtech-io" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+<script>
+
+/* ═══════════════════════════════════════
+   DORA SIMULATION
+   ═══════════════════════════════════════ */
+let doraStep_ = 0;
+let doraPlaying = false;
+const doraExplain = [
+  'Click <strong>Play</strong> to watch the full handshake, or <strong>Step</strong> to advance one message at a time.',
+  '<span class="dora-step-num">1 — DISCOVER</span>The client has no IP address. It broadcasts to 255.255.255.255:67 asking if any DHCP server is available. The message includes the client\'s MAC address so the server can identify it.',
+  '<span class="dora-step-num">2 — OFFER</span>MYLan receives the Discover and picks the first free IP from the pool (192.168.1.50). It broadcasts an Offer containing: the proposed IP, the subnet mask, the gateway, the DNS server, and the lease duration.',
+  '<span class="dora-step-num">3 — REQUEST</span>The client accepts the offer and broadcasts a Request confirming it wants 192.168.1.50 from server 192.168.1.1. This tells any other DHCP servers on the segment that their offers were not selected.',
+  '<span class="dora-step-num">4 — ACKNOWLEDGE</span>MYLan commits the lease: MAC address → 192.168.1.50 for 8 hours. It sends an ACK. The client configures its network stack and is now fully connected.'
+];
+
+function doraShow(step) {
+  for (let i = 1; i <= 4; i++) {
+    document.getElementById('dm-' + i).classList.toggle('show', i <= step);
+  }
+  document.getElementById('dora-info').innerHTML = doraExplain[step];
+  document.getElementById('dora-counter').textContent = 'Step ' + step + ' / 4';
+  document.getElementById('dora-client-ip').textContent = step >= 4 ? '192.168.1.50' : 'No IP';
+}
+
+function doraStep() {
+  if (doraStep_ >= 4) return;
+  doraStep_++;
+  doraShow(doraStep_);
+}
+
+function doraPlay() {
+  if (doraPlaying) return;
+  doraReset();
+  doraPlaying = true;
+  let s = 0;
+  const iv = setInterval(() => {
+    s++;
+    doraShow(s);
+    if (s >= 4) { clearInterval(iv); doraPlaying = false; }
+  }, 1200);
+}
+
+function doraReset() {
+  doraStep_ = 0;
+  doraPlaying = false;
+  doraShow(0);
+}
+
+/* ═══════════════════════════════════════
+   PACKET EXPLORER
+   ═══════════════════════════════════════ */
+const pktFields = {
+  op:    { range: [0,2],    label: 'Op / Hardware Type / HW Length / Hops', desc: '<strong>Byte 0: Op</strong> — 1 = request (client→server), 2 = reply (server→client).<br><strong>Byte 1: HType</strong> — 1 = Ethernet.<br><strong>Byte 2: HLen</strong> — 6 = MAC address length.<br><strong>Byte 3: Hops</strong> — 0 for direct connections. Incremented by relay agents.' },
+  xid:   { range: [4,7],    label: 'Transaction ID (xid)', desc: 'A random 32-bit number generated by the client. Copied into every reply so the client can match responses to its request. Like a reference number on a support ticket.' },
+  yi:    { range: [16,19],  label: 'Your IP Address (yiaddr)', desc: 'The IP address being assigned to the client. Zero in Discover and Request (client has no address yet). Filled in by the server in Offer and ACK.' },
+  si:    { range: [20,23],  label: 'Server IP Address (siaddr)', desc: 'The IP address of the DHCP server. MYLan writes its own configured Server IP here (e.g. 192.168.1.1).' },
+  ch:    { range: [28,33],  label: 'Client Hardware Address (chaddr)', desc: 'The client\'s MAC address (6 bytes for Ethernet). This is the primary key MYLan uses to track which device has which lease. Displayed in the lease table as dash-separated hex (e.g. 00-1A-2B-3C-4D-5E).' },
+  magic: { range: [236,239], label: 'Magic Cookie', desc: 'The fixed sequence <code>99.130.83.99</code> (hex 63.82.53.63). This marks where the BOOTP fixed header ends and the DHCP options begin. If this cookie is missing or wrong, MYLan rejects the packet.' }
+};
+
+function buildPacketGrid() {
+  const g = document.getElementById('pkt-grid');
+  // Show first 48 bytes + magic cookie area (236-243)
+  const ranges = [[0,47],[236,247]];
+  let html = '';
+  for (const [s,e] of ranges) {
+    if (s > 48) html += '<div class="packet-byte" style="grid-column:1/-1;background:transparent;border:none;color:var(--muted);font-size:10px;padding:4px">· · ·  bytes 48–235 (bootp padding + sname + file)  · · ·</div>';
+    for (let i = s; i <= e; i++) {
+      let cls = '';
+      for (const [k,v] of Object.entries(pktFields)) {
+        if (i >= v.range[0] && i <= v.range[1]) cls = 'hl-' + k;
+      }
+      html += `<div class="packet-byte ${cls}" data-field="${cls}" onclick="pktClickByte('${cls}')">${i}</div>`;
+    }
+  }
+  g.innerHTML = html;
+}
+
+function pktHighlight(field) {
+  const bytes = document.querySelectorAll('.packet-byte');
+  bytes.forEach(b => b.style.opacity = b.dataset.field === 'hl-' + field || !b.dataset.field ? '1' : '.25');
+  const f = pktFields[field];
+  if (f) document.getElementById('pkt-detail').innerHTML = `<strong style="color:var(--cyan)">${f.label}</strong> <span style="color:var(--muted);font-size:12px">(bytes ${f.range[0]}–${f.range[1]})</span><br><br>${f.desc}`;
+}
+
+function pktClickByte(cls) {
+  if (!cls) return;
+  pktHighlight(cls.replace('hl-', ''));
+}
+
+/* ═══════════════════════════════════════
+   LEASE SIMULATOR
+   ═══════════════════════════════════════ */
+let leases = [];
+let nextIp = 50;
+const macs = ['00-1A-2B-3C-4D-5E','AA-BB-CC-DD-EE-01','D4-F5-47-2A-91-C3','08-00-27-BE-FD-42','FC-AA-14-E7-3B-90','B8-27-EB-12-34-56','DC-A6-32-98-76-54','00-0C-29-4F-8A-11','A4-83-E7-2D-5C-09','52-54-00-AB-CD-EF'];
+
+function simConnect() {
+  if (leases.filter(l => l.active).length >= 10) return; // Demo cap
+  const mac = macs[leases.length % macs.length];
+  const ip = '192.168.1.' + nextIp;
+  nextIp++;
+  if (nextIp > 150) nextIp = 50;
+  const now = new Date();
+  const exp = new Date(now.getTime() + 8*60*60*1000);
+  leases.push({ mac, ip, expiry: exp, active: true });
+  renderLeases(true);
+}
+
+function simRelease() {
+  for (let i = leases.length - 1; i >= 0; i--) {
+    if (leases[i].active) { leases.splice(i, 1); renderLeases(false); return; }
+  }
+}
+
+function simExpire() {
+  for (let i = 0; i < leases.length; i++) {
+    if (leases[i].active) { leases[i].active = false; renderLeases(false); return; }
+  }
+}
+
+function simReset() { leases = []; nextIp = 50; renderLeases(false); }
+
+function renderLeases(flash) {
+  const tbody = document.getElementById('lease-body');
+  let html = '';
+  leases.forEach((l, i) => {
+    const cls = (flash && i === leases.length - 1) ? ' class="new"' : '';
+    const status = l.active ? '<span class="status active"></span>Active' : '<span class="status expired"></span>Expired';
+    const exp = l.active ? l.expiry.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}) : '—';
+    html += `<tr${cls}><td>${status}</td><td>${l.mac}</td><td>${l.ip}</td><td>${exp}</td></tr>`;
+  });
+  if (!leases.length) html = '<tr><td colspan="4" style="color:var(--muted);text-align:center;padding:24px">No active leases — click Connect Device to simulate a DORA handshake</td></tr>';
+  tbody.innerHTML = html;
+  document.getElementById('lease-count').textContent = leases.filter(l => l.active).length;
+}
+
+/* ═══════════════════════════════════════
+   DHCP OPTIONS
+   ═══════════════════════════════════════ */
+const dhcpOpts = [
+  { num: 1,  name: 'Subnet Mask', val: '255.255.255.0', desc: 'Tells the client which part of its IP address identifies the network and which part identifies the device. A /24 mask (255.255.255.0) means the first three octets are the network and the last octet is the host.' },
+  { num: 3,  name: 'Router (Gateway)', val: '192.168.1.1', desc: 'The default gateway — the address the client sends traffic to when the destination is outside its local subnet. MYLan sets this to the server\'s own IP by default, which is correct when the MYLan laptop is also the gateway.' },
+  { num: 6,  name: 'DNS Server', val: '8.8.8.8', desc: 'The Domain Name System server the client should use to resolve hostnames to IP addresses. MYLan defaults to Google Public DNS (8.8.8.8). For isolated event networks without internet, this is harmless — DNS queries simply time out.' },
+  { num: 50, name: 'Requested IP', val: '(from client)', desc: 'Included by the client in a REQUEST message to specify which IP it wants. MYLan validates this: if the requested IP is in the pool and not leased to another device, it is granted. If not, MYLan sends a NAK.' },
+  { num: 51, name: 'Lease Time', val: '28,800 sec (8 hrs)', desc: 'How long the lease is valid. After this time, the client must renew (send a new REQUEST) or lose its address. 8 hours is MYLan\'s default — long enough for a full show day, short enough that abandoned addresses return to the pool overnight.' },
+  { num: 53, name: 'Message Type', val: '1–8', desc: 'Identifies the DHCP message: 1=Discover, 2=Offer, 3=Request, 4=Decline, 5=ACK, 6=NAK, 7=Release, 8=Inform. This is the most important option — it tells the server what the client is asking for.' },
+  { num: 54, name: 'Server Identifier', val: '192.168.1.1', desc: 'The IP address of the server that sent this message. When multiple DHCP servers exist on a segment, the client includes this in its REQUEST to indicate which server\'s offer it is accepting.' },
+  { num: 255, name: 'End', val: '—', desc: 'Marks the end of the options list. Every DHCP packet terminates its options with byte 255. Any data after this byte is ignored.' }
+];
+
+function buildOptions() {
+  const g = document.getElementById('options-grid');
+  g.innerHTML = dhcpOpts.map((o, i) => `<div class="card" style="cursor:pointer" onclick="showOpt(${i})"><h4>Option ${o.num}</h4><p>${o.name}</p><p style="color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:6px">${o.val}</p></div>`).join('');
+}
+
+function showOpt(i) {
+  const o = dhcpOpts[i];
+  document.getElementById('opt-detail').innerHTML = `<strong style="color:var(--cyan)">Option ${o.num} — ${o.name}</strong><br><span style="color:var(--muted);font-size:12px">Default value: ${o.val}</span><br><br>${o.desc}`;
+}
+
+/* ═══════════════════════════════════════
+   TROUBLESHOOTING
+   ═══════════════════════════════════════ */
+const troubles = [
+  { symptom: '"Failed to set static IP" appears in the log', cause: 'The application is not running with elevated privileges.', fix: '<strong>Windows:</strong> Right-click MYLan.exe → Run as Administrator.<br><strong>macOS:</strong> Open Terminal, run <code>sudo ./MYLan</code>.' },
+  { symptom: 'No DISCOVER messages appear after connecting devices', cause: 'Devices are not on the same Layer 2 segment, or they already have static IPs.', fix: 'Verify all devices connect to the same switch. Confirm clients are set to "Obtain IP automatically" (DHCP mode). Check cable and link lights.' },
+  { symptom: 'DISCOVER appears but clients never get an IP', cause: 'The firewall is blocking UDP ports 67/68, or the OFFER broadcast cannot reach the client.', fix: 'Add MYLan to the firewall exception list. On Windows, check Windows Defender Firewall. On macOS, check System Settings → Network → Firewall.' },
+  { symptom: 'Two devices end up with the same IP address', cause: 'In older MYLan versions, restarting the server cleared the lease table. v2.1 fixes this with persistent leases.', fix: 'Ensure you are running MYLan v2.1 or later. If duplicates persist, stop the server, delete <code>mylan-leases.json</code>, and restart. Then reconnect all devices.' },
+  { symptom: '"IP pool exhausted" warning in the log', cause: 'All addresses in the configured pool range are leased to active or recently-seen devices.', fix: 'Wait for leases to expire (8 hours), or stop and restart the server to clear the table. Consider widening the pool range before restarting.' },
+  { symptom: 'Client gets an IP but cannot ping the server', cause: 'The server adapter was not correctly configured, or ICMP is blocked by the firewall.', fix: 'Check the adapter IP with <code>ipconfig</code> (Windows) or <code>ifconfig</code> (macOS). Verify the adapter shows the MYLan server IP. Allow ICMP in firewall rules.' }
+];
+
+function buildTroubleshoot() {
+  const c = document.getElementById('troubleshoot-cards');
+  c.innerHTML = troubles.map((t, i) => `<details><summary>${t.symptom}</summary><div class="details-content"><p><strong class="orange">Cause:</strong> ${t.cause}</p><p><strong class="green">Fix:</strong> ${t.fix}</p></div></details>`).join('');
+}
+
+/* ═══════════════════════════════════════
+   QUIZ
+   ═══════════════════════════════════════ */
+const quizData = [
+  { q: 'What does the "D" in DORA stand for?', opts: ['Delegate', 'Discover', 'Distribute', 'Dispatch'], correct: 1 },
+  { q: 'Which UDP port does a DHCP server listen on?', opts: ['53', '67', '68', '80'], correct: 1 },
+  { q: 'What is a DHCP lease?', opts: ['A permanent IP assignment', 'A time-limited reservation of an IP address', 'A network cable rental agreement', 'A DNS record type'], correct: 1 },
+  { q: 'What does the Magic Cookie (99.130.83.99) indicate in a DHCP packet?', opts: ['The server is running on port 99', 'The start of the DHCP options field', 'The client MAC address', 'The packet checksum'], correct: 1 },
+  { q: 'Why does a DHCP client broadcast its REQUEST (not unicast it)?', opts: ['Because it has no IP address yet', 'To inform all DHCP servers which offer was accepted', 'Because UDP does not support unicast', 'To test network connectivity'], correct: 1 },
+  { q: 'What happens when MYLan sends a NAK?', opts: ['The server shuts down', 'The client is told its requested IP is not valid and must start over', 'The lease timer is reset', 'The firewall blocks the client'], correct: 1 },
+  { q: 'Why does MYLan persist leases to disk?', opts: ['To comply with RFC 2131', 'To prevent duplicate IP assignments after a server restart', 'To encrypt the lease data', 'To share leases across multiple servers'], correct: 1 }
+];
+
+let quizAnswered = 0;
+let quizCorrect = 0;
+
+function buildQuiz() {
+  const c = document.getElementById('quiz-container');
+  c.innerHTML = quizData.map((q, qi) => {
+    const opts = q.opts.map((o, oi) => `<div class="quiz-opt" data-q="${qi}" data-o="${oi}" onclick="answer(${qi},${oi})">${o}</div>`).join('');
+    return `<div class="quiz-q" id="qq-${qi}"><h4>Question ${qi + 1}</h4><p>${q.q}</p><div class="quiz-opts">${opts}</div><div class="quiz-result" id="qr-${qi}"></div></div>`;
+  }).join('');
+}
+
+function answer(qi, oi) {
+  const q = quizData[qi];
+  const opts = document.querySelectorAll(`[data-q="${qi}"]`);
+  if (opts[0].classList.contains('disabled')) return;
+  opts.forEach((o, i) => {
+    o.classList.add('disabled');
+    if (i === q.correct) o.classList.add('correct');
+    else if (i === oi && oi !== q.correct) o.classList.add('wrong');
+  });
+  const correct = oi === q.correct;
+  document.getElementById('qr-' + qi).innerHTML = correct
+    ? '<span class="green">✓ Correct</span>'
+    : '<span class="red">✗ Incorrect</span>';
+  quizAnswered++;
+  if (correct) quizCorrect++;
+  if (quizAnswered === quizData.length) {
+    const bar = document.getElementById('score-bar');
+    bar.style.display = 'block';
+    document.getElementById('score-num').textContent = quizCorrect;
+    document.getElementById('score-label').textContent = `correct out of ${quizData.length}`;
+    bar.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function resetQuiz() {
+  quizAnswered = 0; quizCorrect = 0;
+  document.getElementById('score-bar').style.display = 'none';
+  buildQuiz();
+}
+
+/* ═══════════════════════════════════════
+   TOC highlight on scroll
+   ═══════════════════════════════════════ */
+function updateToc() {
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.guide-toc a');
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
+}
+window.addEventListener('scroll', updateToc, { passive: true });
+
+/* ═══════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => {
+  buildPacketGrid();
+  renderLeases(false);
+  buildOptions();
+  buildTroubleshoot();
+  buildQuiz();
+  updateToc();
+});
+
+</script>
+</body>
+</html>

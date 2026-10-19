@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NodeScope | Event Tech Research</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ETR-NodeScope is observational monitoring software for professional wireless microphones and Dante channels. Read the white paper and user guide." />
+  <link rel="canonical" href="https://eventresearch.io/nodescope.html" />
+  <meta property="og:title" content="NodeScope | Event Tech Research" />
+  <meta property="og:description" content="Observational RF, battery, audio, and fault intelligence for live wireless systems. Not show-critical. Not a control surface." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://eventresearch.io/nodescope.html" />
+  <meta property="og:image" content="https://eventresearch.io/assets/logo.png" />
+  <link rel="icon" href="favicon/favicon.ico" />
+  <link rel="stylesheet" href="assets/site.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="logo-img"><img src="assets/logo.png" alt="Event Tech Research"></span>
+      <span>
+        <span class="brand-text-title">Event Tech Research</span>
+        <span class="brand-text-sub">Audio / Control / R&amp;D</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="eventservices.html">Services</a>
+      <a class="nav-link" href="software.html">Software</a>
+      <a class="nav-link" href="hardware.html">Hardware</a>
+      <a class="nav-link" href="projects.html">Projects</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" aria-current="page" href="nodescope.html">NodeScope</a>
+      <a class="nav-link" href="hedera.html">Hedera</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main" class="site-main">
+    <section class="hero compact">
+      <div class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <a href="software.html">Software</a>
+        <span>/</span>
+        <span>NodeScope</span>
+      </div>
+      <p class="kicker"><span class="dot"></span> Observation software · v2.2.0</p>
+      <h1>ETR-<span class="accent">NodeScope</span></h1>
+      <p class="lead">
+        Cross-platform monitoring for professional wireless systems and Dante channels.
+        Real-time RF, battery, audio level, and fault intelligence in one operational picture —
+        built as research, shared as education, and explicitly not show-critical kit.
+      </p>
+      <div class="actions" aria-label="Primary NodeScope actions">
+        <a class="button primary" href="papers/ETR-NodeScope-White-Paper.html" download="ETR-NodeScope-White-Paper.html"><span class="dot"></span> Download white paper</a>
+        <a class="button" href="papers/ETR-NodeScope-User-Guide.html" download="ETR-NodeScope-User-Guide.html"><span class="dot"></span> Download user guide</a>
+        <a class="button" href="ETR-NodeScope-Sizzle-Reel.html" target="_blank" rel="noreferrer"><span class="dot"></span> Watch the sizzle reel</a>
+      </div>
+    </section>
+
+    <div class="pill-row" aria-label="Scope badges">
+      <span class="pill"><span class="dot"></span> Windows · macOS · Linux</span>
+      <span class="pill"><span class="dot"></span> Shure · Sennheiser · Wisycom</span>
+      <span class="pill"><span class="dot"></span> MQTT · OSC · WebUI</span>
+      <span class="pill"><span class="dot"></span> Observation, not control</span>
+    </div>
+
+    <section class="notice warn" role="note">
+      <strong>Operational scope.</strong>
+      NodeScope is monitoring and observation software. It does not retune, pair, unmute or coordinate.
+      It does not replace manufacturer tools, a frequency plan, RF coordination, or a listen.
+      Do not treat the dashboard as show-critical kit. Validate readings against receiver front panels
+      before you rely on them. Shure Edition is coming to demo soon — that is not a partnership or endorsement.
+    </section>
+
+    <section class="grid grid-2" aria-labelledby="what-title">
+      <article class="card">
+        <p class="section-title" id="what-title">What it is</p>
+        <h2>An observational layer for wireless telemetry</h2>
+        <p>
+          Professional wireless systems already talk over IP: RF levels, battery reports, mute flags,
+          identity fields, and a long tail of vendor-specific values. That talk is fragmented, late,
+          and easy to over-trust. NodeScope discovers, decodes, timestamps and translates those values
+          into a manufacturer-neutral state model — then shows the engineer what the software actually knows.
+        </p>
+        <p>
+          The research question is manufacturer-neutral. The first demonstration is not. The scoped
+          public demo is NodeScope — Shure Edition, coming soon.
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="section-title">What it is not</p>
+        <h2>Explicit non-goals</h2>
+        <ul class="plain-list">
+          <li>Not a control surface and not a write path to transmitters</li>
+          <li>Not a replacement for manufacturer software</li>
+          <li>Not a certification, competence badge, or sponsorship claim</li>
+          <li>Not show-critical monitoring</li>
+          <li>Not a substitute for a frequency plan, an RF engineer, or a listen</li>
+          <li>Not multi-vendor production readiness as a single operational picture</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="grid" aria-labelledby="papers-title">
+      <div class="section-heading">
+        <p class="section-title" id="papers-title">Papers</p>
+        <p>Both papers are embedded below, with fonts packaged inside the files. Download the same HTML for offline use or print-to-PDF.</p>
+      </div>
+
+      <div class="grid grid-2">
+        <article class="card">
+          <p class="section-title">White paper</p>
+          <h2>NodeScope — RF Edition: an observational approach</h2>
+          <p>
+            Field report and engineering position paper from three months of public research.
+            It covers the problem of the engineer as translation layer, ASK / LISTEN / DISCOVER
+            interface classes, freshness discipline, the adapter contract, the alert state machine,
+            validation against ugly cases, and known limits.
+          </p>
+          <ul>
+            <li>Problem, method, findings, architecture, validation, limits</li>
+            <li>Six principles and a working glossary</li>
+            <li>Claims tagged built, experimental, or untested concept</li>
+          </ul>
+          <div class="actions">
+            <a class="button primary" href="papers/ETR-NodeScope-White-Paper.html"><span class="dot"></span> Read in browser</a>
+            <a class="button" href="papers/ETR-NodeScope-White-Paper.html" download="ETR-NodeScope-White-Paper.html"><span class="dot"></span> Download HTML</a>
+          </div>
+          <p class="fine">Self-contained HTML with fonts embedded. No CDN required. Print to PDF from the browser if a paginated copy is needed.</p>
+        </article>
+
+        <article class="card">
+          <p class="section-title">User guide</p>
+          <h2>ETR-NodeScope v2.2.0 — operator reference</h2>
+          <p>
+            Practical guide to the current desktop build: installation, quick start and demo mode,
+            channel tiles, devices and alerts panels, mic check, talent profiles, show presets,
+            WebUI, settings, MQTT, OSC, shortcuts, diagnostics, and the config file.
+          </p>
+          <ul>
+            <li>Windows, macOS and Linux · .NET 8 / Avalonia</li>
+            <li>Demo mode with no hardware required</li>
+            <li>Support bundle and release readiness check</li>
+          </ul>
+          <div class="actions">
+            <a class="button primary" href="papers/ETR-NodeScope-User-Guide.html"><span class="dot"></span> Read in browser</a>
+            <a class="button" href="papers/ETR-NodeScope-User-Guide.html" download="ETR-NodeScope-User-Guide.html"><span class="dot"></span> Download HTML</a>
+          </div>
+          <p class="fine">Self-contained HTML with fonts embedded. WebRTC / Opus audio in the browser is experimental and off by default.</p>
+        </article>
+      </div>
+
+      <article class="card paper-embed" id="white-paper">
+        <p class="section-title">Embedded white paper</p>
+        <h2>NodeScope — RF Edition</h2>
+        <p class="fine">Full document, fonts and styles included. Scroll inside the frame or open it fullscreen.</p>
+        <iframe class="paper-frame" title="ETR-NodeScope white paper" src="papers/ETR-NodeScope-White-Paper.html" loading="lazy"></iframe>
+      </article>
+
+      <article class="card paper-embed" id="user-guide">
+        <p class="section-title">Embedded user guide</p>
+        <h2>ETR-NodeScope v2.2.0</h2>
+        <p class="fine">Full operator reference, fonts and styles included.</p>
+        <iframe class="paper-frame" title="ETR-NodeScope user guide" src="papers/ETR-NodeScope-User-Guide.html" loading="lazy"></iframe>
+      </article>
+    </section>
+
+    <section class="grid" aria-labelledby="capabilities-title">
+      <div class="section-heading">
+        <p class="section-title" id="capabilities-title">Capabilities in the current build</p>
+        <p>Drawn from the v2.2.0 user guide. Presentation is required to stay readable at three metres.</p>
+      </div>
+
+      <div class="grid grid-3">
+        <article class="card">
+          <h2>Channel grid</h2>
+          <p class="muted">Up to 32 live tiles.</p>
+          <p>
+            Each tile shows RF-A / RF-B, battery, audio level, mute state and fault status together,
+            with talent name, role and priority when assigned.
+          </p>
+        </article>
+        <article class="card">
+          <h2>Smart alerts</h2>
+          <p class="muted">State machine, not a car alarm.</p>
+          <p>
+            Battery depletion trends, RF warnings and faults, audio dropouts and unexpected mute.
+            Persistence, hysteresis and recovery are first-class states.
+          </p>
+        </article>
+        <article class="card">
+          <h2>Mic check</h2>
+          <p class="muted">Structured pre-show pass.</p>
+          <p>
+            OK / Watch / Fault marking, engineer and venue metadata, timestamped log,
+            and an exportable PDF report.
+          </p>
+        </article>
+        <article class="card">
+          <h2>Talent profiles</h2>
+          <p class="muted">Human context on the wire.</p>
+          <p>
+            Named performers with photos, roles and priority. Per-talent battery and RF thresholds.
+            Lead channels escalate alerts so they are not lost in a busy list.
+          </p>
+        </article>
+        <article class="card">
+          <h2>WebUI remote</h2>
+          <p class="muted">HTTP + WebSocket on the LAN.</p>
+          <p>
+            A tablet at FOH or a phone in the wings can watch channels and manage talent.
+            Visibility is not access. Bind to localhost by default.
+          </p>
+        </article>
+        <article class="card">
+          <h2>MQTT and OSC</h2>
+          <p class="muted">Versioned output contracts.</p>
+          <p>
+            Channel, device, alert and system state published to a broker. OSC for consoles
+            and show control. Publishing outward does not make NodeScope a control bus.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="grid" aria-labelledby="hardware-title">
+      <p class="section-title" id="hardware-title">Supported hardware families</p>
+      <article class="card">
+        <p>
+          Manual device entries always take priority over auto-discovery. The monitoring PC must sit
+          on the same L2 segment as the receivers for discovery to function.
+        </p>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Manufacturer</th>
+                <th>Product range</th>
+                <th>Protocol</th>
+                <th>Port</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Shure</td>
+                <td>ULX-D, Axient Digital</td>
+                <td>TCP text protocol</td>
+                <td>2202</td>
+              </tr>
+              <tr>
+                <td>Sennheiser</td>
+                <td>EW-DX series</td>
+                <td>HTTPS REST</td>
+                <td>443</td>
+              </tr>
+              <tr>
+                <td>Wisycom</td>
+                <td>MCR series receivers</td>
+                <td>TCP</td>
+                <td>32789</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fine">
+          Naming a manufacturer here is platform scope for observation, not a commercial relationship.
+          Event Tech Research is not speaking for these vendors.
+        </p>
+      </article>
+    </section>
+
+    <section class="grid grid-2" aria-labelledby="method-title">
+      <article class="card">
+        <p class="section-title" id="method-title">How the data is treated</p>
+        <h2>Three interface jobs, not one pipe</h2>
+        <ul>
+          <li><strong>ASK</strong> — request / response. You know the answer at the moment you asked.</li>
+          <li><strong>LISTEN</strong> — unsolicited or subscribed stream. Silence can mean “nothing changed” or “the conversation died.”</li>
+          <li><strong>DISCOVER</strong> — announcement, browse or scan. Absence is a hypothesis, not proof the device does not exist.</li>
+        </ul>
+        <p>
+          Every accepted value carries a timestamp of observation, not of display. A frozen healthy reading
+          is a comms problem in costume. Stale is a state. “I don’t know” is a first-class display value.
+        </p>
+      </article>
+
+      <article class="card">
+        <p class="section-title">Six principles</p>
+        <h2>The acceptance test for later features</h2>
+        <ol class="principle-list">
+          <li><strong>Preserve before translating.</strong> Raw values stay. Derived state is an opinion with a timestamp.</li>
+          <li><strong>Timestamp before trusting.</strong> Age is part of the value. No age, no trust.</li>
+          <li><strong>Identify before addressing.</strong> The device is not its current IP address.</li>
+          <li><strong>Compare carefully.</strong> Shared English names do not make quantities comparable.</li>
+          <li><strong>Add context before alerting.</strong> Role, history, persistence, recovery.</li>
+          <li><strong>Observe before controlling.</strong> No write path until the read path can admit uncertainty.</li>
+        </ol>
+      </article>
+    </section>
+
+    <section class="grid" aria-labelledby="alerts-title">
+      <p class="section-title" id="alerts-title">Alert types</p>
+      <article class="card">
+        <p>
+          Alerts fire and clear automatically. Inactive Shure slots with zero RF and zero audio are
+          suppressed so unused receiver channels do not flood the list. Per-talent thresholds override
+          the global defaults.
+        </p>
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Alert</th>
+                <th>Trigger</th>
+                <th>Default</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Battery critical</td>
+                <td>Battery % below critical threshold</td>
+                <td>15%</td>
+              </tr>
+              <tr>
+                <td>Battery warning</td>
+                <td>Battery % below warning threshold</td>
+                <td>30%</td>
+              </tr>
+              <tr>
+                <td>Battery depletion trend</td>
+                <td>Drain rate suggests under 30 minutes remaining</td>
+                <td>On for Lead / Important</td>
+              </tr>
+              <tr>
+                <td>RF warning</td>
+                <td>Signal below warning level</td>
+                <td>−85 dBm</td>
+              </tr>
+              <tr>
+                <td>RF fault</td>
+                <td>Signal lost or dropout</td>
+                <td>Immediate on loss</td>
+              </tr>
+              <tr>
+                <td>Audio dropout</td>
+                <td>Programme seen, then silence for a sustained period</td>
+                <td>−40 dBu silence</td>
+              </tr>
+              <tr>
+                <td>Mute active</td>
+                <td>Transmitter muted while programme is expected</td>
+                <td>Context required</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <section class="grid grid-2" aria-labelledby="limits-title">
+      <article class="card">
+        <p class="section-title" id="limits-title">Still unvalidated</p>
+        <h2>The honest list matters more than the feature list</h2>
+        <ul>
+          <li>Aggregation across rooms, sites or inventories</li>
+          <li>Multi-vendor alerting as one operational picture</li>
+          <li>72-hour stability under continuous observation</li>
+          <li>Large racks at show density</li>
+          <li>Show-floor alert policy under real load-in noise</li>
+          <li>WebUI as a shared crew surface, not a single-operator view</li>
+        </ul>
+        <p class="fine">A monitoring system tested only against healthy hardware has only been tested against the case that never needed monitoring.</p>
+      </article>
+
+      <article class="card">
+        <p class="section-title">Getting started</p>
+        <h2>Demo mode in under two minutes</h2>
+        <ol class="principle-list">
+          <li>Launch ETR-NodeScope. Status bar reads Ready.</li>
+          <li>Actions → Toggle Demo Mode. Simulated Shure and Sennheiser devices appear.</li>
+          <li>Choose the Demo audio generator in the output device dropdown.</li>
+          <li>Ctrl+S or Actions → Start Services. Tiles animate with simulated RF, battery and audio.</li>
+        </ol>
+        <p>
+          Real hardware needs receiver IPs or auto-discovery, a Dante Virtual Soundcard or ASIO path
+          on Windows, and a check against front-panel meters before anyone treats the screen as useful.
+        </p>
+        <div class="actions">
+          <a class="button" href="papers/ETR-NodeScope-User-Guide.html#quickstart"><span class="dot"></span> Open quick start</a>
+          <a class="button primary" href="mailto:event.tech.research@gmail.com?subject=NodeScope%20demo%20interest"><span class="dot"></span> Register interest</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="card" aria-labelledby="demo-title">
+      <p class="section-title" id="demo-title">Shure Edition demo</p>
+      <h2>Coming to demo soon</h2>
+      <p>
+        The first public demonstration is being prepared against Shure wireless systems. The label is a
+        platform scope, not a commercial relationship. Until the demo is live, the only approved
+        forward-looking sentence is <strong>coming to demo soon</strong>.
+      </p>
+      <p>
+        What we want from a first sitting is a sorted pile of reactions: useful, confusing, missing, broken.
+        “I would not trust this next to a lead vocal” is the correct default attitude toward research software.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="papers/ETR-NodeScope-White-Paper.html#demo"><span class="dot"></span> Read the demo chapter</a>
+        <a class="button" href="ETR-NodeScope-Sizzle-Reel.html" target="_blank" rel="noreferrer"><span class="dot"></span> Sizzle reel</a>
+        <a class="button" href="contact.html"><span class="dot"></span> Contact the studio</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>&copy; <span id="year"></span> Event Tech Research. Built on GitHub Pages.</span>
+      <nav class="footer-links" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/event-tech-research-uk/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/eventtechresearch" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="https://github.com/eventtech-io" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

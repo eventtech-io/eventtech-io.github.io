@@ -11,16 +11,16 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://eventresearch.io/software.html" />
   <meta property="og:image" content="https://eventresearch.io/assets/logo.png" />
-  <link rel="icon" href="/favicon/favicon.ico" />
-  <link rel="stylesheet" href="/assets/site.css" />
+  <link rel="icon" href="favicon/favicon.ico" />
+  <link rel="stylesheet" href="assets/site.css" />
 </head>
 
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <a class="brand" href="/">
-      <span class="logo-img"><img src="/assets/logo.png" alt="Event Tech Research"></span>
+    <a class="brand" href="index.html">
+      <span class="logo-img"><img src="assets/logo.png" alt="Event Tech Research"></span>
       <span>
         <span class="brand-text-title">Event Tech Research</span>
         <span class="brand-text-sub">Audio / Control / R&amp;D</span>
@@ -28,21 +28,22 @@
     </a>
 
     <nav class="site-nav" aria-label="Main navigation">
-      <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="/eventservices.html">Services</a>
-      <a class="nav-link" aria-current="page" href="/software.html">Software</a>
-      <a class="nav-link" href="/hardware.html">Hardware</a>
-      <a class="nav-link" href="/projects.html">Projects</a>
-      <a class="nav-link" href="/about.html">About</a>
-      <a class="nav-link" href="/hedera.html">Hedera</a>
-      <a class="nav-link" href="/contact.html">Contact</a>
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="eventservices.html">Services</a>
+      <a class="nav-link" aria-current="page" href="software.html">Software</a>
+      <a class="nav-link" href="hardware.html">Hardware</a>
+      <a class="nav-link" href="projects.html">Projects</a>
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="nodescope.html">NodeScope</a>
+      <a class="nav-link" href="hedera.html">Hedera</a>
+      <a class="nav-link" href="contact.html">Contact</a>
     </nav>
   </header>
 
   <main id="main" class="site-main">
     <section class="hero compact">
       <div class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a>
+        <a href="index.html">Home</a>
         <span>/</span>
         <span>Software</span>
       </div>
@@ -50,27 +51,53 @@
       <h1>Practical software for event engineers and production teams.</h1>
       <p class="lead">
         Software at Event Tech Research is built around real show workflows: clear control, useful monitoring,
-        fast troubleshooting, and documentation that stays connected to the system it describes.
+        fast troubleshooting, field networking, and documentation that stays connected to the system it describes.
       </p>
     </section>
 
     <section class="grid" aria-labelledby="nodescope-title">
       <p class="section-title" id="nodescope-title">Featured software</p>
+
+      <article class="card">
+        <h2>MYLan</h2>
+        <p>
+          MYLan is a portable DHCP server and field network utility built for temporary event, audio, and
+          production networks. It is designed to help engineers quickly deploy a simple DHCP service from a
+          laptop when devices need reliable automatic IP addressing on site.
+        </p>
+        <p>
+          The interactive DHCP guide explains the DORA handshake, packet structure, lease handling, DHCP
+          options, and practical troubleshooting using MYLan as the example field tool.
+        </p>
+        <ul>
+          <li>Portable DHCP server for Windows and macOS workflows</li>
+          <li>Useful for isolated show networks, Dante-style infrastructure, and temporary engineering setups</li>
+          <li>Includes educational documentation for understanding how DHCP behaves in the field</li>
+        </ul>
+        <div class="actions">
+          <a class="button primary" href="MYLan-DHCP-Interactive-Guide.html"><span class="dot"></span> Open DHCP guide</a>
+          <a class="button" href="https://github.com/Event-Tech-Research-Ltd/MYLan" target="_blank" rel="noreferrer"><span class="dot"></span> View MYLan on GitHub</a>
+        </div>
+        <p class="fine">Field utility / public software resource</p>
+      </article>
+
       <article class="card">
         <h2>ETR-NodeScope</h2>
         <p>
-          ETR-NodeScope is a software concept for making networked event systems easier to understand at a
-          glance. It is aimed at engineers who need fast visibility of nodes, links, status, and system health
-          during setup, commissioning, and live operation.
+          Observational monitoring for professional wireless microphones and Dante channels.
+          NodeScope aggregates RF, battery, audio level and fault telemetry into a dark-themed
+          operational grid — then refuses to look more certain than the conversation that produced the number.
         </p>
         <p>
-          The sizzle reel shows the intended look and feel: a clear, technical interface for mapping connected
-          equipment, tracking operational state, and keeping show-critical information close to hand.
+          It is not a control surface and not show-critical kit. Shure, Sennheiser and Wisycom families
+          are in the current adapter set. NodeScope — Shure Edition is coming to demo soon.
         </p>
         <div class="actions">
-          <a class="button primary" href="/ETR-NodeScope-Sizzle-Reel.html" target="_blank" rel="noreferrer"><span class="dot"></span> View ETR-NodeScope</a>
+          <a class="button primary" href="nodescope.html"><span class="dot"></span> Open NodeScope section</a>
+          <a class="button" href="papers/ETR-NodeScope-White-Paper.html" download="ETR-NodeScope-White-Paper.html"><span class="dot"></span> Download white paper</a>
+          <a class="button" href="papers/ETR-NodeScope-User-Guide.html" download="ETR-NodeScope-User-Guide.html"><span class="dot"></span> Download user guide</a>
         </div>
-        <p class="fine">Coming Soon</p>
+        <p class="fine">Observation study / v2.2.0 user guide / coming to demo soon</p>
       </article>
     </section>
 
@@ -140,7 +167,7 @@
         </p>
         <div class="actions">
           <a class="button" href="https://github.com/eventtech-io" target="_blank" rel="noreferrer"><span class="dot"></span> View GitHub</a>
-          <a class="button primary" href="/contact.html"><span class="dot"></span> Discuss software</a>
+          <a class="button primary" href="contact.html"><span class="dot"></span> Discuss software</a>
         </div>
       </article>
     </section>
