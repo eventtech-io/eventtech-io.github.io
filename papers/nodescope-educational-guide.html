@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html><html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ETR-NodeScope — Complete Educational Guide</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Syne:wght@400;600;700;800&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap" rel="stylesheet">
 <style>
   :root {
     --navy:        #0d1b2a;
@@ -730,7 +729,7 @@
     <span class="pill">MQTT · 1999</span>
     <span class="pill">Dante · 2003</span>
     <span class="pill">WebSocket · 2011</span>
-    <span class="pill">Shure · Sennheiser · Wisycom</span>
+    <span class="pill">Wireless receiver integration</span>
   </div>
   <span class="scroll-hint">▼ SCROLL TO BEGIN</span>
 </section>
@@ -909,7 +908,7 @@ double dBu  = dBFS + 18.0;
       <span class="timeline-year">1960</span>
       <div class="timeline-content">
         <strong>RS-232 — Serial Communication Standard (EIA)</strong>
-        <span>The Electronic Industries Association published RS-232 in 1960 to define how computers communicate with modems. By the 1980s it became the universal AV control language — every rack-mount device had an RS-232 port accepting text commands like <code>POWER ON\r</code>. When Ethernet replaced RS-232 in the 2000s, manufacturers simply wrapped the same ASCII commands in TCP sockets. Shure's port 2202 protocol — <code>&lt; GET 1 BATT_CHARGE &gt;</code> — is RS-232-era design philosophy running over modern TCP/IP.</span>
+        <span>The Electronic Industries Association published RS-232 in 1960 to define how computers communicate with modems. By the 1980s it became the universal AV control language — every rack-mount device had an RS-232 port accepting text commands like <code>POWER ON\r</code>. When Ethernet replaced RS-232 in the 2000s, manufacturers simply wrapped the same ASCII commands in TCP sockets. Wireless's port 2202 protocol — <code>&lt; GET 1 BATT_CHARGE &gt;</code> — is RS-232-era design philosophy running over modern TCP/IP.</span>
       </div>
     </div>
 
@@ -917,7 +916,7 @@ double dBu  = dBFS + 18.0;
       <span class="timeline-year">1974</span>
       <div class="timeline-content">
         <strong>TCP/IP — Cerf and Kahn, IEEE Transactions on Communications</strong>
-        <span>Vint Cerf and Bob Kahn published "A Protocol for Packet Network Intercommunication" in 1974, defining the two-layer model: IP handles routing and addressing; TCP adds guaranteed delivery, in-order reassembly, and flow control. Everything ETR-NodeScope does over the network runs on TCP/IP. The three-way handshake (SYN, SYN-ACK, ACK) plus ARP resolution on link-local addresses is why ETR-NodeScope uses an 800ms TCP probe timeout for Shure discovery.</span>
+        <span>Vint Cerf and Bob Kahn published "A Protocol for Packet Network Intercommunication" in 1974, defining the two-layer model: IP handles routing and addressing; TCP adds guaranteed delivery, in-order reassembly, and flow control. Everything ETR-NodeScope does over the network runs on TCP/IP. The three-way handshake (SYN, SYN-ACK, ACK) plus ARP resolution on link-local addresses is why ETR-NodeScope uses an 800ms TCP probe timeout for Wireless discovery.</span>
       </div>
     </div>
 
@@ -948,7 +947,7 @@ double dBu  = dBFS + 18.0;
     <div class="timeline-item">
       <span class="timeline-year">1997</span>
       <div class="timeline-content">
-        <strong>OSC — Open Sound Control (Wright & Freed, CNMAT, UC Berkeley)</strong>
+        <strong>OSC — Open Sound Control (Wright &amp; Freed, CNMAT, UC Berkeley)</strong>
         <span>Presented at the International Computer Music Conference in 1997. Designed as everything MIDI was not: 32-bit float values instead of 7-bit integers, arbitrary URL-like address patterns (/etr-nodescope/channel/1/battery) instead of fixed message types, UDP over any network instead of a serial wire, and 64-bit NTP timestamps for precise scheduling. ETR-NodeScope sends OSC for Qlab integration, lighting console triggers, and custom monitoring scripts.</span>
       </div>
     </div>
@@ -956,7 +955,7 @@ double dBu  = dBFS + 18.0;
     <div class="timeline-item">
       <span class="timeline-year">1999</span>
       <div class="timeline-content">
-        <strong>MQTT — Message Queuing Telemetry Transport (Stanford-Clark & Nipper, IBM)</strong>
+        <strong>MQTT — Message Queuing Telemetry Transport (Stanford-Clark &amp; Nipper, IBM)</strong>
         <span>Invented by Andy Stanford-Clark of IBM and Arlen Nipper of Arcom to monitor oil pipelines across the Sahara desert over expensive, unreliable satellite links. Design goals: minimal bandwidth (every byte matters at USD 10/KB), reliable delivery (QoS levels), low power, publish/subscribe broker model. IBM kept it proprietary until 2013 when it was released to OASIS, coinciding with the IoT boom. ETR-NodeScope uses MQTTnet (a .NET library) to publish channel state with QoS 1 (at-least-once delivery).</span>
       </div>
     </div>
@@ -965,7 +964,7 @@ double dBu  = dBFS + 18.0;
       <span class="timeline-year">2000</span>
       <div class="timeline-content">
         <strong>REST — Roy Fielding's PhD Thesis, UC Irvine</strong>
-        <span>Roy Fielding (co-author of HTTP/1.1) defined REST (Representational State Transfer) in his 2000 PhD thesis. REST constraints — stateless requests, uniform interface (GET/PUT/POST), self-describing messages — made web services scalable and interoperable. Sennheiser's SSC v2 API (used by ETR-NodeScope for EW-DX receivers) is a REST API. The contrast with Shure's ASCII protocol illustrates 20 years of API design evolution.</span>
+        <span>Roy Fielding (co-author of HTTP/1.1) defined REST (Representational State Transfer) in his 2000 PhD thesis. REST constraints — stateless requests, uniform interface (GET/PUT/POST), self-describing messages — made web services scalable and interoperable. Wireless's SSC v2 API (used by ETR-NodeScope for digital wireless receiver receivers) is a REST API. The contrast with Wireless's ASCII protocol illustrates 20 years of API design evolution.</span>
       </div>
     </div>
 
@@ -973,7 +972,7 @@ double dBu  = dBFS + 18.0;
       <span class="timeline-year">2001</span>
       <div class="timeline-content">
         <strong>JSON — JavaScript Object Notation (Douglas Crockford)</strong>
-        <span>Crockford formalised JSON around 2001, published RFC 4627 in 2006. JSON is a subset of JavaScript object literal syntax that had existed since 1995 — Crockford's contribution was identifying it as a useful standalone data format. Wisycom's protocol uses JSON push messages; ETR-NodeScope's WebSocket messages to browsers are JSON; MQTT payloads are JSON. The contrast with Shure's ASCII strings shows how data serialisation has evolved.</span>
+        <span>Crockford formalised JSON around 2001, published RFC 4627 in 2006. JSON is a subset of JavaScript object literal syntax that had existed since 1995 — Crockford's contribution was identifying it as a useful standalone data format. Wireless's protocol uses JSON push messages; ETR-NodeScope's WebSocket messages to browsers are JSON; MQTT payloads are JSON. The contrast with Wireless's ASCII strings shows how data serialisation has evolved.</span>
       </div>
     </div>
 
@@ -981,7 +980,7 @@ double dBu  = dBFS + 18.0;
       <span class="timeline-year">2002</span>
       <div class="timeline-content">
         <strong>mDNS / Bonjour (Stuart Cheshire, Apple)</strong>
-        <span>Apple shipped Rendezvous (later renamed Bonjour) in Mac OS X 10.2 as part of the zero-configuration networking initiative. mDNS sends DNS queries to multicast address 224.0.0.251:5353 — any device that matches responds directly, no DNS server needed. Standardised as RFC 6762 in 2013. ETR-NodeScope uses mDNS to find Sennheiser EW-DX receivers and — critically — to find the control interface IP of Axient Digital receivers (AD4D-A, AD4Q) which is different from the Dante audio interface IP.</span>
+        <span>Apple shipped Rendezvous (later renamed Bonjour) in Mac OS X 10.2 as part of the zero-configuration networking initiative. mDNS sends DNS queries to multicast address 224.0.0.251:5353 — any device that matches responds directly, no DNS server needed. Standardised as RFC 6762 in 2013. ETR-NodeScope uses mDNS to find Wireless digital wireless receiver receivers and — critically — to find the control interface IP of digital wireless receivers (AD4D-A, AD4Q) which is different from the Dante audio interface IP.</span>
       </div>
     </div>
 
@@ -997,7 +996,7 @@ double dBu  = dBFS + 18.0;
       <span class="timeline-year">2006</span>
       <div class="timeline-content">
         <strong>Server-Sent Events (Ian Hickson, Opera)</strong>
-        <span>Hickson developed SSE at Opera Software and included it in the WHATWG HTML Living Standard. SSE holds an HTTP connection open and streams text events as they occur — simpler than WebSocket for one-directional push use cases. Standardised as RFC 8895. Sennheiser chose SSE for SSC v2 because EW-DX is a monitoring tool: data flows from receiver to controller. Commands (mute, gain) are separate HTTP requests, not sent back over the SSE stream.</span>
+        <span>Hickson developed SSE at Opera Software and included it in the WHATWG HTML Living Standard. SSE holds an HTTP connection open and streams text events as they occur — simpler than WebSocket for one-directional push use cases. Standardised as RFC 8895. Wireless chose SSE for SSC v2 because digital wireless receiver is a monitoring tool: data flows from receiver to controller. Commands (mute, gain) are separate HTTP requests, not sent back over the SSE stream.</span>
       </div>
     </div>
 
@@ -1017,22 +1016,22 @@ double dBu  = dBFS + 18.0;
     <tbody>
       <tr><td>1937</td><td>PCM (Alec Reeves)</td><td>Foundation of all digital audio</td></tr>
       <tr><td>1958</td><td>Sony WRT-57/WRR-57 — first commercial wireless mic</td><td>Start of the wireless microphone industry</td></tr>
-      <tr><td>1960</td><td>RS-232 serial standard (EIA)</td><td>Ancestor of Shure's ASCII command protocol</td></tr>
+      <tr><td>1960</td><td>RS-232 serial standard (EIA)</td><td>Ancestor of Wireless's ASCII command protocol</td></tr>
       <tr><td>1974</td><td>TCP/IP (Cerf and Kahn)</td><td>Foundation of all ETR-NodeScope network communication</td></tr>
       <tr><td>1983</td><td>MIDI standard</td><td>Context for OSC — shows what OSC improved on</td></tr>
       <tr><td>1991</td><td>WAV file format (Microsoft/IBM)</td><td>ETR-NodeScope HTTP audio stream format</td></tr>
       <tr><td>1997</td><td>ASIO (Steinberg)</td><td>ETR-NodeScope's audio capture interface</td></tr>
-      <tr><td>1997</td><td>OSC 1.0 (Wright & Freed, CNMAT)</td><td>ETR-NodeScope OSC integration for Qlab etc.</td></tr>
+      <tr><td>1997</td><td>OSC 1.0 (Wright &amp; Freed, CNMAT)</td><td>ETR-NodeScope OSC integration for Qlab etc.</td></tr>
       <tr><td>1999</td><td>MQTT (Stanford-Clark, IBM)</td><td>ETR-NodeScope MQTT channel state publishing</td></tr>
-      <tr><td>2000</td><td>REST (Fielding PhD thesis)</td><td>Foundation of Sennheiser SSC v2 API</td></tr>
-      <tr><td>2001</td><td>JSON (Crockford)</td><td>Wisycom protocol, WebSocket messages</td></tr>
-      <tr><td>2002</td><td>mDNS / Bonjour (Apple)</td><td>Finds Sennheiser and Axient control IPs</td></tr>
+      <tr><td>2000</td><td>REST (Fielding PhD thesis)</td><td>Foundation of Wireless SSC v2 API</td></tr>
+      <tr><td>2001</td><td>JSON (Crockford)</td><td>Wireless protocol, WebSocket messages</td></tr>
+      <tr><td>2002</td><td>mDNS / Bonjour (Apple)</td><td>Finds Wireless and digital wireless control IPs</td></tr>
       <tr><td>2003</td><td>Dante development begins (Audinate)</td><td>The audio network ETR-NodeScope monitors</td></tr>
-      <tr><td>2006</td><td>Server-Sent Events (Hickson, Opera)</td><td>Sennheiser SSC v2 real-time data delivery</td></tr>
+      <tr><td>2006</td><td>Server-Sent Events (Hickson, Opera)</td><td>Wireless SSC v2 real-time data delivery</td></tr>
       <tr><td>2011</td><td>WebSocket RFC 6455</td><td>ETR-NodeScope WebUI real-time updates and audio</td></tr>
       <tr><td>2017</td><td>FCC 600 MHz spectrum repack</td><td>Forces wireless frequency coordination</td></tr>
-      <tr><td>2017</td><td>Axient Digital launched (Shure)</td><td>AD4D, AD4Q — Shure hardware supported</td></tr>
-      <tr><td>2020</td><td>EW-DX launched (Sennheiser) with SSC v2</td><td>Sennheiser hardware supported</td></tr>
+      <tr><td>2017</td><td>digital wireless launched (Wireless)</td><td>AD4D, AD4Q — Wireless hardware supported</td></tr>
+      <tr><td>2020</td><td>digital wireless receiver launched (Wireless) with SSC v2</td><td>Wireless hardware supported</td></tr>
     </tbody>
   </table>
 </section>
@@ -1059,15 +1058,15 @@ double dBu  = dBFS + 18.0;
 
   <div class="question" data-q="2" data-correct="a">
     <span class="q-num">Question 2 of 5</span>
-    <p class="q-text">Why does Shure's TCP/2202 protocol look like RS-232 serial commands with angle brackets and spaces?</p>
+    <p class="q-text">Why does Wireless's TCP/2202 protocol look like RS-232 serial commands with angle brackets and spaces?</p>
     <div class="options">
-      <label class="option"><input type="radio" name="q2-2" value="a"><span class="option-dot"></span><span class="option-text">The protocol was originally designed for RS-232 serial ports in the 1990s for Crestron/AMX control systems. When Ethernet replaced RS-232, Shure wrapped the same ASCII commands in TCP sockets rather than redesigning the protocol</span></label>
+      <label class="option"><input type="radio" name="q2-2" value="a"><span class="option-dot"></span><span class="option-text">The protocol was originally designed for RS-232 serial ports in the 1990s for Crestron/AMX control systems. When Ethernet replaced RS-232, Wireless wrapped the same ASCII commands in TCP sockets rather than redesigning the protocol</span></label>
       <label class="option"><input type="radio" name="q2-2" value="b"><span class="option-dot"></span><span class="option-text">Angle brackets were required by the TCP/IP specification for audio control protocols</span></label>
-      <label class="option"><input type="radio" name="q2-2" value="c"><span class="option-dot"></span><span class="option-text">Shure chose this format for compatibility with XML parsers which also use angle brackets</span></label>
+      <label class="option"><input type="radio" name="q2-2" value="c"><span class="option-dot"></span><span class="option-text">Wireless chose this format for compatibility with XML parsers which also use angle brackets</span></label>
       <label class="option"><input type="radio" name="q2-2" value="d"><span class="option-dot"></span><span class="option-text">The format was mandated by the AES67 audio networking standard</span></label>
     </div>
-    <div class="feedback correct">✓ Correct! Legacy protocols on new transports is extremely common in AV. When networks replaced serial cables, manufacturers took the path of least resistance — same commands, new transport. This is why ETR-NodeScope's entire Shure parser is a regex and a string split.</div>
-    <div class="feedback wrong">✗ The ASCII format is 1990s RS-232 design. When Ethernet replaced serial cables, Shure simply wrapped the existing commands in TCP rather than redesigning from scratch.</div>
+    <div class="feedback correct">✓ Correct! Legacy protocols on new transports is extremely common in AV. When networks replaced serial cables, manufacturers took the path of least resistance — same commands, new transport. This is why ETR-NodeScope's entire Wireless parser is a regex and a string split.</div>
+    <div class="feedback wrong">✗ The ASCII format is 1990s RS-232 design. When Ethernet replaced serial cables, Wireless simply wrapped the existing commands in TCP rather than redesigning from scratch.</div>
   </div>
 
   <div class="question" data-q="3" data-correct="d">
@@ -1085,15 +1084,15 @@ double dBu  = dBFS + 18.0;
 
   <div class="question" data-q="4" data-correct="b">
     <span class="q-num">Question 4 of 5</span>
-    <p class="q-text">Why did Sennheiser choose Server-Sent Events (SSE) for EW-DX receivers rather than WebSocket or raw TCP?</p>
+    <p class="q-text">Why did Wireless choose Server-Sent Events (SSE) for digital wireless receiver receivers rather than WebSocket or raw TCP?</p>
     <div class="options">
-      <label class="option"><input type="radio" name="q2-4" value="a"><span class="option-dot"></span><span class="option-text">WebSocket is not supported on Sennheiser's embedded hardware</span></label>
-      <label class="option"><input type="radio" name="q2-4" value="b"><span class="option-dot"></span><span class="option-text">EW-DX is a monitoring use case — data flows from receiver to controller. SSE is one-directional (server to client), uses plain HTTP (works through proxies), and has built-in reconnection. Commands are separate HTTP requests. This matches the access pattern perfectly</span></label>
-      <label class="option"><input type="radio" name="q2-4" value="c"><span class="option-dot"></span><span class="option-text">SSE allows Sennheiser to encrypt the data stream without a separate TLS certificate</span></label>
-      <label class="option"><input type="radio" name="q2-4" value="d"><span class="option-dot"></span><span class="option-text">WebSocket was not standardised until after the EW-DX was designed</span></label>
+      <label class="option"><input type="radio" name="q2-4" value="a"><span class="option-dot"></span><span class="option-text">WebSocket is not supported on Wireless's embedded hardware</span></label>
+      <label class="option"><input type="radio" name="q2-4" value="b"><span class="option-dot"></span><span class="option-text">digital wireless receiver is a monitoring use case — data flows from receiver to controller. SSE is one-directional (server to client), uses plain HTTP (works through proxies), and has built-in reconnection. Commands are separate HTTP requests. This matches the access pattern perfectly</span></label>
+      <label class="option"><input type="radio" name="q2-4" value="c"><span class="option-dot"></span><span class="option-text">SSE allows Wireless to encrypt the data stream without a separate TLS certificate</span></label>
+      <label class="option"><input type="radio" name="q2-4" value="d"><span class="option-dot"></span><span class="option-text">WebSocket was not standardised until after the digital wireless receiver was designed</span></label>
     </div>
     <div class="feedback correct">✓ Correct! SSE is one-directional by design — perfect for monitoring where the receiver pushes state changes and the controller sends occasional commands via separate HTTP PUT requests. SSE also works through HTTP proxies that might block WebSocket upgrades.</div>
-    <div class="feedback wrong">✗ The key is that EW-DX is a monitoring system — data flows one way (receiver to controller). SSE is designed for exactly this pattern, works through HTTP proxies, and has automatic reconnection built in.</div>
+    <div class="feedback wrong">✗ The key is that digital wireless receiver is a monitoring system — data flows one way (receiver to controller). SSE is designed for exactly this pattern, works through HTTP proxies, and has automatic reconnection built in.</div>
   </div>
 
   <div class="question" data-q="5" data-correct="c">
@@ -1172,12 +1171,12 @@ sessionLogger.ChannelDataReceived     += MaybeLogBatterySwap;</code></div>
   </div>
 
   <h3 class="sub-title">Change Detection — Not Every Frame Reaches the UI</h3>
-  <p>Shure sends SAMPLE frames every 100ms. ETR-NodeScope filters them before the UI is updated — only meaningful changes cause a redraw:</p>
+  <p>Wireless sends SAMPLE frames every 100ms. ETR-NodeScope filters them before the UI is updated — only meaningful changes cause a redraw:</p>
   <div class="code-block"><code><span class="keyword">private void</span> PublishChannelIfChanged(<span class="keyword">int</span> channel, WirelessChannelState state)
 {
     <span class="keyword">var</span> snapshot = ChannelPublishSnapshot.From(state);
 
-    <span class="keyword">if</span> (_lastPublishedState.TryGetValue(channel, <span class="keyword">out var</span> previous) &&
+    <span class="keyword">if</span> (_lastPublishedState.TryGetValue(channel, <span class="keyword">out var</span> previous) &amp;&amp;
         !snapshot.HasMeaningfulChangeFrom(previous))
         <span class="keyword">return</span>;  <span class="comment">// RF changed by 0.5 dBm? Skip the UI update.</span>
 
@@ -1290,11 +1289,11 @@ sessionLogger.ChannelDataReceived     += MaybeLogBatterySwap;</code></div>
 
 <section class="section" id="ch4">
   <div class="mfr-banner shure">
-    <h2>Shure</h2>
-    <p>ULX-D  ·  Axient Digital  ·  QLX-D  ·  SLX-D  ·  TCP Port 2202</p>
+    <h2>Wireless</h2>
+    <p>wireless receiver  ·  digital wireless  ·  QLX-D  ·  SLX-D  ·  TCP Port 2202</p>
   </div>
 
-  <h2 class="section-title"><span class="ch">Chapter 4</span>Shure Protocol — ASCII over TCP</h2>
+  <h2 class="section-title"><span class="ch">Chapter 4</span>Wireless Protocol — ASCII over TCP</h2>
 
   <h3 class="sub-title">The Grammar</h3>
   <table class="data-table">
@@ -1307,7 +1306,7 @@ sessionLogger.ChannelDataReceived     += MaybeLogBatterySwap;</code></div>
     </tbody>
   </table>
 
-  <div class="code-block"><code><span class="comment">// The entire Shure protocol parser — one regex + one split:</span>
+  <div class="code-block"><code><span class="comment">// The entire Wireless protocol parser — one regex + one split:</span>
 <span class="keyword">var</span> match = Regex.Match(line, <span class="string">@"&lt; (?&lt;body&gt;.+?) &gt;"</span>);
 <span class="keyword">string</span>[] parts = match.Groups[<span class="string">"body"</span>].Value.Split(<span class="string">' '</span>);
 
@@ -1326,9 +1325,9 @@ sessionLogger.ChannelDataReceived     += MaybeLogBatterySwap;</code></div>
     <span class="keyword">if</span> (model.Contains(<span class="string">"AD4D"</span>)  || model.Contains(<span class="string">"ULXD4D"</span>)) <span class="keyword">return</span> <span class="num">2</span>;
     <span class="keyword">if</span> (model.Contains(<span class="string">"ULXD4"</span>) || model.Contains(<span class="string">"AD4"</span>))    <span class="keyword">return</span> <span class="num">1</span>;</code></div>
 
-  <h3 class="sub-title">ULX-D vs Axient Digital — Key Differences</h3>
+  <h3 class="sub-title">wireless receiver vs digital wireless — Key Differences</h3>
   <table class="data-table">
-    <thead><tr><th>Parameter</th><th>ULX-D</th><th>Axient Digital</th></tr></thead>
+    <thead><tr><th>Parameter</th><th>wireless receiver</th><th>digital wireless</th></tr></thead>
     <tbody>
       <tr><td>RF level</td><td>RX_RF_LVL (raw − 128 = dBm)</td><td>RSSI (raw − 120 = dBm)</td></tr>
       <tr><td>Audio level</td><td>AUDIO_LVL (0–255)</td><td>AUDIO_LEVEL_RMS (raw − 120 = dBFS)</td></tr>
@@ -1340,11 +1339,11 @@ sessionLogger.ChannelDataReceived     += MaybeLogBatterySwap;</code></div>
   </table>
 
   <div class="mfr-banner senn" style="margin-top:4rem">
-    <h2>Sennheiser</h2>
-    <p>EW-DX EM2  ·  EW-DX EM4  ·  Dante variants  ·  HTTPS Port 443</p>
+    <h2>Wireless</h2>
+    <p>digital wireless receiver EM2  ·  digital wireless receiver EM4  ·  Dante variants  ·  HTTPS Port 443</p>
   </div>
 
-  <h2 class="section-title"><span class="ch">Chapter 5</span>Sennheiser Protocol — HTTPS + Server-Sent Events</h2>
+  <h2 class="section-title"><span class="ch">Chapter 5</span>Wireless Protocol — HTTPS + Server-Sent Events</h2>
 
   <h3 class="sub-title">SSC v2 Connection Sequence</h3>
   <div class="code-block"><code><span class="comment">// Step 1: Confirm SSC v2 supported</span>
@@ -1352,7 +1351,7 @@ GET https://[ip]/api/ssc/version  →  {<span class="string">"version"</span>:<s
 
 <span class="comment">// Step 2: Get device identity</span>
 GET https://[ip]/api/device/identity
-→  {<span class="string">"name"</span>:<span class="string">"EW-DX EM2"</span>,<span class="string">"channels"</span>:<span class="num">2</span>,<span class="string">"firmware"</span>:<span class="string">"4.2.1"</span>}
+→  {<span class="string">"name"</span>:<span class="string">"digital wireless receiver EM2"</span>,<span class="string">"channels"</span>:<span class="num">2</span>,<span class="string">"firmware"</span>:<span class="string">"4.2.1"</span>}
 
 <span class="comment">// Step 3: Open SSE stream (never closes until ETR-NodeScope disconnects)</span>
 GET https://[ip]/api/ssc/state/subscriptions
@@ -1367,20 +1366,20 @@ data: {<span class="string">"/api/device/channels/0/transmitter/battery/level"</
 data: {<span class="string">"/api/device/channels/0/rf/level"</span>:{<span class="string">"value"</span>:-<span class="num">72.5</span>}}</code></div>
 
   <div class="mfr-banner wisy" style="margin-top:4rem">
-    <h2>Wisycom</h2>
-    <p>MCR42  ·  MCR54  ·  MPR50  ·  MPR52  ·  TCP Port 32789</p>
+    <h2>Wireless</h2>
+    <p>receiver  ·  receiver  ·  MPR50  ·  MPR52  ·  TCP Port 32789</p>
   </div>
 
-  <h2 class="section-title"><span class="ch">Chapter 6</span>Wisycom Protocol — JSON over TCP</h2>
+  <h2 class="section-title"><span class="ch">Chapter 6</span>Wireless Protocol — JSON over TCP</h2>
 
   <div class="callout warn">
     <span class="callout-label">⚠️ Critical</span>
-    <p>Wisycom receivers allow only one TCP controller at a time on port 32789. If Wisycom Manager is connected, ETR-NodeScope cannot connect. Disconnect all other tools before starting ETR-NodeScope.</p>
+    <p>Wireless receivers allow only one TCP controller at a time on port 32789. If Wireless Manager is connected, ETR-NodeScope cannot connect. Disconnect all other tools before starting ETR-NodeScope.</p>
   </div>
 
   <div class="code-block"><code><span class="comment">// ETR-NodeScope sends: get_device_info</span>
 <span class="comment">// Receiver responds:</span>
-{<span class="string">"result"</span>:<span class="string">"ok"</span>,<span class="string">"data"</span>:{<span class="string">"product"</span>:<span class="string">"MCR42"</span>,<span class="string">"num_channels"</span>:<span class="num">2</span>,<span class="string">"firmware"</span>:<span class="string">"1.9.3"</span>}}
+{<span class="string">"result"</span>:<span class="string">"ok"</span>,<span class="string">"data"</span>:{<span class="string">"product"</span>:<span class="string">"receiver"</span>,<span class="string">"num_channels"</span>:<span class="num">2</span>,<span class="string">"firmware"</span>:<span class="string">"1.9.3"</span>}}
 
 <span class="comment">// Receiver then pushes continuously:</span>
 {<span class="string">"channels"</span>:[
@@ -1409,20 +1408,20 @@ data: {<span class="string">"/api/device/channels/0/rf/level"</span>:{<span clas
 
   <div class="question" data-q="1" data-correct="c">
     <span class="q-num">Question 1 of 5</span>
-    <p class="q-text">A Shure AD4D-A sends <code>&lt; REP 1 RX_RF_LVL 043 &gt;</code>. What is the actual RF level in dBm, and which device family is this?</p>
+    <p class="q-text">A Wireless AD4D-A sends <code>&lt; REP 1 RX_RF_LVL 043 &gt;</code>. What is the actual RF level in dBm, and which device family is this?</p>
     <div class="options">
-      <label class="option"><input type="radio" name="q4-1" value="a"><span class="option-dot"></span><span class="option-text">−43 dBm — Axient Digital (offset −0)</span></label>
-      <label class="option"><input type="radio" name="q4-1" value="b"><span class="option-dot"></span><span class="option-text">−77 dBm — Axient Digital (offset −120)</span></label>
-      <label class="option"><input type="radio" name="q4-1" value="c"><span class="option-dot"></span><span class="option-text">−85 dBm — ULX-D (offset −128). Wait: AD4D-A is Axient Digital so it uses RSSI not RX_RF_LVL. RX_RF_LVL is ULX-D specific. Offset = 43 − 128 = −85 dBm if this were ULX-D</span></label>
+      <label class="option"><input type="radio" name="q4-1" value="a"><span class="option-dot"></span><span class="option-text">−43 dBm — digital wireless (offset −0)</span></label>
+      <label class="option"><input type="radio" name="q4-1" value="b"><span class="option-dot"></span><span class="option-text">−77 dBm — digital wireless (offset −120)</span></label>
+      <label class="option"><input type="radio" name="q4-1" value="c"><span class="option-dot"></span><span class="option-text">−85 dBm — wireless receiver (offset −128). Wait: AD4D-A is digital wireless so it uses RSSI not RX_RF_LVL. RX_RF_LVL is wireless receiver specific. Offset = 43 − 128 = −85 dBm if this were wireless receiver</span></label>
       <label class="option"><input type="radio" name="q4-1" value="d"><span class="option-dot"></span><span class="option-text">−85 dBm — regardless of family, the offset is always −128</span></label>
     </div>
-    <div class="feedback correct">✓ Correct! The key insight: RX_RF_LVL is a ULX-D parameter (offset −128). Axient Digital uses RSSI (offset −120). The AD4D-A is Axient Digital — so in practice it would send RSSI, not RX_RF_LVL. If it were ULX-D: 43 − 128 = −85 dBm. This is a weak signal — 1 bar.</div>
-    <div class="feedback wrong">✗ ULX-D uses RX_RF_LVL with offset −128. Axient Digital uses RSSI with offset −120. For ULX-D: 43 − 128 = −85 dBm (weak signal). For Axient: 43 − 120 = −77 dBm (acceptable).</div>
+    <div class="feedback correct">✓ Correct! The key insight: RX_RF_LVL is a wireless receiver parameter (offset −128). digital wireless uses RSSI (offset −120). The AD4D-A is digital wireless — so in practice it would send RSSI, not RX_RF_LVL. If it were wireless receiver: 43 − 128 = −85 dBm. This is a weak signal — 1 bar.</div>
+    <div class="feedback wrong">✗ wireless receiver uses RX_RF_LVL with offset −128. digital wireless uses RSSI with offset −120. For wireless receiver: 43 − 128 = −85 dBm (weak signal). For digital wireless: 43 − 120 = −77 dBm (acceptable).</div>
   </div>
 
   <div class="question" data-q="2" data-correct="b">
     <span class="q-num">Question 2 of 5</span>
-    <p class="q-text">ETR-NodeScope receives: <code>&lt; SAMPLE 1 RSSI A 083 &gt;</code> from an Axient Digital receiver. What does it do with this message?</p>
+    <p class="q-text">ETR-NodeScope receives: <code>&lt; SAMPLE 1 RSSI A 083 &gt;</code> from an digital wireless receiver. What does it do with this message?</p>
     <div class="options">
       <label class="option"><input type="radio" name="q4-2" value="a"><span class="option-dot"></span><span class="option-text">Ignores it — SAMPLE frames are for positional data only</span></label>
       <label class="option"><input type="radio" name="q4-2" value="b"><span class="option-dot"></span><span class="option-text">Detects that parts[2] ("RSSI") is not numeric — this is a keyword SAMPLE frame — synthesises ["REP","1","RSSI","A","083"] and routes it through HandleRep() so the RSSI case parses it normally</span></label>
@@ -1435,7 +1434,7 @@ data: {<span class="string">"/api/device/channels/0/rf/level"</span>:{<span clas
 
   <div class="question" data-q="3" data-correct="a">
     <span class="q-num">Question 3 of 5</span>
-    <p class="q-text">What does Sennheiser's SSE subscription PUT request do and why is it necessary?</p>
+    <p class="q-text">What does Wireless's SSE subscription PUT request do and why is it necessary?</p>
     <div class="options">
       <label class="option"><input type="radio" name="q4-3" value="a"><span class="option-dot"></span><span class="option-text">It tells the receiver exactly which resource paths to include in the event stream. Without it, the receiver would either send everything (wasteful bandwidth) or nothing. ETR-NodeScope subscribes to 10 specific paths per channel (battery, RF, mute, gain, etc.)</span></label>
       <label class="option"><input type="radio" name="q4-3" value="b"><span class="option-dot"></span><span class="option-text">It registers ETR-NodeScope as an authorised controller to prevent unauthorised access to the receiver</span></label>
@@ -1448,23 +1447,23 @@ data: {<span class="string">"/api/device/channels/0/rf/level"</span>:{<span clas
 
   <div class="question" data-q="4" data-correct="d">
     <span class="q-num">Question 4 of 5</span>
-    <p class="q-text">Why does Wisycom's ChannelDataReceived call use <code>chIndex - 1</code> when invoking the event?</p>
+    <p class="q-text">Why does Wireless's ChannelDataReceived call use <code>chIndex - 1</code> when invoking the event?</p>
     <div class="options">
-      <label class="option"><input type="radio" name="q4-4" value="a"><span class="option-dot"></span><span class="option-text">Wisycom uses zero-based channel numbering in its JSON</span></label>
+      <label class="option"><input type="radio" name="q4-4" value="a"><span class="option-dot"></span><span class="option-text">Wireless uses zero-based channel numbering in its JSON</span></label>
       <label class="option"><input type="radio" name="q4-4" value="b"><span class="option-dot"></span><span class="option-text">The -1 accounts for the device channel header in the JSON array</span></label>
       <label class="option"><input type="radio" name="q4-4" value="c"><span class="option-dot"></span><span class="option-text">ETR-NodeScope's tile system uses -1 as the first tile index for historical reasons</span></label>
-      <label class="option"><input type="radio" name="q4-4" value="d"><span class="option-dot"></span><span class="option-text">Wisycom's JSON array uses 1-based channel numbers (CH1, CH2) but ETR-NodeScope's internal tile system is 0-based — the subtraction converts between the two conventions</span></option></label>
+      <label class="option"><input type="radio" name="q4-4" value="d"><span class="option-dot"></span><span class="option-text">Wireless's JSON array uses 1-based channel numbers (CH1, CH2) but ETR-NodeScope's internal tile system is 0-based — the subtraction converts between the two conventions</span></label>
     </div>
-    <div class="feedback correct">✓ Correct! This is a classic off-by-one conversion. Wisycom counts channels from 1. ETR-NodeScope's tile indices start at 0. Without the -1, every Wisycom channel would appear on the wrong tile.</div>
-    <div class="feedback wrong">✗ It's a 1-based to 0-based conversion. Wisycom numbers channels starting from 1 (CH1, CH2). ETR-NodeScope tiles are 0-indexed. Subtracting 1 aligns them correctly.</div>
+    <div class="feedback correct">✓ Correct! This is a classic off-by-one conversion. Wireless counts channels from 1. ETR-NodeScope's tile indices start at 0. Without the -1, every Wireless channel would appear on the wrong tile.</div>
+    <div class="feedback wrong">✗ It's a 1-based to 0-based conversion. Wireless numbers channels starting from 1 (CH1, CH2). ETR-NodeScope tiles are 0-indexed. Subtracting 1 aligns them correctly.</div>
   </div>
 
   <div class="question" data-q="5" data-correct="b">
     <span class="q-num">Question 5 of 5</span>
-    <p class="q-text">ETR-NodeScope discovers a Shure receiver at 169.254.158.222 via multicast and at 169.254.100.134 via TCP fingerprint. It connects to 169.254.100.134. Why?</p>
+    <p class="q-text">ETR-NodeScope discovers a Wireless receiver at 169.254.158.222 via multicast and at 169.254.100.134 via TCP fingerprint. It connects to 169.254.100.134. Why?</p>
     <div class="options">
       <label class="option"><input type="radio" name="q4-5" value="a"><span class="option-dot"></span><span class="option-text">169.254.100.x addresses are always preferred over 169.254.158.x by the IP routing table</span></label>
-      <label class="option"><input type="radio" name="q4-5" value="b"><span class="option-dot"></span><span class="option-text">The AD4D-A has two network interfaces: 169.254.158.222 is the Dante audio port (partial data only), 169.254.100.134 is the control port (full RF/battery/frequency data). ETR-NodeScope tags the multicast-discovered IP as "shure-multicast" and skips it when a TCP-fingerprinted control IP exists</span></label>
+      <label class="option"><input type="radio" name="q4-5" value="b"><span class="option-dot"></span><span class="option-text">The AD4D-A has two network interfaces: 169.254.158.222 is the Dante audio port (partial data only), 169.254.100.134 is the control port (full RF/battery/frequency data). ETR-NodeScope tags the multicast-discovered IP as "Wireless-multicast" and skips it when a TCP-fingerprinted control IP exists</span></label>
       <label class="option"><input type="radio" name="q4-5" value="c"><span class="option-dot"></span><span class="option-text">The lower IP address (100.134) always has higher bandwidth than the higher address</span></label>
       <label class="option"><input type="radio" name="q4-5" value="d"><span class="option-dot"></span><span class="option-text">Multicast-discovered devices are always ignored as they cannot be verified</span></label>
     </div>
@@ -1503,7 +1502,7 @@ data: {<span class="string">"/api/device/channels/0/rf/level"</span>:{<span clas
   </table>
 
   <h3 class="sub-title">First Launch — Step by Step</h3>
-  <p>1. Launch ETR-NodeScope.exe as Administrator &nbsp;→&nbsp; 2. File → Settings → Audio → select Dante Virtual Soundcard → Channel Count = 8 → Save &nbsp;→&nbsp; 3. Press F5 &nbsp;→&nbsp; 4. Watch Live Logs (Ctrl+L) for "Connected to x.x.x.x:2202"</p>
+  <p>1. Launch ETR-NodeScope.exe as Administrator  →  2. File → Settings → Audio → select Dante Virtual Soundcard → Channel Count = 8 → Save  →  3. Press F5  →  4. Watch Live Logs (Ctrl+L) for "Connected to x.x.x.x:2202"</p>
 
   <div class="callout tip">
     <span class="callout-label">💡 Tip</span>
@@ -1558,21 +1557,21 @@ data: {<span class="string">"/api/device/channels/0/rf/level"</span>:{<span clas
       <label class="option"><input type="radio" name="q5-1" value="c"><span class="option-dot"></span><span class="option-text">ETR-NodeScope is connected to the Dante audio port (169.254.158.x) instead of the control port (169.254.100.x). The Dante port responds to some TCP/2202 commands but doesn't return CHAN_NAME, BATT_CHARGE, or FREQUENCY. Enable mDNS or add the control IP manually</span></label>
       <label class="option"><input type="radio" name="q5-1" value="d"><span class="option-dot"></span><span class="option-text">The receivers need to be rebooted to send their configuration data</span></label>
     </div>
-    <div class="feedback correct">✓ Correct! This is the most common Shure Axient connection problem. The Dante audio port gives partial data — RF bars may even work. But channel name, battery, and frequency come only from the control port.</div>
+    <div class="feedback correct">✓ Correct! This is the most common Wireless digital wireless connection problem. The Dante audio port gives partial data — RF bars may even work. But channel name, battery, and frequency come only from the control port.</div>
     <div class="feedback wrong">✗ When tiles show --- for name/battery/frequency but RF might still work, the likely cause is connecting to the Dante audio port instead of the control port. Enable mDNS discovery or add the control IP manually.</div>
   </div>
 
   <div class="question" data-q="2" data-correct="a">
     <span class="q-num">Question 2 of 5</span>
-    <p class="q-text">A Wisycom MCR42 is not appearing in ETR-NodeScope's Connected Devices panel. You have verified the IP is reachable. What should you check first?</p>
+    <p class="q-text">A Wireless receiver is not appearing in ETR-NodeScope's Connected Devices panel. You have verified the IP is reachable. What should you check first?</p>
     <div class="options">
-      <label class="option"><input type="radio" name="q5-2" value="a"><span class="option-dot"></span><span class="option-text">Whether Wisycom Manager or any other tool is connected to port 32789 on that device — the single-controller restriction means only one client can hold the connection. Disconnect other tools, then add the IP manually in Settings → Wireless Devices</span></label>
-      <label class="option"><input type="radio" name="q5-2" value="b"><span class="option-dot"></span><span class="option-text">Whether the Wisycom receiver's multicast announcements are reaching ETR-NodeScope</span></label>
+      <label class="option"><input type="radio" name="q5-2" value="a"><span class="option-dot"></span><span class="option-text">Whether Wireless Manager or any other tool is connected to port 32789 on that device — the single-controller restriction means only one client can hold the connection. Disconnect other tools, then add the IP manually in Settings → Wireless Devices</span></label>
+      <label class="option"><input type="radio" name="q5-2" value="b"><span class="option-dot"></span><span class="option-text">Whether the Wireless receiver's multicast announcements are reaching ETR-NodeScope</span></label>
       <label class="option"><input type="radio" name="q5-2" value="c"><span class="option-dot"></span><span class="option-text">Whether the receiver's HTTPS certificate is valid and trusted by Windows</span></label>
       <label class="option"><input type="radio" name="q5-2" value="d"><span class="option-dot"></span><span class="option-text">Whether the receiver's firmware supports the JSON protocol version ETR-NodeScope expects</span></label>
     </div>
-    <div class="feedback correct">✓ Correct! And remember: Wisycom doesn't use multicast. You must always add Wisycom IPs manually — they will never be auto-discovered. Then check no other tool (Wisycom Manager) holds port 32789.</div>
-    <div class="feedback wrong">✗ The first check for Wisycom is the single-controller restriction. Also remember: Wisycom has no multicast, so you must add the IP manually in Settings → Wireless Devices regardless.</div>
+    <div class="feedback correct">✓ Correct! And remember: Wireless doesn't use multicast. You must always add Wireless IPs manually — they will never be auto-discovered. Then check no other tool (Wireless Manager) holds port 32789.</div>
+    <div class="feedback wrong">✗ The first check for Wireless is the single-controller restriction. Also remember: Wireless has no multicast, so you must add the IP manually in Settings → Wireless Devices regardless.</div>
   </div>
 
   <div class="question" data-q="3" data-correct="d">
@@ -1582,7 +1581,7 @@ data: {<span class="string">"/api/device/channels/0/rf/level"</span>:{<span clas
       <label class="option"><input type="radio" name="q5-3" value="a"><span class="option-dot"></span><span class="option-text">It updates ETR-NodeScope to the latest version from the internet</span></label>
       <label class="option"><input type="radio" name="q5-3" value="b"><span class="option-dot"></span><span class="option-text">It exports a compliance report for venue safety certification</span></label>
       <label class="option"><input type="radio" name="q5-3" value="c"><span class="option-dot"></span><span class="option-text">It backs up the current show configuration to cloud storage</span></label>
-      <label class="option"><input type="radio" name="q5-3" value="d"><span class="option-dot"></span><span class="option-text">It runs automated pre-show checks including: settings writable, ASIO driver available, WebUI resources accessible, MQTT configured, licence valid, Shure multicast socket bindable on 8427, mDNS socket bindable on 5353, and debug logging disabled</span></label>
+      <label class="option"><input type="radio" name="q5-3" value="d"><span class="option-dot"></span><span class="option-text">It runs automated pre-show checks including: settings writable, ASIO driver available, WebUI resources accessible, MQTT configured, licence valid, Wireless multicast socket bindable on 8427, mDNS socket bindable on 5353, and debug logging disabled</span></label>
     </div>
     <div class="feedback correct">✓ Correct! Run Release Readiness before every show. All checks should show green. A red check (e.g. port 8427 already bound) indicates a configuration problem that could prevent normal operation.</div>
     <div class="feedback wrong">✗ Release Readiness is a pre-show automated checklist. It tests 12+ conditions that need to be right for ETR-NodeScope to function properly — socket bindings, licence validity, ASIO availability, and more.</div>
@@ -1607,7 +1606,7 @@ data: {<span class="string">"/api/device/channels/0/rf/level"</span>:{<span clas
     <div class="options">
       <label class="option"><input type="radio" name="q5-5" value="a"><span class="option-dot"></span><span class="option-text">The WebSocket audio format (PCM-16LE) is not supported by all browsers</span></label>
       <label class="option"><input type="radio" name="q5-5" value="b"><span class="option-dot"></span><span class="option-text">The student's browser is blocking WebSocket connections on port 8080</span></label>
-      <label class="option"><input type="radio" name="q5-5" value="c"><span class="option-dot"></span><span class="option-text">Modern browsers (Chrome, Safari, Firefox) require a user gesture — a click or tap — before they allow audio to start playing. If the student navigated directly to a channel without first clicking the page, the Web Audio API will be blocked. Solution: click anywhere on the page, then double-click the tile</span></option></label>
+      <label class="option"><input type="radio" name="q5-5" value="c"><span class="option-dot"></span><span class="option-text">Modern browsers (Chrome, Safari, Firefox) require a user gesture — a click or tap — before they allow audio to start playing. If the student navigated directly to a channel without first clicking the page, the Web Audio API will be blocked. Solution: click anywhere on the page, then double-click the tile</span></label>
       <label class="option"><input type="radio" name="q5-5" value="d"><span class="option-dot"></span><span class="option-text">The audio buffer (200ms) is too small for a Wi-Fi connection and needs to be increased</span></label>
     </div>
     <div class="feedback correct">✓ Correct! Browser autoplay policy has been strict since 2018. The Web Audio API requires a user gesture (click, tap, or keypress) before audio context can be created and audio played. This applies to all browsers — Chrome, Safari, Firefox, Edge.</div>

@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en-GB">
+<!doctype html><html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NodeScope — RF Edition · White Paper · ETR Stay Connected</title>
-<meta name="description" content="Cinematic packaging of the Event Tech Research white paper: an observational approach to wireless system telemetry. NodeScope — Shure Edition coming to demo soon.">
+<meta name="description" content="Cinematic packaging of the Event Tech Research white paper: an observational approach to wireless system telemetry. NodeScope — Wireless Edition coming to demo soon.">
 <style>
 @font-face {
   font-family: 'Inter';
@@ -191,17 +190,17 @@
   }
 </style>
 </head>
-<body><p style="padding:12px 18px;background:#102831;color:#fff;text-align:center">NodeScopeRF Shure demo is available: <a style="color:#9ef0da" href="mailto:event.tech.research@gmail.com?subject=NodeScope%20demo%20request">Download and quick start</a></p>
+<body><p style="padding:12px 18px;background:#102831;color:#fff;text-align:center">NodeScopeRF Wireless demo is available: <a style="color:#9ef0da" href="mailto:event.tech.research@gmail.com?subject=NodeScope%20demo%20request">Download and quick start</a></p>
 <a class="skip" href="#start">Skip to content</a>
 <div class="rail"><i id="railfill"></i></div>
 <header class="topbar">
   <div class="topbar-in">
     <div class="brand">
-      <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
-        <rect x="6" y="28" width="10" height="22" rx="2" fill="#44CC44"/>
-        <rect x="22" y="16" width="10" height="34" rx="2" fill="#44CC44"/>
-        <rect x="38" y="6" width="10" height="44" rx="2" fill="#44CC44"/>
-        <circle cx="56" cy="12" r="6" fill="#44CC44"/>
+      <svg width="28" height="28" viewbox="0 0 64 64" aria-hidden="true">
+        <rect x="6" y="28" width="10" height="22" rx="2" fill="#44CC44"></rect>
+        <rect x="22" y="16" width="10" height="34" rx="2" fill="#44CC44"></rect>
+        <rect x="38" y="6" width="10" height="44" rx="2" fill="#44CC44"></rect>
+        <circle cx="56" cy="12" r="6" fill="#44CC44"></circle>
       </svg>
       <div>NODESCOPE<div class="brand-sub">ETR · STAY CONNECTED</div></div>
     </div>
@@ -231,17 +230,17 @@
         <span>Observation study</span>
         <span>Not show-critical</span>
         <span>Not a control surface</span>
-        <span>Shure Edition coming to demo soon</span>
+        <span>Wireless Edition coming to demo soon</span>
       </div>
     </div>
     <aside class="endcard-mini" aria-label="Wordmark and illustrative live row">
       <div>
         <div class="wm">
-          <svg width="120" height="90" viewBox="0 0 160 120" aria-hidden="true">
-            <rect x="8" y="58" width="28" height="50" rx="4" fill="#44CC44"/>
-            <rect x="48" y="32" width="28" height="76" rx="4" fill="#44CC44"/>
-            <rect x="88" y="8" width="28" height="100" rx="4" fill="#44CC44"/>
-            <circle cx="140" cy="20" r="12" fill="#44CC44"/>
+          <svg width="120" height="90" viewbox="0 0 160 120" aria-hidden="true">
+            <rect x="8" y="58" width="28" height="50" rx="4" fill="#44CC44"></rect>
+            <rect x="48" y="32" width="28" height="76" rx="4" fill="#44CC44"></rect>
+            <rect x="88" y="8" width="28" height="100" rx="4" fill="#44CC44"></rect>
+            <circle cx="140" cy="20" r="12" fill="#44CC44"></circle>
           </svg>
         </div>
         <h2>NODESCOPE</h2>
@@ -265,7 +264,7 @@
       <li><a href="#architecture">Architecture</a></li>
       <li><a href="#validation">Validation approach</a></li>
       <li><a href="#limits">Known limitations and open questions</a></li>
-      <li><a href="#demo">The Shure Edition demo</a></li>
+      <li><a href="#demo">The Wireless Edition demo</a></li>
       <li><a href="#principles">Principles and glossary</a></li>
       <li><a href="#refs">Public record and references</a></li>
     </ol>
@@ -278,16 +277,16 @@
   </section>
   <div class="col">
     <p>Professional wireless microphone systems already expose operational data over IP: RF levels, battery reports, mute flags, identity fields, and a long tail of vendor-specific values. In practice that data is fragmented across interface styles, semantically inconsistent across manufacturers, and easy to display with more confidence than it deserves.</p>
-    <p>Event Tech Research spent three months treating this as a research problem rather than a product launch. Month One observed how the data behaves. Month Two built an architecture that can survive the ugly cases. Month Three named the project — NodeScope — and prepared a first observation demo for a single platform family: NodeScope — Shure Edition, coming to demo soon.</p>
+    <p>Event Tech Research spent three months treating this as a research problem rather than a product launch. Month One observed how the data behaves. Month Two built an architecture that can survive the ugly cases. Month Three named the project — NodeScope — and prepared a first observation demo for a single platform family: NodeScope — Wireless Edition, coming to demo soon.</p>
     <p>The approach is observational. Values are discovered, parsed, timestamped and translated into a manufacturer-neutral state model. Alerts are treated as state transitions, not raw threshold crossings. Presentation is required to remain readable under show-floor conditions. Outward publishing, where implemented, is treated as a versioned contract.</p>
     <div class="box red">
       <h4>Explicit non-goals</h4>
-      <p>NodeScope is not a control surface. It does not retune, pair, unmute or coordinate. It is not a replacement for manufacturer software. It is not a certification. It is not show-critical monitoring. It is not a substitute for a frequency plan, an RF engineer, or a listen. It does not claim multi-vendor production readiness. It does not claim Shure sponsorship, approval or co-development.</p>
+      <p>NodeScope is not a control surface. It does not retune, pair, unmute or coordinate. It is not a replacement for manufacturer software. It is not a certification. It is not show-critical monitoring. It is not a substitute for a frequency plan, an RF engineer, or a listen. It does not claim multi-vendor production readiness. It does not claim Wireless sponsorship, approval or co-development.</p>
     </div>
     <p>Every capability discussed below is tagged <span class="pill g">Built</span> <span class="pill a">Experimental</span> or <span class="pill d">Untested concept</span>. Claims that cannot be traced to the public campaign record or to the current development state are out of scope for this paper.</p>
     <h3>Who this paper is for</h3>
     <p>It is written for RF and systems engineers who may try the demo; for software engineers who need the architectural argument without a tour of a private protocol; for trade press and podcast hosts who need a source that will not collapse if a follow-up question is precise; and for ourselves, as a public constraint on what we are allowed to say next. It is not written as a sales deck, a protocol guide, or a substitute for manufacturer training.</p>
-    <p>Readers in a hurry can take three sentences and leave. Wireless systems already talk. The talk is fragmented, late and easy to over-trust. NodeScope is an attempt to observe that talk honestly, starting with a Shure Edition demo coming soon, and it is not something to rely on while an audience is in the room.</p>
+    <p>Readers in a hurry can take three sentences and leave. Wireless systems already talk. The talk is fragmented, late and easy to over-trust. NodeScope is an attempt to observe that talk honestly, starting with a Wireless Edition demo coming soon, and it is not something to rely on while an audience is in the room.</p>
   </div>
 
   <!-- PROBLEM -->
@@ -310,22 +309,22 @@
 
   <figure>
     <div class="frame">
-      <svg viewBox="0 0 900 340" role="img" aria-label="Fragmented operational sources — receiver front panel, vendor software, network telemetry and the engineer — all claiming to describe the same channel.">
-        <rect width="900" height="340" fill="#050505"/>
+      <svg viewbox="0 0 900 340" role="img" aria-label="Fragmented operational sources — receiver front panel, vendor software, network telemetry and the engineer — all claiming to describe the same channel.">
+        <rect width="900" height="340" fill="#050505"></rect>
         <text x="28" y="30" fill="#44CC44" font-size="12" font-weight="800" letter-spacing="3">FRAGMENTED SOURCES</text>
-        <rect x="28" y="52" width="190" height="88" rx="12" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="28" y="52" width="190" height="88" rx="12" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="123" y="92" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">FRONT PANEL</text>
         <text x="123" y="114" text-anchor="middle" fill="#AAAAAA" font-size="12">local · immediate</text>
-        <rect x="236" y="52" width="190" height="88" rx="12" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="236" y="52" width="190" height="88" rx="12" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="331" y="92" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">VENDOR APP</text>
         <text x="331" y="114" text-anchor="middle" fill="#AAAAAA" font-size="12">rich · proprietary</text>
-        <rect x="444" y="52" width="190" height="88" rx="12" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="444" y="52" width="190" height="88" rx="12" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="539" y="92" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">IP TELEMETRY</text>
         <text x="539" y="114" text-anchor="middle" fill="#AAAAAA" font-size="12">partial · uneven</text>
-        <rect x="652" y="52" width="220" height="88" rx="12" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="652" y="52" width="220" height="88" rx="12" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="762" y="92" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">EARS / COMMS</text>
         <text x="762" y="114" text-anchor="middle" fill="#AAAAAA" font-size="12">truth of last resort</text>
-        <rect x="180" y="180" width="540" height="70" rx="14" fill="rgba(68,204,68,.14)" stroke="#44CC44"/>
+        <rect x="180" y="180" width="540" height="70" rx="14" fill="rgba(68,204,68,.14)" stroke="#44CC44"></rect>
         <text x="450" y="210" text-anchor="middle" fill="#44CC44" font-size="16" font-weight="800">THE ENGINEER AS TRANSLATION LAYER</text>
         <text x="450" y="234" text-anchor="middle" fill="#AAAAAA" font-size="12">four answers, three clocks, two identities, one decision</text>
         <text x="450" y="300" text-anchor="middle" fill="#777777" font-size="12">Observation software should reduce that translation load — not add a fifth source of confidence.</text>
@@ -353,7 +352,7 @@
     <p>The three-month arc was the method. We did not start by drawing a product. We started by writing down what wireless systems already say, what those statements mean, and which of them survive contact with a show.</p>
     <p><strong>Month One — observation.</strong> Twelve public lessons covering discovery, communication, interpretation and decision support. No software screenshots. The unit of work was a claim an RF engineer could correct in the comments.</p>
     <p><strong>Month Two — construction as curriculum.</strong> Twelve further lessons in which the architecture itself was the teaching object: adapters, async services, state, WebUI, WebSockets, MQTT, fake devices, release honesty. Aggregation was published as an untested concept rather than a feature.</p>
-    <p><strong>Month Three — named project, human tone, bounded invitation.</strong> The software received the name NodeScope. The first demo target was stated as NodeScope — Shure Edition, coming to demo soon. Claims were kept inside what the build can actually show.</p>
+    <p><strong>Month Three — named project, human tone, bounded invitation.</strong> The software received the name NodeScope. The first demo target was stated as NodeScope — Wireless Edition, coming to demo soon. Claims were kept inside what the build can actually show.</p>
     <h3>Interface classification</h3>
     <p>We classify device interfaces into three working families. They are not a taxonomy of manufacturers. They are a way to stop writing one client for three jobs.</p>
   </div>
@@ -384,8 +383,8 @@
     <p><strong>Corrections from practitioners.</strong> A comment that says “that flag does not mean what you think on this family of hardware” is a first-class input. It is more valuable than a hundred undirected likes. The method assumes we will be wrong in public and that the correction is part of the record.</p>
     <p>What did not count as evidence: a tidy bench on known firmware; a screenshot of a development build offered as a capability; a hoped-for multi-site view; anything that would identify a client, a venue, a talent name or a production network. Those exclusions are methodological, not decorative.</p>
     <h3>Scope of the first platform cut</h3>
-    <p>The research question is manufacturer-neutral. The first demonstration is not. Concentrating the first demo on Shure wireless systems is an engineering choice about depth, not a claim about the rest of the market. A shallow adapter for four vendors would have produced a more impressive diagram and a less honest state model. We chose the opposite trade: one family, observed carefully, with the adapter contract written so that a second family can be added without rewriting alerts or presentation.</p>
-    <p>That choice has a cost, and it should be visible. Findings about battery semantics, mute context and RF-meter meaning were developed against the systems we actually spent time with. Extrapolating them as universal laws would violate “compare carefully.” Where this paper speaks generally, it speaks about interface classes and software duties. Where it speaks specifically, it speaks about the Shure Edition as a scoped demo coming soon.</p>
+    <p>The research question is manufacturer-neutral. The first demonstration is not. Concentrating the first demo on Wireless wireless systems is an engineering choice about depth, not a claim about the rest of the market. A shallow adapter for four vendors would have produced a more impressive diagram and a less honest state model. We chose the opposite trade: one family, observed carefully, with the adapter contract written so that a second family can be added without rewriting alerts or presentation.</p>
+    <p>That choice has a cost, and it should be visible. Findings about battery semantics, mute context and RF-meter meaning were developed against the systems we actually spent time with. Extrapolating them as universal laws would violate “compare carefully.” Where this paper speaks generally, it speaks about interface classes and software duties. Where it speaks specifically, it speaks about the Wireless Edition as a scoped demo coming soon.</p>
   </div>
 
   <!-- FINDINGS -->
@@ -418,19 +417,19 @@
 
   <figure>
     <div class="frame">
-      <svg viewBox="0 0 900 300" role="img" aria-label="Polling versus truth: a signal dip between polls is invisible to a poller and visible to a subscription that timestamps the moment of change.">
-        <rect width="900" height="300" fill="#050505"/>
+      <svg viewbox="0 0 900 300" role="img" aria-label="Polling versus truth: a signal dip between polls is invisible to a poller and visible to a subscription that timestamps the moment of change.">
+        <rect width="900" height="300" fill="#050505"></rect>
         <text x="28" y="28" fill="#44CC44" font-size="12" font-weight="800" letter-spacing="3">POLLING ASKS · A SUBSCRIPTION ANSWERS</text>
         <text x="28" y="64" fill="#AAAAAA" font-size="12">ASK — samples at T1 T2 T3. The dip between T2 and T3 never happened on the screen.</text>
-        <path d="M40 120 L160 118 L280 122 L340 168 L420 120 L560 116 L720 118 L860 114" fill="none" stroke="#AAAAAA" stroke-width="2"/>
+        <path d="M40 120 L160 118 L280 122 L340 168 L420 120 L560 116 L720 118 L860 114" fill="none" stroke="#AAAAAA" stroke-width="2"></path>
         <g fill="#44CC44">
-          <circle cx="160" cy="118" r="5"/><circle cx="420" cy="120" r="5"/><circle cx="720" cy="118" r="5"/>
+          <circle cx="160" cy="118" r="5"></circle><circle cx="420" cy="120" r="5"></circle><circle cx="720" cy="118" r="5"></circle>
         </g>
         <text x="160" y="100" text-anchor="middle" fill="#44CC44" font-size="11">T1</text>
         <text x="420" y="100" text-anchor="middle" fill="#44CC44" font-size="11">T2</text>
         <text x="720" y="100" text-anchor="middle" fill="#44CC44" font-size="11">T3</text>
         <text x="340" y="190" text-anchor="middle" fill="#CC4444" font-size="12">dip the poller never saw</text>
-        <line x1="40" y1="220" x2="860" y2="220" stroke="#2a2a2a"/>
+        <line x1="40" y1="220" x2="860" y2="220" stroke="#2a2a2a"></line>
         <text x="28" y="250" fill="#AAAAAA" font-size="12">LISTEN — the change itself is the event. Silence after that still needs a timeout, or it becomes another costume.</text>
         <text x="450" y="284" text-anchor="middle" fill="#777777" font-size="12">Illustrative timeline. Not a captured NodeScope trace.</text>
       </svg>
@@ -465,25 +464,25 @@
   </div>
   <figure>
     <div class="frame">
-      <svg viewBox="0 0 900 400" role="img" aria-label="Layered architecture mapping Month Two lessons onto Discovery, Connection, Parsing, State, Alerts and Presentation.">
-        <rect width="900" height="400" fill="#050505"/>
+      <svg viewbox="0 0 900 400" role="img" aria-label="Layered architecture mapping Month Two lessons onto Discovery, Connection, Parsing, State, Alerts and Presentation.">
+        <rect width="900" height="400" fill="#050505"></rect>
         <text x="28" y="28" fill="#44CC44" font-size="12" font-weight="800" letter-spacing="3">LAYERS · LESSONS MAPPED</text>
-        <rect x="70" y="50" width="520" height="46" rx="10" fill="#151515" stroke="#44CC44"/>
+        <rect x="70" y="50" width="520" height="46" rx="10" fill="#151515" stroke="#44CC44"></rect>
         <text x="330" y="78" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="800">PRESENTATION · desktop + WebUI</text>
         <text x="620" y="78" fill="#AAAAAA" font-size="12">readability at 3 m</text>
-        <rect x="70" y="106" width="520" height="46" rx="10" fill="#151515" stroke="#2a2a2a"/>
+        <rect x="70" y="106" width="520" height="46" rx="10" fill="#151515" stroke="#2a2a2a"></rect>
         <text x="330" y="134" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="800">ALERTS · state machine</text>
         <text x="620" y="134" fill="#AAAAAA" font-size="12">not raw thresholds</text>
-        <rect x="70" y="162" width="520" height="46" rx="10" fill="#151515" stroke="#2a2a2a"/>
+        <rect x="70" y="162" width="520" height="46" rx="10" fill="#151515" stroke="#2a2a2a"></rect>
         <text x="330" y="190" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="800">STATE MODEL · one belief</text>
         <text x="620" y="190" fill="#AAAAAA" font-size="12">if views disagree, no state</text>
-        <rect x="70" y="218" width="520" height="46" rx="10" fill="#151515" stroke="#2a2a2a"/>
+        <rect x="70" y="218" width="520" height="46" rx="10" fill="#151515" stroke="#2a2a2a"></rect>
         <text x="330" y="246" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="800">PARSING · reject over repair</text>
         <text x="620" y="246" fill="#AAAAAA" font-size="12">preserve raw</text>
-        <rect x="70" y="274" width="520" height="46" rx="10" fill="#151515" stroke="#2a2a2a"/>
+        <rect x="70" y="274" width="520" height="46" rx="10" fill="#151515" stroke="#2a2a2a"></rect>
         <text x="330" y="302" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="800">CONNECTION · isolated transports</text>
         <text x="620" y="302" fill="#AAAAAA" font-size="12">timeout ≠ freeze</text>
-        <rect x="70" y="330" width="520" height="46" rx="10" fill="#151515" stroke="#44CC44"/>
+        <rect x="70" y="330" width="520" height="46" rx="10" fill="#151515" stroke="#44CC44"></rect>
         <text x="330" y="358" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="800">DISCOVERY · identity ≠ address</text>
         <text x="620" y="358" fill="#AAAAAA" font-size="12">absence is a hypothesis</text>
       </svg>
@@ -509,16 +508,16 @@
   </div>
   <figure>
     <div class="frame">
-      <svg viewBox="0 0 900 220" role="img" aria-label="Conceptual binary frame anatomy: preamble, type, payload, checksum. Reject on failure. No field map.">
-        <rect width="900" height="220" fill="#050505"/>
+      <svg viewbox="0 0 900 220" role="img" aria-label="Conceptual binary frame anatomy: preamble, type, payload, checksum. Reject on failure. No field map.">
+        <rect width="900" height="220" fill="#050505"></rect>
         <text x="28" y="30" fill="#44CC44" font-size="12" font-weight="800" letter-spacing="3">FRAME ANATOMY · CONCEPT ONLY</text>
-        <rect x="40" y="70" width="140" height="70" rx="10" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="40" y="70" width="140" height="70" rx="10" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="110" y="112" text-anchor="middle" fill="#FFFFFF" font-size="14">PREAMBLE</text>
-        <rect x="200" y="70" width="140" height="70" rx="10" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="200" y="70" width="140" height="70" rx="10" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="270" y="112" text-anchor="middle" fill="#FFFFFF" font-size="14">TYPE</text>
-        <rect x="360" y="70" width="280" height="70" rx="10" fill="rgba(68,204,68,.14)" stroke="#44CC44"/>
+        <rect x="360" y="70" width="280" height="70" rx="10" fill="rgba(68,204,68,.14)" stroke="#44CC44"></rect>
         <text x="500" y="112" text-anchor="middle" fill="#44CC44" font-size="14" font-weight="800">PAYLOAD · untrusted</text>
-        <rect x="660" y="70" width="200" height="70" rx="10" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="660" y="70" width="200" height="70" rx="10" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="760" y="112" text-anchor="middle" fill="#FFFFFF" font-size="14">CHECK</text>
         <text x="450" y="180" text-anchor="middle" fill="#AAAAAA" font-size="13">Validate · reject · preserve raw. Never publish a field map that functions as a reverse-engineering guide.</text>
       </svg>
@@ -532,22 +531,22 @@
   </div>
   <figure>
     <div class="frame">
-      <svg viewBox="0 0 900 260" role="img" aria-label="State store at the centre with adapters writing in and desktop, WebUI, alerts and MQTT reading out.">
-        <rect width="900" height="260" fill="#050505"/>
+      <svg viewbox="0 0 900 260" role="img" aria-label="State store at the centre with adapters writing in and desktop, WebUI, alerts and MQTT reading out.">
+        <rect width="900" height="260" fill="#050505"></rect>
         <text x="28" y="28" fill="#44CC44" font-size="12" font-weight="800" letter-spacing="3">ONE BELIEF PER DEVICE</text>
-        <rect x="40" y="90" width="160" height="70" rx="12" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="40" y="90" width="160" height="70" rx="12" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="120" y="132" text-anchor="middle" fill="#FFFFFF" font-size="14">ADAPTERS</text>
-        <rect x="330" y="70" width="240" height="110" rx="16" fill="rgba(68,204,68,.14)" stroke="#44CC44"/>
+        <rect x="330" y="70" width="240" height="110" rx="16" fill="rgba(68,204,68,.14)" stroke="#44CC44"></rect>
         <text x="450" y="118" text-anchor="middle" fill="#44CC44" font-size="16" font-weight="800">STATE STORE</text>
         <text x="450" y="144" text-anchor="middle" fill="#AAAAAA" font-size="12">timestamped · raw + derived</text>
-        <rect x="700" y="50" width="160" height="46" rx="10" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="700" y="50" width="160" height="46" rx="10" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="780" y="78" text-anchor="middle" fill="#FFFFFF" font-size="13">DESKTOP</text>
-        <rect x="700" y="106" width="160" height="46" rx="10" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="700" y="106" width="160" height="46" rx="10" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="780" y="134" text-anchor="middle" fill="#FFFFFF" font-size="13">WEBUI</text>
-        <rect x="700" y="162" width="160" height="46" rx="10" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="700" y="162" width="160" height="46" rx="10" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="780" y="190" text-anchor="middle" fill="#FFFFFF" font-size="13">ALERTS / MQTT</text>
-        <path d="M200 125 L330 125" stroke="#44CC44" stroke-width="2"/>
-        <path d="M570 90 L700 74 M570 125 L700 130 M570 160 L700 184" stroke="#2a2a2a" stroke-width="1.5"/>
+        <path d="M200 125 L330 125" stroke="#44CC44" stroke-width="2"></path>
+        <path d="M570 90 L700 74 M570 125 L700 130 M570 160 L700 184" stroke="#2a2a2a" stroke-width="1.5"></path>
         <text x="450" y="230" text-anchor="middle" fill="#777777" font-size="12">Readers do not keep a private second opinion. Uncertainty is stored, not styled away.</text>
       </svg>
     </div>
@@ -575,18 +574,18 @@
   </div>
   <figure>
     <div class="frame">
-      <svg viewBox="0 0 900 200" role="img" aria-label="Alert state machine from Normal to Watch to Warning to Fault and back to Recovered.">
-        <rect width="900" height="200" fill="#050505"/>
+      <svg viewbox="0 0 900 200" role="img" aria-label="Alert state machine from Normal to Watch to Warning to Fault and back to Recovered.">
+        <rect width="900" height="200" fill="#050505"></rect>
         <text x="28" y="28" fill="#44CC44" font-size="12" font-weight="800" letter-spacing="3">STATE MACHINE · NOT A CAR ALARM</text>
-        <rect x="30" y="60" width="150" height="56" rx="10" fill="rgba(68,204,68,.14)" stroke="#44CC44"/>
+        <rect x="30" y="60" width="150" height="56" rx="10" fill="rgba(68,204,68,.14)" stroke="#44CC44"></rect>
         <text x="105" y="94" text-anchor="middle" fill="#44CC44" font-size="13" font-weight="800">NORMAL</text>
-        <rect x="200" y="60" width="150" height="56" rx="10" fill="rgba(255,170,0,.14)" stroke="#FFAA00"/>
+        <rect x="200" y="60" width="150" height="56" rx="10" fill="rgba(255,170,0,.14)" stroke="#FFAA00"></rect>
         <text x="275" y="94" text-anchor="middle" fill="#FFAA00" font-size="13" font-weight="800">WATCH</text>
-        <rect x="370" y="60" width="150" height="56" rx="10" fill="rgba(204,68,68,.16)" stroke="#CC4444"/>
+        <rect x="370" y="60" width="150" height="56" rx="10" fill="rgba(204,68,68,.16)" stroke="#CC4444"></rect>
         <text x="445" y="94" text-anchor="middle" fill="#CC4444" font-size="13" font-weight="800">WARNING</text>
-        <rect x="540" y="60" width="150" height="56" rx="10" fill="#1E1E1E" stroke="#2a2a2a"/>
+        <rect x="540" y="60" width="150" height="56" rx="10" fill="#1E1E1E" stroke="#2a2a2a"></rect>
         <text x="615" y="94" text-anchor="middle" fill="#AAAAAA" font-size="13" font-weight="800">FAULT</text>
-        <rect x="710" y="60" width="160" height="56" rx="10" fill="rgba(68,204,68,.14)" stroke="#44CC44"/>
+        <rect x="710" y="60" width="160" height="56" rx="10" fill="rgba(68,204,68,.14)" stroke="#44CC44"></rect>
         <text x="790" y="94" text-anchor="middle" fill="#44CC44" font-size="13" font-weight="800">RECOVERED</text>
         <text x="450" y="160" text-anchor="middle" fill="#AAAAAA" font-size="13">Persistence · hysteresis · recovery. Returning to normal is a state change, not a non-event.</text>
       </svg>
@@ -627,7 +626,7 @@
     <p>For a research tool, the honest list of what has not been proved yet is more valuable than the feature list.</p>
     <h3>What the harness cannot do</h3>
     <p>Fake devices prove software behaviour. They do not prove RF behaviour. They cannot tell us how often a real pack’s battery estimate diverges from a measured runtime. They cannot tell us how a particular venue’s switch drops multicast. They cannot tell us whether an engineer will ignore a Watch state during load-in because everything is amber until doors. Those questions need captures, and captures need permission, anonymisation and time. The observation programme sketched in Month Three is how we intend to get them. It is not how we have already got them.</p>
-    <p>Hardware-in-the-loop remains mandatory for anything that will be shown in the Shure Edition demo. The demo must be able to point at a real conversation with real devices, even if the surrounding explanation includes simulated failure. A demo that only fails on purpose is a slide deck.</p>
+    <p>Hardware-in-the-loop remains mandatory for anything that will be shown in the Wireless Edition demo. The demo must be able to point at a real conversation with real devices, even if the surrounding explanation includes simulated failure. A demo that only fails on purpose is a slide deck.</p>
     <p>Pass/fail for a research build is therefore two-sided. The harness must be able to force the ugly case. The bench must still be able to show the ordinary case without dressing it up. If either side is missing, we do not know whether the software is careful or merely nervous.</p>
     <h3>How a claim moves column</h3>
     <p>A behaviour moves from untested to experimental when it exists in the build and can be demonstrated on the bench or in the harness without inventing a supporting story. It moves from experimental to implemented when we are willing to describe it in public without a dashed box and without a paragraph of apology — which still does not make it show-critical. Nothing in this paper crosses that last line. Show-critical is not a maturity column we use. It is a category we have opted out of.</p>
@@ -659,7 +658,7 @@
     <p>Long-run stability would require an observation window measured in days, with the harness injecting failures during that window, and a log of what the UI claimed while those failures were in flight. An afternoon on the bench is not that evidence.</p>
     <p>Large-rack behaviour would require device counts closer to a real plot than to a development shelf, plus a note on what discovery did when the network was no longer ours. Three units in the lab will never generate that note.</p>
     <h3>Risks that are not technical</h3>
-    <p>Naming a manufacturer next to a failure mode is how a research post becomes a legal and social problem in a small industry. This paper describes behaviours and interface classes. It names Shure only as the scoped platform of the first demo, in a neutral factual register, with the non-endorsement clause attached.</p>
+    <p>Naming a manufacturer next to a failure mode is how a research post becomes a legal and social problem in a small industry. This paper describes behaviours and interface classes. It names Wireless only as the scoped platform of the first demo, in a neutral factual register, with the non-endorsement clause attached.</p>
     <p>Overclaiming is the other non-technical failure. “NodeScope monitors any wireless system” would be false today and damaging tomorrow. Research language — investigating, may, appears to, in testing, unvalidated — is not hedging for its own sake. It is how the work stays usable by people who have to put their name on a show.</p>
     <p>Author capacity belongs on the list as well. A campaign that publishes three times a week during a show week will eventually publish something wrong. The standing policy is to batch ahead, hold spare posts, and treat a skipped week as cheaper than a rushed claim. That policy is part of the method because the method is public.</p>
   </div>
@@ -667,12 +666,12 @@
   <!-- DEMO -->
   <section class="chapter" id="demo">
     <div class="chapter-tag"><b>08</b> · Demo</div>
-    <h2>NodeScope — Shure Edition, coming to demo soon</h2>
+    <h2>NodeScope — Wireless Edition, coming to demo soon</h2>
   </section>
   <div class="col">
-    <p>The first public demonstration of the research software is being prepared against Shure wireless systems. The label is a platform scope, not a commercial relationship.</p>
+    <p>The first public demonstration of the research software is being prepared against Wireless wireless systems. The label is a platform scope, not a commercial relationship.</p>
     <div class="notice">
-      <strong>Not a partnership. Not an endorsement.</strong> Event Tech Research is not speaking for Shure. NodeScope is not a Shure product. Manufacturer marks, if used in later artwork, will be used only where permitted and never to imply sponsorship, approval or co-development.
+      <strong>Not a partnership. Not an endorsement.</strong> Event Tech Research is not speaking for Wireless. NodeScope is not a Wireless product. Manufacturer marks, if used in later artwork, will be used only where permitted and never to imply sponsorship, approval or co-development.
     </div>
     <p>What the first demo <strong>is</strong>:</p>
     <ul class="tight">
@@ -683,7 +682,7 @@
     <p>What the first demo <strong>is not</strong>:</p>
     <ul class="tight">
       <li>A control application.</li>
-      <li>A replacement for Shure’s own tools.</li>
+      <li>A replacement for Wireless’s own tools.</li>
       <li>A certification or a competence badge.</li>
       <li>Show-critical kit.</li>
       <li>A download, a date, or a supported-device matrix announced ahead of the verified build.</li>
@@ -752,7 +751,7 @@
     <blockquote class="amber" style="margin-top:28px">When you try a new engineering tool, what makes you trust it enough to keep exploring?</blockquote>
     <p style="margin-top:28px">Built as software. Developed as research. Shared as education.</p>
     <div class="notice good">
-      <strong>Compliance footer.</strong> NodeScope is an observation and research project at Event Tech Research. It is not show-critical monitoring, not a control system, and not a replacement for manufacturer software, RF coordination or direct listening. NodeScope — Shure Edition is coming to demo soon. That is not a date, a download, or an endorsement.
+      <strong>Compliance footer.</strong> NodeScope is an observation and research project at Event Tech Research. It is not show-critical monitoring, not a control system, and not a replacement for manufacturer software, RF coordination or direct listening. NodeScope — Wireless Edition is coming to demo soon. That is not a date, a download, or an endorsement.
     </div>
   </div>
 </main>
