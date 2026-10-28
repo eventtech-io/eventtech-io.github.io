@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ETR-NodeScope — Complete Educational Guide</title>
+
+<style>
+  :root {
+    --navy:        #0d1b2a;
+    --navy-mid:    #1a2e45;
+    --teal:        #00c9b1;
+    --teal-dim:    #007a6e;
+    --amber:       #f5a623;
+    --red:         #e84855;
+    --green:       #39d353;
+    --white:       #f0f4f8;
+    --gray:        #8899aa;
+    --code-bg:     #0a1520;
+    --code-fg:     #64d9c8;
+    --shure:       #0074b8;
+    --shure-bg:    #001f35;
+    --senn:        #2da44e;
+    --senn-bg:     #001a0d;
+    --wisy:        #c17f00;
+    --wisy-bg:     #1a1000;
+    --concept:     #9b5de5;
+    --concept-bg:  #1a0e2e;
+    --quiz-bg:     #0a1520;
+    --pass:        #39d353;
+    --fail:        #e84855;
+    --correct:     rgba(57,211,83,0.15);
+    --wrong:       rgba(232,72,85,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* ── HERO ────────────────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse 120% 80% at 50% 60%, #001830 0%, var(--navy) 70%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(0,201,177,0.04) 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(0,201,177,0.04) 40px);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: var(--teal);
+    text-transform: uppercase;
+    border: 1px solid var(--teal-dim);
+    padding: 0.35rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    animation: fadein 1s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    color: var(--white);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    animation: fadein 1s 0.2s ease both;
+  }
+
+  .hero h1 span { color: var(--teal); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--gray);
+    margin: 1.5rem 0 2.5rem;
+    max-width: 600px;
+    animation: fadein 1s 0.4s ease both;
+  }
+
+  .hero-pills {
+    display: flex; flex-wrap: wrap; gap: 0.75rem;
+    justify-content: center;
+    animation: fadein 1s 0.6s ease both;
+  }
+
+  .pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(0,201,177,0.3);
+    border-radius: 2px;
+    color: var(--teal);
+    background: rgba(0,201,177,0.06);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--teal-dim);
+    animation: bounce 2s infinite;
+  }
+
+  /* ── NAV ─────────────────────────────────────────────────────────── */
+  .toc {
+    background: var(--navy-mid);
+    border-bottom: 2px solid var(--teal-dim);
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .toc-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    align-items: center;
+  }
+
+  .toc-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--teal);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+  }
+
+  .toc a {
+    font-size: 0.8rem;
+    color: var(--gray);
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .toc a:hover { color: var(--teal); }
+
+  /* ── LAYOUT ──────────────────────────────────────────────────────── */
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── PART DIVIDER ────────────────────────────────────────────────── */
+  .part-divider {
+    margin: 5rem 0 0;
+    padding: 5rem 2rem;
+    text-align: center;
+    background: linear-gradient(180deg, var(--navy) 0%, rgba(0,40,60,0.8) 50%, var(--navy) 100%);
+    border-top: 1px solid var(--teal-dim);
+    border-bottom: 1px solid var(--teal-dim);
+    position: relative;
+  }
+
+  .part-divider::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 10px,
+      rgba(0,201,177,0.015) 10px, rgba(0,201,177,0.015) 11px
+    );
+  }
+
+  .part-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--teal);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .part-divider h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--white);
+    line-height: 1.1;
+    position: relative;
+  }
+
+  /* ── SECTIONS ────────────────────────────────────────────────────── */
+  .section {
+    padding: 4rem 0 2rem;
+    border-bottom: 1px solid rgba(0,201,177,0.1);
+  }
+
+  h2.section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    color: var(--white);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  h2.section-title span.ch {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--teal);
+    display: block;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h3.sub-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--teal);
+    margin: 2rem 0 0.75rem;
+  }
+
+  p { margin-bottom: 1.1rem; color: #c8d8e8; line-height: 1.8; }
+
+  /* ── MFR BANNER ──────────────────────────────────────────────────── */
+  .mfr-banner {
+    border-radius: 4px;
+    padding: 2.5rem 3rem;
+    margin: 3rem 0 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .mfr-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      135deg, transparent, transparent 20px,
+      rgba(255,255,255,0.02) 20px, rgba(255,255,255,0.02) 21px
+    );
+  }
+  .mfr-banner.shure { background: linear-gradient(135deg, var(--shure-bg) 0%, #002a50 100%); border-left: 4px solid var(--shure); }
+  .mfr-banner.senn  { background: linear-gradient(135deg, var(--senn-bg) 0%, #003310 100%); border-left: 4px solid var(--senn); }
+  .mfr-banner.wisy  { background: linear-gradient(135deg, var(--wisy-bg) 0%, #2a1800 100%); border-left: 4px solid var(--wisy); }
+
+  .mfr-banner h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.5rem;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+  }
+  .mfr-banner p {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1;
+    margin: 0.5rem 0 0;
+  }
+
+  /* ── CODE BLOCKS ─────────────────────────────────────────────────── */
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid rgba(100,217,200,0.2);
+    border-left: 3px solid var(--teal);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+  }
+
+  .code-block code {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--code-fg);
+    line-height: 1.8;
+    display: block;
+    white-space: pre;
+  }
+
+  .code-block code .comment { color: #445566; }
+  .code-block code .keyword { color: #f5a623; }
+  .code-block code .string  { color: #9fef9f; }
+  .code-block code .num     { color: #ff9b71; }
+
+  /* ── CONCEPT BOX ─────────────────────────────────────────────────── */
+  .concept {
+    background: var(--concept-bg);
+    border: 1px solid rgba(155,93,229,0.3);
+    border-left: 4px solid var(--concept);
+    border-radius: 4px;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+  }
+
+  .concept-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--concept);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .concept h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #d0aaff;
+    margin-bottom: 1rem;
+  }
+
+  /* ── CALLOUT BOXES ───────────────────────────────────────────────── */
+  .callout {
+    padding: 1.2rem 1.5rem;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+    border-left: 4px solid;
+  }
+  .callout.tip  { background: rgba(57,211,83,0.08);  border-color: var(--green);  }
+  .callout.note { background: rgba(0,201,177,0.08); border-color: var(--teal);   }
+  .callout.warn { background: rgba(245,166,35,0.08); border-color: var(--amber);  }
+
+  .callout-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .callout.tip  .callout-label { color: var(--green); }
+  .callout.note .callout-label { color: var(--teal);  }
+  .callout.warn .callout-label { color: var(--amber); }
+  .callout p { color: #c8d8e8; margin: 0; }
+
+  /* ── TABLES ──────────────────────────────────────────────────────── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.88rem;
+  }
+
+  .data-table th {
+    background: var(--teal-dim);
+    color: var(--white);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .data-table td {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    color: #c8d8e8;
+    vertical-align: top;
+  }
+
+  .data-table tr:nth-child(even) td { background: rgba(255,255,255,0.03); }
+  .data-table tr:hover td { background: rgba(0,201,177,0.05); }
+  .data-table td:first-child { font-weight: 700; color: var(--white); font-family: 'Space Mono', monospace; font-size: 0.82rem; }
+  .data-table td code { font-family: 'Space Mono', monospace; font-size: 0.78rem; color: var(--teal); background: rgba(0,201,177,0.1); padding: 0.1rem 0.4rem; border-radius: 2px; }
+
+  /* ── TIMELINE ────────────────────────────────────────────────────── */
+  .timeline { margin: 2rem 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0,201,177,0.08);
+    align-items: start;
+  }
+  .timeline-year {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--teal);
+    padding-top: 0.2rem;
+  }
+  .timeline-content strong { color: var(--white); display: block; margin-bottom: 0.25rem; }
+  .timeline-content span { font-size: 0.88rem; color: var(--gray); }
+
+  /* ── QUIZ ────────────────────────────────────────────────────────── */
+  .quiz-section {
+    background: var(--quiz-bg);
+    border: 1px solid rgba(0,201,177,0.25);
+    border-top: 3px solid var(--teal);
+    border-radius: 4px;
+    padding: 2.5rem;
+    margin: 3rem 0;
+  }
+
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0,201,177,0.15);
+  }
+
+  .quiz-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(0,201,177,0.1);
+    border: 2px solid var(--teal-dim);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .quiz-header h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--teal);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .quiz-header p { color: var(--gray); font-size: 0.88rem; margin: 0; }
+
+  .question { margin-bottom: 2.5rem; }
+
+  .question p.q-text {
+    font-weight: 700;
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .q-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--teal);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1.2rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    user-select: none;
+  }
+
+  .option:hover { border-color: var(--teal); background: rgba(0,201,177,0.06); }
+
+  .option input[type="radio"] { display: none; }
+
+  .option-dot {
+    width: 20px; height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    margin-top: 0.1rem;
+  }
+
+  .option input:checked ~ .option-dot {
+    border-color: var(--teal);
+    background: var(--teal);
+  }
+
+  .option input:checked ~ .option-dot::after {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--navy);
+  }
+
+  .option input:checked ~ .option-text { color: var(--white); }
+
+  .option-text { font-size: 0.9rem; color: #a0b4c8; line-height: 1.5; }
+
+  /* Revealed states */
+  .option.correct  { border-color: var(--green) !important; background: var(--correct) !important; }
+  .option.wrong    { border-color: var(--red)   !important; background: var(--wrong)   !important; }
+  .option.correct .option-dot { border-color: var(--green); background: var(--green); }
+  .option.wrong   .option-dot { border-color: var(--red);   background: var(--red);   }
+  .option.correct .option-text { color: #a0ffb0; }
+  .option.wrong   .option-text { color: #ffaaaa; }
+
+  .feedback {
+    margin-top: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    display: none;
+  }
+  .feedback.correct { background: rgba(57,211,83,0.1);  color: var(--green); border: 1px solid rgba(57,211,83,0.3); }
+  .feedback.wrong   { background: rgba(232,72,85,0.1);  color: #ff8888;      border: 1px solid rgba(232,72,85,0.3); }
+  .feedback.visible { display: block; }
+
+  .quiz-footer {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0,201,177,0.15);
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-check {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.8rem 2rem;
+    background: var(--teal);
+    color: var(--navy);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+  .btn-check:hover { background: #00e8cc; transform: translateY(-1px); }
+  .btn-check:disabled { background: var(--teal-dim); cursor: not-allowed; transform: none; }
+
+  .score-display {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.88rem;
+    display: none;
+  }
+  .score-display.pass { color: var(--green); }
+  .score-display.fail { color: var(--red);   }
+  .score-display.visible { display: block; }
+
+  /* ── FINAL RESULTS ───────────────────────────────────────────────── */
+  #final-results {
+    background: linear-gradient(135deg, #0a1a2a 0%, #001020 100%);
+    border: 2px solid rgba(0,201,177,0.3);
+    border-radius: 8px;
+    padding: 4rem 2rem;
+    margin: 4rem 0 6rem;
+    text-align: center;
+    display: none;
+  }
+
+  #final-results.visible { display: block; }
+
+  #final-results .result-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    animation: pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both;
+  }
+
+  #final-results h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadein 0.5s 0.2s ease both;
+  }
+
+  #final-results.pass h2 { color: var(--green); }
+  #final-results.fail h2 { color: var(--red);   }
+
+  #final-score-text {
+    font-size: 1.2rem;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    animation: fadein 0.5s 0.3s ease both;
+  }
+
+  #final-score-text strong { color: var(--white); font-size: 2rem; }
+
+  .result-breakdown {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    animation: fadein 0.5s 0.4s ease both;
+  }
+
+  .rb-item {
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+    padding: 1rem 1.5rem;
+    min-width: 120px;
+  }
+
+  .rb-item .rb-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .rb-item .rb-label {
+    font-size: 0.75rem;
+    color: var(--gray);
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .rb-item.correct .rb-num { color: var(--green); }
+  .rb-item.wrong   .rb-num { color: var(--red);   }
+  .rb-item.pct     .rb-num { color: var(--teal);  }
+
+  .btn-retry {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.8rem 2.5rem;
+    background: transparent;
+    color: var(--teal);
+    border: 2px solid var(--teal);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 1rem;
+    animation: fadein 0.5s 0.5s ease both;
+  }
+  .btn-retry:hover { background: rgba(0,201,177,0.1); }
+
+  #reveal-btn {
+    display: block;
+    margin: 3rem auto 0;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem 3rem;
+    background: transparent;
+    color: var(--teal);
+    border: 2px solid var(--teal);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  #reveal-btn:hover { background: var(--teal); color: var(--navy); }
+
+  /* ── PROGRESS BAR ────────────────────────────────────────────────── */
+  .progress-bar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--teal);
+    transition: width 0.3s;
+    z-index: 1000;
+    box-shadow: 0 0 10px var(--teal);
+  }
+
+  /* ── ANIMATIONS ──────────────────────────────────────────────────── */
+  @keyframes fadein  { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  @keyframes bounce  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+  @keyframes pop     { 0%{transform:scale(0)} 80%{transform:scale(1.1)} 100%{transform:scale(1)} }
+
+  /* ── SCROLLBAR ───────────────────────────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--teal-dim); border-radius: 3px; }
+
+  /* ── RESPONSIVE ──────────────────────────────────────────────────── */
+  @media(max-width:700px) {
+    .page { padding: 0 1rem; }
+    .quiz-section { padding: 1.5rem; }
+    .data-table { font-size: 0.78rem; }
+    .data-table th, .data-table td { padding: 0.5rem 0.6rem; }
+    .timeline-item { grid-template-columns: 60px 1fr; gap: 0.75rem; }
+    .result-breakdown { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+
+<!-- ── HERO ──────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <span class="hero-badge">Complete Educational Guide · v2.2</span>
+  <h1>ETR-<span>NodeScope</span></h1>
+  <p class="hero-sub">ETR-NodeScope Channel Monitor — for audio students interested in how production software is built and why it works the way it does</p>
+  <div class="hero-pills">
+    <span class="pill">PCM · 1937</span>
+    <span class="pill">TCP/IP · 1974</span>
+    <span class="pill">ASIO · 1997</span>
+    <span class="pill">OSC · 1997</span>
+    <span class="pill">MQTT · 1999</span>
+    <span class="pill">Dante · 2003</span>
+    <span class="pill">WebSocket · 2011</span>
+    <span class="pill">Shure · Sennheiser · Wisycom</span>
+  </div>
+  <span class="scroll-hint">▼ SCROLL TO BEGIN</span>
+</section>
+
+<!-- ── NAV ────────────────────────────────────────────────────────────── -->
+<nav class="toc" id="toc">
+  <div class="toc-inner">
+    <span class="toc-label">Jump to →</span>
+    <a href="#part1">Part I: Audio</a>
+    <a href="#part2">Part II: History</a>
+    <a href="#part3">Part III: Architecture</a>
+    <a href="#part4">Part IV: Protocols</a>
+    <a href="#part5">Part V: Using It</a>
+    <a href="#final-results">Results</a>
+  </div>
+</nav>
+
+<main class="page">
+
+<!-- ════════════════════════════════════════════════════════════════════
+     PART I — THE AUDIO WORLD
+═════════════════════════════════════════════════════════════════════ -->
+<div class="part-divider" id="part1">
+  <span class="part-label">Part I</span>
+  <h2>The Audio World</h2>
+</div>
+
+<section class="section" id="ch1">
+  <h2 class="section-title"><span class="ch">Chapter 1</span>Dante and Digital Audio Networking</h2>
+
+  <p>Before ETR-NodeScope can monitor anything, audio has to be flowing. That audio lives on a <strong>Dante network</strong> — a standard that turns ordinary Ethernet switches into a professional audio router capable of carrying hundreds of channels with submillisecond latency.</p>
+
+  <h3 class="sub-title">What Is Dante?</h3>
+  <p>Dante (Digital Audio Network Through Ethernet) was developed by Audinate, a company founded in Sydney, Australia in 2003. It carries uncompressed PCM audio as RTP/UDP packets over standard Ethernet. Every Dante-enabled device — wireless receiver, digital console, amplifier, stage box — appears as both a source and destination on the network, addressable by name.</p>
+
+  <div class="concept">
+    <span class="concept-label">🎓 Concept</span>
+    <h4>The maths of audio over Ethernet</h4>
+    <div class="code-block"><code>48,000 samples/sec × 24 bits × 64 channels
+= 73,728,000 bits/sec ≈ 74 Mbps
+
+Gigabit Ethernet capacity: 1,000 Mbps
+That's 13× headroom — one GbE port carries
+the full 64-channel load easily.</code></div>
+  </div>
+
+  <h3 class="sub-title">How ETR-NodeScope Receives Dante Audio</h3>
+  <p>ETR-NodeScope does not handle Dante UDP packets directly. It uses <strong>Dante Virtual Soundcard (DVS)</strong> — a driver that presents the Dante network as an ASIO audio device to Windows. DVS handles all the protocol work; ETR-NodeScope reads the delivered audio the same way a DAW reads from an audio interface.</p>
+
+  <table class="data-table">
+    <thead><tr><th>Layer</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>Dante network (UDP/IP)</td><td>Audio flows as RTP/UDP packets between devices on the LAN</td></tr>
+      <tr><td>Dante Virtual Soundcard</td><td>Receives UDP packets, presents them as an ASIO device to Windows</td></tr>
+      <tr><td>ETR-NodeScope (ASIO client)</td><td>Reads audio frames via the ASIO API — same as a DAW reading a sound card</td></tr>
+      <tr><td>Tile meters</td><td>Converts each audio frame to a dBFS/dBu level for display</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title">From Float to dBu — How the Meter Works</h3>
+  <p>ASIO delivers audio as 32-bit floats normalised to −1.0 to +1.0. ETR-NodeScope converts to dBu (a real-world voltage reference) using the EBU R68 calibration constant:</p>
+  <div class="code-block"><code><span class="comment">// ASIO delivers float samples where +1.0 = 0 dBFS</span>
+<span class="comment">// Professional standard: 0 dBFS ≈ +18 dBu (EBU R68)</span>
+
+double dBFS = 20.0 * Math.Log10(Math.Abs(sample) + 1e-9);
+double dBu  = dBFS + 18.0;
+
+<span class="comment">// Example: sample = 0.5 → dBFS = -6.02 → dBu = +11.98</span></code></div>
+</section>
+
+<!-- QUIZ 1 -->
+<div class="quiz-section" data-quiz="1">
+  <div class="quiz-header">
+    <div class="quiz-icon">❓</div>
+    <div>
+      <h3>Chapter 1 Quiz</h3>
+      <p>Dante and Digital Audio Networking — 5 questions, pass mark 60%</p>
+    </div>
+  </div>
+
+  <div class="question" data-q="1" data-correct="b">
+    <span class="q-num">Question 1 of 5</span>
+    <p class="q-text">What protocol does Dante use to carry audio across the network?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q1-1" value="a"><span class="option-dot"></span><span class="option-text">TCP/IP unicast with guaranteed delivery and retransmission</span></label>
+      <label class="option"><input type="radio" name="q1-1" value="b"><span class="option-dot"></span><span class="option-text">RTP/UDP packets over standard Ethernet</span></label>
+      <label class="option"><input type="radio" name="q1-1" value="c"><span class="option-dot"></span><span class="option-text">MIDI over Ethernet using the RTP-MIDI standard</span></label>
+      <label class="option"><input type="radio" name="q1-1" value="d"><span class="option-dot"></span><span class="option-text">HTTP/2 multiplexed streams with TLS encryption</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Dante uses RTP (Real-time Transport Protocol) over UDP. UDP is chosen over TCP because it has lower overhead — there's no retransmission of lost packets, which would cause audio glitches.</div>
+    <div class="feedback wrong">✗ Incorrect. Dante uses RTP/UDP — real-time audio cannot afford TCP's retransmission overhead.</div>
+  </div>
+
+  <div class="question" data-q="2" data-correct="c">
+    <span class="q-num">Question 2 of 5</span>
+    <p class="q-text">Why does ETR-NodeScope use Dante Virtual Soundcard rather than connecting to the Dante network directly?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q1-2" value="a"><span class="option-dot"></span><span class="option-text">Direct Dante connection would cause too much network traffic</span></label>
+      <label class="option"><input type="radio" name="q1-2" value="b"><span class="option-dot"></span><span class="option-text">DVS provides a cheaper alternative to real Dante hardware</span></label>
+      <label class="option"><input type="radio" name="q1-2" value="c"><span class="option-dot"></span><span class="option-text">DVS handles the Dante protocol (RTP, PTP sync, routing) and presents a standard ASIO interface — ETR-NodeScope reads audio without implementing any Dante protocol code</span></label>
+      <label class="option"><input type="radio" name="q1-2" value="d"><span class="option-dot"></span><span class="option-text">ETR-NodeScope cannot run at the same time as Dante Controller</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! DVS abstracts all the complexity — RTP packetising, IEEE 1588 PTP clock sync, subscription management. ETR-NodeScope just reads audio frames via ASIO.</div>
+    <div class="feedback wrong">✗ Not quite. The key reason is abstraction — DVS handles the entire Dante protocol stack so ETR-NodeScope only needs to implement a standard ASIO client.</div>
+  </div>
+
+  <div class="question" data-q="3" data-correct="a">
+    <span class="q-num">Question 3 of 5</span>
+    <p class="q-text">What is ASIO and why does it matter for ETR-NodeScope?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q1-3" value="a"><span class="option-dot"></span><span class="option-text">Audio Stream Input/Output — a low-latency API that bypasses the Windows audio mixer, reducing latency from ~200ms to 3–10ms, and uses a callback model so audio frames are delivered at precise intervals</span></label>
+      <label class="option"><input type="radio" name="q1-3" value="b"><span class="option-dot"></span><span class="option-text">Audio System I/O — a Microsoft standard for encoding audio as MP3 for network streaming</span></label>
+      <label class="option"><input type="radio" name="q1-3" value="c"><span class="option-dot"></span><span class="option-text">Audinate Standard Interface Output — the official way to read from Dante Virtual Soundcard</span></label>
+      <label class="option"><input type="radio" name="q1-3" value="d"><span class="option-dot"></span><span class="option-text">Advanced Sound Interface Operation — an Apple audio standard ported to Windows</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! ASIO was created by Steinberg in 1997 to solve the latency problem in Windows audio. Its callback model is essential — the driver calls your function at precise 10.7ms intervals, and if you miss the deadline, you get a dropout.</div>
+    <div class="feedback wrong">✗ ASIO stands for Audio Stream Input/Output, created by Steinberg in 1997. It reduces Windows audio latency from ~200ms to 3–10ms by bypassing the audio mixer.</div>
+  </div>
+
+  <div class="question" data-q="4" data-correct="d">
+    <span class="q-num">Question 4 of 5</span>
+    <p class="q-text">At 48,000 Hz with a 512-sample ASIO buffer, how often does ETR-NodeScope's audio callback fire?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q1-4" value="a"><span class="option-dot"></span><span class="option-text">Every 1 millisecond</span></label>
+      <label class="option"><input type="radio" name="q1-4" value="b"><span class="option-dot"></span><span class="option-text">Every 5 milliseconds</span></label>
+      <label class="option"><input type="radio" name="q1-4" value="c"><span class="option-dot"></span><span class="option-text">Every 20 milliseconds</span></label>
+      <label class="option"><input type="radio" name="q1-4" value="d"><span class="option-dot"></span><span class="option-text">Every 10.7 milliseconds (512 ÷ 48,000)</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! 512 samples ÷ 48,000 samples/sec = 0.01067 seconds = 10.67ms. The callback must return before the next one fires or you get a dropout.</div>
+    <div class="feedback wrong">✗ The calculation is 512 ÷ 48,000 = 0.01067 seconds = 10.7 milliseconds.</div>
+  </div>
+
+  <div class="question" data-q="5" data-correct="b">
+    <span class="q-num">Question 5 of 5</span>
+    <p class="q-text">What does the +18 dBu offset in the ETR-NodeScope level calculation represent?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q1-5" value="a"><span class="option-dot"></span><span class="option-text">An amplification factor to make quiet signals visible on the meter</span></label>
+      <label class="option"><input type="radio" name="q1-5" value="b"><span class="option-dot"></span><span class="option-text">The EBU R68 calibration constant — the relationship between digital 0 dBFS and the analogue +18 dBu reference level used in professional audio</span></label>
+      <label class="option"><input type="radio" name="q1-5" value="c"><span class="option-dot"></span><span class="option-text">The headroom allowance in the Dante protocol's audio encoding</span></label>
+      <label class="option"><input type="radio" name="q1-5" value="d"><span class="option-dot"></span><span class="option-text">A safety margin added to prevent clipping on live signals</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! The EBU R68 standard defines 0 dBFS ≈ +18 dBu. Without this offset, digital levels (dBFS) would be meaningless to an engineer who thinks in terms of real-world voltages.</div>
+    <div class="feedback wrong">✗ The +18 dBu offset is the EBU R68 calibration constant — it converts digital dBFS into the real-world dBu values that audio engineers are familiar with.</div>
+  </div>
+
+  <div class="quiz-footer">
+    <button class="btn-check" onclick="checkQuiz(1)">Check Answers</button>
+    <span class="score-display" id="score-1"></span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     PART II — HISTORY
+═════════════════════════════════════════════════════════════════════ -->
+<div class="part-divider" id="part2">
+  <span class="part-label">Part II</span>
+  <h2>History of the Protocols</h2>
+</div>
+
+<section class="section" id="ch2">
+  <h2 class="section-title"><span class="ch">Chapter 2</span>A History of Every Protocol ETR-NodeScope Uses</h2>
+
+  <p>Every technology in ETR-NodeScope has a story. Understanding where these standards came from — who invented them, what problem they solved, what constraints they were designed under — makes them much easier to understand and remember.</p>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <span class="timeline-year">1937</span>
+      <div class="timeline-content">
+        <strong>PCM — Pulse Code Modulation (Alec Reeves, ITT Paris)</strong>
+        <span>Reeves filed French patent 852,183 on 22 October 1937 — the idea of sampling an audio waveform at regular intervals and storing each measurement as a binary number. He could not get anyone interested; the patent expired in 1954 before it was exploited. The idea only became practical when Bell Labs used it for military voice encryption (SIGSALY, 1943). PCM reached consumer audio in 1980 with the Compact Disc. Every piece of digital audio in ETR-NodeScope is PCM.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">1960</span>
+      <div class="timeline-content">
+        <strong>RS-232 — Serial Communication Standard (EIA)</strong>
+        <span>The Electronic Industries Association published RS-232 in 1960 to define how computers communicate with modems. By the 1980s it became the universal AV control language — every rack-mount device had an RS-232 port accepting text commands like <code>POWER ON\r</code>. When Ethernet replaced RS-232 in the 2000s, manufacturers simply wrapped the same ASCII commands in TCP sockets. Shure's port 2202 protocol — <code>&lt; GET 1 BATT_CHARGE &gt;</code> — is RS-232-era design philosophy running over modern TCP/IP.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">1974</span>
+      <div class="timeline-content">
+        <strong>TCP/IP — Cerf and Kahn, IEEE Transactions on Communications</strong>
+        <span>Vint Cerf and Bob Kahn published "A Protocol for Packet Network Intercommunication" in 1974, defining the two-layer model: IP handles routing and addressing; TCP adds guaranteed delivery, in-order reassembly, and flow control. Everything ETR-NodeScope does over the network runs on TCP/IP. The three-way handshake (SYN, SYN-ACK, ACK) plus ARP resolution on link-local addresses is why ETR-NodeScope uses an 800ms TCP probe timeout for Shure discovery.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">1983</span>
+      <div class="timeline-content">
+        <strong>MIDI — Musical Instrument Digital Interface</strong>
+        <span>Published August 1983 by a consortium including Roland, Yamaha, Korg, and Sequential Circuits. MIDI's 31.25 kBaud serial connection and 7-bit value resolution (0–127) were appropriate for 1983 microcontrollers. By the 1990s its limitations — no floating-point values, no network transport, fixed message types — were painful. MIDI's shortcomings directly motivated the design of OSC.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">1991</span>
+      <div class="timeline-content">
+        <strong>WAV File Format — Microsoft and IBM</strong>
+        <span>WAV was introduced as part of Windows 3.1 multimedia extensions, built on the RIFF (Resource Interchange File Format) container developed with IBM, itself derived from Electronic Arts' IFF format (1985). The format uses a 44-byte header describing the audio, followed by raw PCM samples. ETR-NodeScope writes this header before streaming audio over HTTP so media players (VLC, browser <code>&lt;audio&gt;</code> tags) can decode the stream. The format is 34 years old and every media player still reads it.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">1997</span>
+      <div class="timeline-content">
+        <strong>ASIO — Audio Stream Input/Output (Steinberg)</strong>
+        <span>Steinberg created ASIO to solve Windows audio latency. Windows' 1990s audio stack was designed for game sound effects (100–200ms latency acceptable). Professional recording demands real-time monitoring at under 10ms. ASIO bypasses the Windows audio mixer and talks directly to hardware drivers, enabling 3–10ms latency. Its callback model — the driver calls your function at precise intervals — is fundamental to ETR-NodeScope's audio pipeline.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">1997</span>
+      <div class="timeline-content">
+        <strong>OSC — Open Sound Control (Wright & Freed, CNMAT, UC Berkeley)</strong>
+        <span>Presented at the International Computer Music Conference in 1997. Designed as everything MIDI was not: 32-bit float values instead of 7-bit integers, arbitrary URL-like address patterns (/etr-nodescope/channel/1/battery) instead of fixed message types, UDP over any network instead of a serial wire, and 64-bit NTP timestamps for precise scheduling. ETR-NodeScope sends OSC for Qlab integration, lighting console triggers, and custom monitoring scripts.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">1999</span>
+      <div class="timeline-content">
+        <strong>MQTT — Message Queuing Telemetry Transport (Stanford-Clark & Nipper, IBM)</strong>
+        <span>Invented by Andy Stanford-Clark of IBM and Arlen Nipper of Arcom to monitor oil pipelines across the Sahara desert over expensive, unreliable satellite links. Design goals: minimal bandwidth (every byte matters at USD 10/KB), reliable delivery (QoS levels), low power, publish/subscribe broker model. IBM kept it proprietary until 2013 when it was released to OASIS, coinciding with the IoT boom. ETR-NodeScope uses MQTTnet (a .NET library) to publish channel state with QoS 1 (at-least-once delivery).</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">2000</span>
+      <div class="timeline-content">
+        <strong>REST — Roy Fielding's PhD Thesis, UC Irvine</strong>
+        <span>Roy Fielding (co-author of HTTP/1.1) defined REST (Representational State Transfer) in his 2000 PhD thesis. REST constraints — stateless requests, uniform interface (GET/PUT/POST), self-describing messages — made web services scalable and interoperable. Sennheiser's SSC v2 API (used by ETR-NodeScope for EW-DX receivers) is a REST API. The contrast with Shure's ASCII protocol illustrates 20 years of API design evolution.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">2001</span>
+      <div class="timeline-content">
+        <strong>JSON — JavaScript Object Notation (Douglas Crockford)</strong>
+        <span>Crockford formalised JSON around 2001, published RFC 4627 in 2006. JSON is a subset of JavaScript object literal syntax that had existed since 1995 — Crockford's contribution was identifying it as a useful standalone data format. Wisycom's protocol uses JSON push messages; ETR-NodeScope's WebSocket messages to browsers are JSON; MQTT payloads are JSON. The contrast with Shure's ASCII strings shows how data serialisation has evolved.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">2002</span>
+      <div class="timeline-content">
+        <strong>mDNS / Bonjour (Stuart Cheshire, Apple)</strong>
+        <span>Apple shipped Rendezvous (later renamed Bonjour) in Mac OS X 10.2 as part of the zero-configuration networking initiative. mDNS sends DNS queries to multicast address 224.0.0.251:5353 — any device that matches responds directly, no DNS server needed. Standardised as RFC 6762 in 2013. ETR-NodeScope uses mDNS to find Sennheiser EW-DX receivers and — critically — to find the control interface IP of Axient Digital receivers (AD4D-A, AD4Q) which is different from the Dante audio interface IP.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">2003</span>
+      <div class="timeline-content">
+        <strong>Dante — Audinate (Sydney, Australia)</strong>
+        <span>Audinate was founded in 2003 as a spin-out from the University of Technology Sydney. Dante went commercial around 2006. Yamaha was the first major manufacturer to adopt it (2009 digital consoles). The predecessor, CobraNet (Cirrus Logic, 1996), required special hardware and managed switches. Dante runs on commodity GbE with no special infrastructure. Today Dante is the dominant professional audio networking standard with thousands of compatible products.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">2006</span>
+      <div class="timeline-content">
+        <strong>Server-Sent Events (Ian Hickson, Opera)</strong>
+        <span>Hickson developed SSE at Opera Software and included it in the WHATWG HTML Living Standard. SSE holds an HTTP connection open and streams text events as they occur — simpler than WebSocket for one-directional push use cases. Standardised as RFC 8895. Sennheiser chose SSE for SSC v2 because EW-DX is a monitoring tool: data flows from receiver to controller. Commands (mute, gain) are separate HTTP requests, not sent back over the SSE stream.</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <span class="timeline-year">2011</span>
+      <div class="timeline-content">
+        <strong>WebSocket (RFC 6455)</strong>
+        <span>WebSocket was developed as part of HTML5, published as RFC 6455 in December 2011. It upgrades an HTTP connection to a full-duplex TCP stream via the Upgrade header. Before WebSocket, real-time web apps used polling (GET every second), long-polling (hold response open), or HTTP streaming (Comet) — all awkward. ETR-NodeScope's WebUI uses WebSocket for JSON state updates (text frames) and PCM audio (binary frames) on the same connection simultaneously.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <h3 class="sub-title">Complete Timeline</h3>
+  <table class="data-table">
+    <thead><tr><th>Year</th><th>Technology</th><th>ETR-NodeScope Connection</th></tr></thead>
+    <tbody>
+      <tr><td>1937</td><td>PCM (Alec Reeves)</td><td>Foundation of all digital audio</td></tr>
+      <tr><td>1958</td><td>Sony WRT-57/WRR-57 — first commercial wireless mic</td><td>Start of the wireless microphone industry</td></tr>
+      <tr><td>1960</td><td>RS-232 serial standard (EIA)</td><td>Ancestor of Shure's ASCII command protocol</td></tr>
+      <tr><td>1974</td><td>TCP/IP (Cerf and Kahn)</td><td>Foundation of all ETR-NodeScope network communication</td></tr>
+      <tr><td>1983</td><td>MIDI standard</td><td>Context for OSC — shows what OSC improved on</td></tr>
+      <tr><td>1991</td><td>WAV file format (Microsoft/IBM)</td><td>ETR-NodeScope HTTP audio stream format</td></tr>
+      <tr><td>1997</td><td>ASIO (Steinberg)</td><td>ETR-NodeScope's audio capture interface</td></tr>
+      <tr><td>1997</td><td>OSC 1.0 (Wright & Freed, CNMAT)</td><td>ETR-NodeScope OSC integration for Qlab etc.</td></tr>
+      <tr><td>1999</td><td>MQTT (Stanford-Clark, IBM)</td><td>ETR-NodeScope MQTT channel state publishing</td></tr>
+      <tr><td>2000</td><td>REST (Fielding PhD thesis)</td><td>Foundation of Sennheiser SSC v2 API</td></tr>
+      <tr><td>2001</td><td>JSON (Crockford)</td><td>Wisycom protocol, WebSocket messages</td></tr>
+      <tr><td>2002</td><td>mDNS / Bonjour (Apple)</td><td>Finds Sennheiser and Axient control IPs</td></tr>
+      <tr><td>2003</td><td>Dante development begins (Audinate)</td><td>The audio network ETR-NodeScope monitors</td></tr>
+      <tr><td>2006</td><td>Server-Sent Events (Hickson, Opera)</td><td>Sennheiser SSC v2 real-time data delivery</td></tr>
+      <tr><td>2011</td><td>WebSocket RFC 6455</td><td>ETR-NodeScope WebUI real-time updates and audio</td></tr>
+      <tr><td>2017</td><td>FCC 600 MHz spectrum repack</td><td>Forces wireless frequency coordination</td></tr>
+      <tr><td>2017</td><td>Axient Digital launched (Shure)</td><td>AD4D, AD4Q — Shure hardware supported</td></tr>
+      <tr><td>2020</td><td>EW-DX launched (Sennheiser) with SSC v2</td><td>Sennheiser hardware supported</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- QUIZ 2 -->
+<div class="quiz-section" data-quiz="2">
+  <div class="quiz-header">
+    <div class="quiz-icon">❓</div>
+    <div><h3>Chapter 2 Quiz</h3><p>History of the Protocols — 5 questions, pass mark 60%</p></div>
+  </div>
+
+  <div class="question" data-q="1" data-correct="c">
+    <span class="q-num">Question 1 of 5</span>
+    <p class="q-text">PCM was invented in 1937 by Alec Reeves. Why was it not commercially exploited until the 1970s?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q2-1" value="a"><span class="option-dot"></span><span class="option-text">The patent was kept secret by the British government for military use</span></label>
+      <label class="option"><input type="radio" name="q2-1" value="b"><span class="option-dot"></span><span class="option-text">Reeves did not publish the idea until the 1960s</span></label>
+      <label class="option"><input type="radio" name="q2-1" value="c"><span class="option-dot"></span><span class="option-text">The technology required fast electronic switching (valves/transistors) that could not be built cheaply enough in 1937, and the patent expired in 1954 before hardware caught up</span></label>
+      <label class="option"><input type="radio" name="q2-1" value="d"><span class="option-dot"></span><span class="option-text">Analogue audio was considered higher quality and the industry resisted the change</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Reeves' patent expired in 1954, unrealised, because the vacuum tubes needed to process PCM fast enough were too expensive and bulky. Integrated circuits in the 1970s finally made it practical for consumer audio.</div>
+    <div class="feedback wrong">✗ The main barrier was hardware — practical PCM processing required electronic switching speeds that couldn't be achieved cheaply until integrated circuits in the 1970s. The patent expired in 1954 without being commercially exploited.</div>
+  </div>
+
+  <div class="question" data-q="2" data-correct="a">
+    <span class="q-num">Question 2 of 5</span>
+    <p class="q-text">Why does Shure's TCP/2202 protocol look like RS-232 serial commands with angle brackets and spaces?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q2-2" value="a"><span class="option-dot"></span><span class="option-text">The protocol was originally designed for RS-232 serial ports in the 1990s for Crestron/AMX control systems. When Ethernet replaced RS-232, Shure wrapped the same ASCII commands in TCP sockets rather than redesigning the protocol</span></label>
+      <label class="option"><input type="radio" name="q2-2" value="b"><span class="option-dot"></span><span class="option-text">Angle brackets were required by the TCP/IP specification for audio control protocols</span></label>
+      <label class="option"><input type="radio" name="q2-2" value="c"><span class="option-dot"></span><span class="option-text">Shure chose this format for compatibility with XML parsers which also use angle brackets</span></label>
+      <label class="option"><input type="radio" name="q2-2" value="d"><span class="option-dot"></span><span class="option-text">The format was mandated by the AES67 audio networking standard</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Legacy protocols on new transports is extremely common in AV. When networks replaced serial cables, manufacturers took the path of least resistance — same commands, new transport. This is why ETR-NodeScope's entire Shure parser is a regex and a string split.</div>
+    <div class="feedback wrong">✗ The ASCII format is 1990s RS-232 design. When Ethernet replaced serial cables, Shure simply wrapped the existing commands in TCP rather than redesigning from scratch.</div>
+  </div>
+
+  <div class="question" data-q="3" data-correct="d">
+    <span class="q-num">Question 3 of 5</span>
+    <p class="q-text">MQTT was invented to solve a problem in which industry, and what were the three key design constraints?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q2-3" value="a"><span class="option-dot"></span><span class="option-text">Home automation — constraints were security, power, and ease of use</span></label>
+      <label class="option"><input type="radio" name="q2-3" value="b"><span class="option-dot"></span><span class="option-text">Financial services — constraints were speed, reliability, and encryption</span></label>
+      <label class="option"><input type="radio" name="q2-3" value="c"><span class="option-dot"></span><span class="option-text">Telecommunications — constraints were bandwidth, latency, and compatibility</span></label>
+      <label class="option"><input type="radio" name="q2-3" value="d"><span class="option-dot"></span><span class="option-text">Oil pipeline monitoring (Sahara desert) — constraints were minimal bandwidth (expensive satellite links), reliable delivery, and low power (battery/solar sensors)</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Stanford-Clark and Nipper at IBM designed MQTT in 1999 for oil pipelines across the Sahara. Satellite data cost USD 10/KB, sensors ran on solar power, and the link dropped regularly. These constraints produced a remarkably efficient protocol that became the standard for IoT 15 years later.</div>
+    <div class="feedback wrong">✗ MQTT was invented for oil pipeline monitoring across the Sahara desert. The constraints were minimal bandwidth (satellite data was USD 10/KB), reliable delivery, and low power consumption.</div>
+  </div>
+
+  <div class="question" data-q="4" data-correct="b">
+    <span class="q-num">Question 4 of 5</span>
+    <p class="q-text">Why did Sennheiser choose Server-Sent Events (SSE) for EW-DX receivers rather than WebSocket or raw TCP?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q2-4" value="a"><span class="option-dot"></span><span class="option-text">WebSocket is not supported on Sennheiser's embedded hardware</span></label>
+      <label class="option"><input type="radio" name="q2-4" value="b"><span class="option-dot"></span><span class="option-text">EW-DX is a monitoring use case — data flows from receiver to controller. SSE is one-directional (server to client), uses plain HTTP (works through proxies), and has built-in reconnection. Commands are separate HTTP requests. This matches the access pattern perfectly</span></label>
+      <label class="option"><input type="radio" name="q2-4" value="c"><span class="option-dot"></span><span class="option-text">SSE allows Sennheiser to encrypt the data stream without a separate TLS certificate</span></label>
+      <label class="option"><input type="radio" name="q2-4" value="d"><span class="option-dot"></span><span class="option-text">WebSocket was not standardised until after the EW-DX was designed</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! SSE is one-directional by design — perfect for monitoring where the receiver pushes state changes and the controller sends occasional commands via separate HTTP PUT requests. SSE also works through HTTP proxies that might block WebSocket upgrades.</div>
+    <div class="feedback wrong">✗ The key is that EW-DX is a monitoring system — data flows one way (receiver to controller). SSE is designed for exactly this pattern, works through HTTP proxies, and has automatic reconnection built in.</div>
+  </div>
+
+  <div class="question" data-q="5" data-correct="c">
+    <span class="q-num">Question 5 of 5</span>
+    <p class="q-text">What was the fundamental problem that led to the creation of WebSocket in 2011?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q2-5" value="a"><span class="option-dot"></span><span class="option-text">HTTP/1.1 could not handle multiple simultaneous connections to the same server</span></label>
+      <label class="option"><input type="radio" name="q2-5" value="b"><span class="option-dot"></span><span class="option-text">Browsers could not display JSON data without converting it to XML first</span></label>
+      <label class="option"><input type="radio" name="q2-5" value="c"><span class="option-dot"></span><span class="option-text">HTTP is request-response — browsers could not receive server-initiated messages without polling every second, wasting bandwidth and adding latency. WebSocket upgrades an HTTP connection to full-duplex TCP so either side can send messages at any time</span></label>
+      <label class="option"><input type="radio" name="q2-5" value="d"><span class="option-dot"></span><span class="option-text">HTTP/1.1 encrypted all traffic by default, making real-time communication too slow</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Before WebSocket, developers used polling (GET every second), long-polling (held response), or Comet (HTTP streaming with a permanently loading page). All were hacks. WebSocket solved the fundamental problem: HTTP was never designed for server-initiated messages.</div>
+    <div class="feedback wrong">✗ The core problem was that HTTP is request-response — browsers could only receive data by asking for it repeatedly. WebSocket enables true bidirectional communication where the server can push messages the moment something happens.</div>
+  </div>
+
+  <div class="quiz-footer">
+    <button class="btn-check" onclick="checkQuiz(2)">Check Answers</button>
+    <span class="score-display" id="score-2"></span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     PART III — SOFTWARE ARCHITECTURE
+═════════════════════════════════════════════════════════════════════ -->
+<div class="part-divider" id="part3">
+  <span class="part-label">Part III</span>
+  <h2>The Software Architecture</h2>
+</div>
+
+<section class="section" id="ch3">
+  <h2 class="section-title"><span class="ch">Chapter 3</span>How ETR-NodeScope Is Structured</h2>
+
+  <p>ETR-NodeScope is a C# / .NET 8 desktop application using Avalonia UI. Its architecture separates concerns into layers — each layer has one job, communicates upward via events, and knows nothing about the layers above it.</p>
+
+  <table class="data-table">
+    <thead><tr><th>Layer</th><th>Classes</th><th>Responsibility</th></tr></thead>
+    <tbody>
+      <tr><td>Models</td><td>WirelessChannelState, ChannelStateDto, AlertModel</td><td>Pure data — no logic, no UI</td></tr>
+      <tr><td>Services</td><td>ShureDeviceClient, DiscoveryService, SmartAlertsEngine, WebUIServer</td><td>All business logic and hardware communication</td></tr>
+      <tr><td>ViewModels</td><td>MainViewModel, ChannelTileViewModel</td><td>Translate service data into bindable UI properties</td></tr>
+      <tr><td>Views</td><td>MainWindow.axaml, ChannelTile.axaml</td><td>XAML layout — no logic, binds to ViewModel properties</td></tr>
+      <tr><td>Integration</td><td>MqttService, OscService, SessionLogService</td><td>MQTT broker, OSC UDP, log files</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title">The 12-Step Journey from Transmitter to Tile</h3>
+
+  <div class="code-block"><code> 1. Transmitter embeds battery % in RF side-channel (~400 bits/sec)
+ 2. Receiver demodulates: <span class="string">"&lt; REP 1 BATT_CHARGE 078 &gt;"</span>
+ 3. BaseDeviceClientAdapter.ReceiveLoopAsync() reads the line
+ 4. ShureDeviceClient.ParseMessage() routes → HandleRep()
+ 5. <span class="keyword">case</span> <span class="string">"BATT_CHARGE"</span>: state.BatteryPercent = <span class="num">78</span>
+ 6. PublishChannelIfChanged() compares with last published snapshot
+ 7. If changed → RaiseChannelDataReceived(channel=<span class="num">1</span>, state)
+ 8. C# event fires → all subscribers notified simultaneously
+ 9. MainViewModel.OnDeviceChannelData() receives it
+10. tile.BatteryDisplay = <span class="string">"78%"</span>
+11. tile.BatteryLevel   = <span class="num">0.78</span>
+12. Avalonia data binding updates the tile — no explicit UI code</code></div>
+
+  <div class="concept">
+    <span class="concept-label">🎓 Concept</span>
+    <h4>The Observer Pattern — C# events</h4>
+    <p>Step 7–9 uses C# events — a built-in implementation of the Observer pattern (Gang of Four, 1994). ShureDeviceClient fires an event; MainViewModel, SmartAlertsEngine, WebUIServer, and SessionLogService all subscribe. ShureDeviceClient knows nothing about any of them:</p>
+    <div class="code-block"><code><span class="comment">// ShureDeviceClient declares the event:</span>
+<span class="keyword">event</span> Action&lt;<span class="keyword">int</span>, WirelessChannelState&gt;? ChannelDataReceived;
+
+<span class="comment">// Fires it after parsing a REP message:</span>
+RaiseChannelDataReceived(channel, state);
+
+<span class="comment">// All four subscribers run — ShureDeviceClient knows nothing about them:</span>
+mainViewModel.ChannelDataReceived     += OnDeviceChannelData;
+smartAlertsEngine.ChannelDataReceived += EvaluateChannel;
+webUIServer.ChannelDataReceived       += PushStateToClients;
+sessionLogger.ChannelDataReceived     += MaybeLogBatterySwap;</code></div>
+  </div>
+
+  <h3 class="sub-title">Change Detection — Not Every Frame Reaches the UI</h3>
+  <p>Shure sends SAMPLE frames every 100ms. ETR-NodeScope filters them before the UI is updated — only meaningful changes cause a redraw:</p>
+  <div class="code-block"><code><span class="keyword">private void</span> PublishChannelIfChanged(<span class="keyword">int</span> channel, WirelessChannelState state)
+{
+    <span class="keyword">var</span> snapshot = ChannelPublishSnapshot.From(state);
+
+    <span class="keyword">if</span> (_lastPublishedState.TryGetValue(channel, <span class="keyword">out var</span> previous) &&
+        !snapshot.HasMeaningfulChangeFrom(previous))
+        <span class="keyword">return</span>;  <span class="comment">// RF changed by 0.5 dBm? Skip the UI update.</span>
+
+    _lastPublishedState[channel] = snapshot;
+    RaiseChannelDataReceived(channel, state);  <span class="comment">// Something real changed</span>
+}</code></div>
+
+  <h3 class="sub-title">WebUI Audio Path — Float to Browser</h3>
+  <div class="code-block"><code><span class="comment">// Called every 10.7ms from ASIO callback</span>
+<span class="comment">// Converts ASIO float32 → PCM int16 → WebSocket binary frames</span>
+<span class="keyword">unsafe</span> {
+    <span class="keyword">fixed</span> (<span class="keyword">float*</span> pIn  = frame)
+    <span class="keyword">fixed</span> (<span class="keyword">byte*</span>  pOut = pcm) {
+        <span class="keyword">short*</span> pS = (<span class="keyword">short*</span>)pOut;
+        <span class="keyword">for</span> (<span class="keyword">int</span> s = <span class="num">0</span>; s &lt; totalSamples; s++) {
+            <span class="keyword">float</span> v = Math.Clamp(pIn[s * channelCount + ch], -<span class="num">1f</span>, <span class="num">1f</span>);
+            pS[s]   = (<span class="keyword">short</span>)(v * <span class="num">32767f</span>);  <span class="comment">// float → int16</span>
+        }
+    }
+}
+<span class="comment">// 128 samples × 2 bytes = 256 bytes per WebSocket binary frame</span>
+<span class="comment">// 375 frames/sec, each 2.67ms apart</span></code></div>
+</section>
+
+<!-- QUIZ 3 -->
+<div class="quiz-section" data-quiz="3">
+  <div class="quiz-header">
+    <div class="quiz-icon">❓</div>
+    <div><h3>Chapter 3 Quiz</h3><p>Software Architecture — 5 questions, pass mark 60%</p></div>
+  </div>
+
+  <div class="question" data-q="1" data-correct="b">
+    <span class="q-num">Question 1 of 5</span>
+    <p class="q-text">What is the purpose of PublishChannelIfChanged() in ETR-NodeScope?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q3-1" value="a"><span class="option-dot"></span><span class="option-text">It encrypts channel data before sending it over the network</span></label>
+      <label class="option"><input type="radio" name="q3-1" value="b"><span class="option-dot"></span><span class="option-text">It compares each new channel state against the last published snapshot and only fires the UI update event when something meaningful has actually changed — preventing 10 Hz SAMPLE frames from triggering unnecessary redraws</span></label>
+      <label class="option"><input type="radio" name="q3-1" value="c"><span class="option-dot"></span><span class="option-text">It stores channel data to disk so it can be restored after a restart</span></label>
+      <label class="option"><input type="radio" name="q3-1" value="d"><span class="option-dot"></span><span class="option-text">It checks whether the channel has a talent profile assigned before displaying data</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Without this filter, 10 SAMPLE frames per second per channel would all trigger UI redraws. The snapshot comparison means only actual changes (battery dropping 1%, RF dropping 3 dBm) cause a redraw.</div>
+    <div class="feedback wrong">✗ PublishChannelIfChanged() is a change detection filter. It compares new state with a stored snapshot and only fires the update event when something meaningful changed.</div>
+  </div>
+
+  <div class="question" data-q="2" data-correct="d">
+    <span class="q-num">Question 2 of 5</span>
+    <p class="q-text">In MVVM, what is the ViewModel's role and why is it important?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q3-2" value="a"><span class="option-dot"></span><span class="option-text">The ViewModel stores data in a database for persistent storage between sessions</span></label>
+      <label class="option"><input type="radio" name="q3-2" value="b"><span class="option-dot"></span><span class="option-text">The ViewModel renders the XAML layout and applies CSS styling to controls</span></label>
+      <label class="option"><input type="radio" name="q3-2" value="c"><span class="option-dot"></span><span class="option-text">The ViewModel handles network requests and sends data to the server</span></label>
+      <label class="option"><input type="radio" name="q3-2" value="d"><span class="option-dot"></span><span class="option-text">The ViewModel bridges services and UI — it receives raw data (WirelessChannelState), formats it (BatteryPercent 78 → "78%"), and exposes properties the View binds to. Neither the service nor the View depends on the other</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! The ViewModel is the translator. ShureDeviceClient produces WirelessChannelState with a BatteryPercent integer. ChannelTileViewModel formats that as "78%" for the TextBlock binding. The service doesn't know about UI; the View doesn't know about services.</div>
+    <div class="feedback wrong">✗ The ViewModel bridges services and UI. It receives raw service data, formats it into display strings and normalised values, and exposes them as properties. The key benefit is decoupling — services don't import UI classes and vice versa.</div>
+  </div>
+
+  <div class="question" data-q="3" data-correct="a">
+    <span class="q-num">Question 3 of 5</span>
+    <p class="q-text">Why does ETR-NodeScope start the receive loop before calling ConnectDeviceAsync()?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q3-3" value="a"><span class="option-dot"></span><span class="option-text">To ensure no REP messages are missed in the gap between the TCP connection being established and the GET commands being sent — the receiver may respond very quickly and the first REP (like MODEL or NUM_CH) could arrive before the loop starts</span></label>
+      <label class="option"><input type="radio" name="q3-3" value="b"><span class="option-dot"></span><span class="option-text">To allow the ASIO callback to start receiving audio before the wireless connection is established</span></label>
+      <label class="option"><input type="radio" name="q3-3" value="c"><span class="option-dot"></span><span class="option-text">The receive loop initialises the TCP socket that ConnectDeviceAsync() then uses</span></label>
+      <label class="option"><input type="radio" name="q3-3" value="d"><span class="option-dot"></span><span class="option-text">It is a bug — the correct order is ConnectDeviceAsync() first, then the receive loop</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! A race condition: if ConnectDeviceAsync runs first and sends GET 0 MODEL, the receiver might send the REP before the receive loop is listening. Starting the loop first eliminates this race.</div>
+    <div class="feedback wrong">✗ It's a deliberate choice to prevent a race condition. If connection happened before the loop started, the receiver might send the MODEL or NUM_CH response before anything is listening for it.</div>
+  </div>
+
+  <div class="question" data-q="4" data-correct="c">
+    <span class="q-num">Question 4 of 5</span>
+    <p class="q-text">When ETR-NodeScope converts ASIO float audio to PCM-16LE for WebSocket streaming, why multiply by 32767 rather than 32768?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q3-4" value="a"><span class="option-dot"></span><span class="option-text">32767 is the maximum positive value of a signed 16-bit integer — multiplying by 32768 could produce exactly +32768 for a +1.0 float, which overflows to -32768 (a signed overflow bug)</span></label>
+      <label class="option"><input type="radio" name="q3-4" value="b"><span class="option-dot"></span><span class="option-text">32767 is an industry convention for DAW compatibility with older 16-bit systems</span></label>
+      <label class="option"><input type="radio" name="q3-4" value="c"><span class="option-dot"></span><span class="option-text">Both A and the fact that signed 16-bit integers range from -32768 to +32767 (not +32768) — so the maximum positive integer is 32767</span></label>
+      <label class="option"><input type="radio" name="q3-4" value="d"><span class="option-dot"></span><span class="option-text">Multiplying by 32768 would produce 8-bit audio instead of 16-bit</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Signed 16-bit integers (short in C#) range from -32768 to +32767. The positive maximum is 32767. Multiplying +1.0f × 32768 = 32768, which doesn't fit in a short and wraps to -32768 — a loud click. Hence 32767.</div>
+    <div class="feedback wrong">✗ Signed 16-bit integers range from -32768 to +32767. The maximum positive value is 32767. Multiplying by 32768 for a +1.0 input would produce 32768, which overflows to -32768 in a short — an audible click.</div>
+  </div>
+
+  <div class="question" data-q="5" data-correct="b">
+    <span class="q-num">Question 5 of 5</span>
+    <p class="q-text">What is the Observer pattern and how does ETR-NodeScope use it?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q3-5" value="a"><span class="option-dot"></span><span class="option-text">A database pattern where changes are logged as an audit trail for compliance purposes</span></label>
+      <label class="option"><input type="radio" name="q3-5" value="b"><span class="option-dot"></span><span class="option-text">A design pattern where a Subject maintains a list of Observers and notifies them when its state changes. ETR-NodeScope uses C# events: ShureDeviceClient fires ChannelDataReceived; MainViewModel, SmartAlertsEngine, WebUIServer, and SessionLogService all subscribe — the Subject knows nothing about its Observers</span></label>
+      <label class="option"><input type="radio" name="q3-5" value="c"><span class="option-dot"></span><span class="option-text">A monitoring pattern where ETR-NodeScope watches the Dante network for new devices and alerts the user</span></label>
+      <label class="option"><input type="radio" name="q3-5" value="d"><span class="option-dot"></span><span class="option-text">A caching pattern that stores the most recent value of each channel parameter to avoid repeated network queries</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! The Gang of Four defined the Observer pattern in 1994. C# events are a language-level implementation. The key benefit is decoupling — ShureDeviceClient has zero imports from MainViewModel, SmartAlertsEngine, WebUIServer, or SessionLogService.</div>
+    <div class="feedback wrong">✗ The Observer pattern (Gang of Four, 1994) defines a Subject-Observer relationship where the Subject notifies its Observers when state changes, without knowing who they are. C# events are a built-in implementation.</div>
+  </div>
+
+  <div class="quiz-footer">
+    <button class="btn-check" onclick="checkQuiz(3)">Check Answers</button>
+    <span class="score-display" id="score-3"></span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     PART IV — WIRELESS PROTOCOLS
+═════════════════════════════════════════════════════════════════════ -->
+<div class="part-divider" id="part4">
+  <span class="part-label">Part IV</span>
+  <h2>Wireless Protocols in Depth</h2>
+</div>
+
+<section class="section" id="ch4">
+  <div class="mfr-banner shure">
+    <h2>Shure</h2>
+    <p>ULX-D  ·  Axient Digital  ·  QLX-D  ·  SLX-D  ·  TCP Port 2202</p>
+  </div>
+
+  <h2 class="section-title"><span class="ch">Chapter 4</span>Shure Protocol — ASCII over TCP</h2>
+
+  <h3 class="sub-title">The Grammar</h3>
+  <table class="data-table">
+    <thead><tr><th>Type</th><th>Format</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>GET</td><td><code>&lt; GET channel PARAM &gt;</code></td><td><code>&lt; GET 1 BATT_CHARGE &gt;</code></td></tr>
+      <tr><td>SET</td><td><code>&lt; SET channel PARAM value &gt;</code></td><td><code>&lt; SET 1 AUDIO_MUTE ON &gt;</code></td></tr>
+      <tr><td>REP</td><td><code>&lt; REP channel PARAM value &gt;</code></td><td><code>&lt; REP 1 BATT_CHARGE 078 &gt;</code></td></tr>
+      <tr><td>SAMPLE</td><td><code>&lt; SAMPLE ch v1 v2 &gt;</code> or keyword form</td><td><code>&lt; SAMPLE 1 058 142 &gt;</code></td></tr>
+    </tbody>
+  </table>
+
+  <div class="code-block"><code><span class="comment">// The entire Shure protocol parser — one regex + one split:</span>
+<span class="keyword">var</span> match = Regex.Match(line, <span class="string">@"&lt; (?&lt;body&gt;.+?) &gt;"</span>);
+<span class="keyword">string</span>[] parts = match.Groups[<span class="string">"body"</span>].Value.Split(<span class="string">' '</span>);
+
+<span class="keyword">switch</span> (parts[<span class="num">0</span>]) {
+    <span class="keyword">case</span> <span class="string">"REP"</span>:    HandleRep(parts);    <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"SAMPLE"</span>: HandleSample(parts); <span class="keyword">break</span>;
+}</code></div>
+
+  <h3 class="sub-title">Device Family Detection</h3>
+  <div class="code-block"><code><span class="keyword">case</span> <span class="string">"MODEL"</span>:
+    _model    = value.Trim();
+    _isAxient = _model.ToUpperInvariant().StartsWith(<span class="string">"AD"</span>) ||
+                _model.ToUpperInvariant().StartsWith(<span class="string">"ADX"</span>);
+    <span class="comment">// Fallback channel count if NUM_CH response is late:</span>
+    <span class="keyword">if</span> (model.Contains(<span class="string">"AD4Q"</span>)  || model.Contains(<span class="string">"ULXD4Q"</span>)) <span class="keyword">return</span> <span class="num">4</span>;
+    <span class="keyword">if</span> (model.Contains(<span class="string">"AD4D"</span>)  || model.Contains(<span class="string">"ULXD4D"</span>)) <span class="keyword">return</span> <span class="num">2</span>;
+    <span class="keyword">if</span> (model.Contains(<span class="string">"ULXD4"</span>) || model.Contains(<span class="string">"AD4"</span>))    <span class="keyword">return</span> <span class="num">1</span>;</code></div>
+
+  <h3 class="sub-title">ULX-D vs Axient Digital — Key Differences</h3>
+  <table class="data-table">
+    <thead><tr><th>Parameter</th><th>ULX-D</th><th>Axient Digital</th></tr></thead>
+    <tbody>
+      <tr><td>RF level</td><td>RX_RF_LVL (raw − 128 = dBm)</td><td>RSSI (raw − 120 = dBm)</td></tr>
+      <tr><td>Audio level</td><td>AUDIO_LVL (0–255)</td><td>AUDIO_LEVEL_RMS (raw − 120 = dBFS)</td></tr>
+      <tr><td>Battery %</td><td>BATT_CHARGE (0–100 direct)</td><td>TX_BATT_CHARGE_PERCENT or SLOT_BATT_CHARGE</td></tr>
+      <tr><td>Mute</td><td>TX_MUTE_STATUS (ON/OFF/UNKN)</td><td>TX_TALK_SWITCH (OFF = muted)</td></tr>
+      <tr><td>Audio gain</td><td>AUDIO_GAIN reported − 18 dB</td><td>AUDIO_GAIN (same offset)</td></tr>
+      <tr><td>RF quality</td><td>Derived from dBm only</td><td>CHAN_QUALITY 0–5 bars</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mfr-banner senn" style="margin-top:4rem">
+    <h2>Sennheiser</h2>
+    <p>EW-DX EM2  ·  EW-DX EM4  ·  Dante variants  ·  HTTPS Port 443</p>
+  </div>
+
+  <h2 class="section-title"><span class="ch">Chapter 5</span>Sennheiser Protocol — HTTPS + Server-Sent Events</h2>
+
+  <h3 class="sub-title">SSC v2 Connection Sequence</h3>
+  <div class="code-block"><code><span class="comment">// Step 1: Confirm SSC v2 supported</span>
+GET https://[ip]/api/ssc/version  →  {<span class="string">"version"</span>:<span class="string">"2.3.0"</span>}
+
+<span class="comment">// Step 2: Get device identity</span>
+GET https://[ip]/api/device/identity
+→  {<span class="string">"name"</span>:<span class="string">"EW-DX EM2"</span>,<span class="string">"channels"</span>:<span class="num">2</span>,<span class="string">"firmware"</span>:<span class="string">"4.2.1"</span>}
+
+<span class="comment">// Step 3: Open SSE stream (never closes until ETR-NodeScope disconnects)</span>
+GET https://[ip]/api/ssc/state/subscriptions
+→  {<span class="string">"uuid"</span>:<span class="string">"3f7a-..."</span>}
+
+<span class="comment">// Step 4: Subscribe to resource paths</span>
+PUT https://[ip]/api/ssc/state/subscriptions/3f7a-.../add
+→  {<span class="string">"resources"</span>:[<span class="string">"/api/device/channels/0/audio/level"</span>, ...]}
+
+<span class="comment">// Receiver now streams events whenever values change:</span>
+data: {<span class="string">"/api/device/channels/0/transmitter/battery/level"</span>:{<span class="string">"value"</span>:<span class="num">78</span>}}
+data: {<span class="string">"/api/device/channels/0/rf/level"</span>:{<span class="string">"value"</span>:-<span class="num">72.5</span>}}</code></div>
+
+  <div class="mfr-banner wisy" style="margin-top:4rem">
+    <h2>Wisycom</h2>
+    <p>MCR42  ·  MCR54  ·  MPR50  ·  MPR52  ·  TCP Port 32789</p>
+  </div>
+
+  <h2 class="section-title"><span class="ch">Chapter 6</span>Wisycom Protocol — JSON over TCP</h2>
+
+  <div class="callout warn">
+    <span class="callout-label">⚠️ Critical</span>
+    <p>Wisycom receivers allow only one TCP controller at a time on port 32789. If Wisycom Manager is connected, ETR-NodeScope cannot connect. Disconnect all other tools before starting ETR-NodeScope.</p>
+  </div>
+
+  <div class="code-block"><code><span class="comment">// ETR-NodeScope sends: get_device_info</span>
+<span class="comment">// Receiver responds:</span>
+{<span class="string">"result"</span>:<span class="string">"ok"</span>,<span class="string">"data"</span>:{<span class="string">"product"</span>:<span class="string">"MCR42"</span>,<span class="string">"num_channels"</span>:<span class="num">2</span>,<span class="string">"firmware"</span>:<span class="string">"1.9.3"</span>}}
+
+<span class="comment">// Receiver then pushes continuously:</span>
+{<span class="string">"channels"</span>:[
+  {<span class="string">"name"</span>:<span class="string">"CH1"</span>,<span class="string">"frequency"</span>:<span class="num">614500000</span>,
+   <span class="string">"rf_a"</span>:-<span class="num">68.5</span>,<span class="string">"rf_b"</span>:-<span class="num">71.0</span>,<span class="string">"audio"</span>:-<span class="num">14.2</span>,
+   <span class="string">"battery"</span>:<span class="num">78</span>,<span class="string">"mute"</span>:<span class="keyword">false</span>},
+  ...
+]}
+
+<span class="comment">// Parsed with System.Text.Json:</span>
+<span class="keyword">using var</span> doc = JsonDocument.Parse(json);
+<span class="keyword">var</span> arr = doc.RootElement.GetProperty(<span class="string">"channels"</span>);
+<span class="keyword">foreach</span> (<span class="keyword">var</span> ch <span class="keyword">in</span> arr.EnumerateArray()) {
+    s.RfLevelA       = ch.GetProperty(<span class="string">"rf_a"</span>).GetDouble();
+    s.BatteryPercent = ch.GetProperty(<span class="string">"battery"</span>).GetInt32();
+    ChannelDataReceived?.Invoke(chIndex - <span class="num">1</span>, s); <span class="comment">// 1-based → 0-based</span>
+}</code></div>
+</section>
+
+<!-- QUIZ 4 -->
+<div class="quiz-section" data-quiz="4">
+  <div class="quiz-header">
+    <div class="quiz-icon">❓</div>
+    <div><h3>Part IV Quiz</h3><p>Wireless Protocols — 5 questions, pass mark 60%</p></div>
+  </div>
+
+  <div class="question" data-q="1" data-correct="c">
+    <span class="q-num">Question 1 of 5</span>
+    <p class="q-text">A Shure AD4D-A sends <code>&lt; REP 1 RX_RF_LVL 043 &gt;</code>. What is the actual RF level in dBm, and which device family is this?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q4-1" value="a"><span class="option-dot"></span><span class="option-text">−43 dBm — Axient Digital (offset −0)</span></label>
+      <label class="option"><input type="radio" name="q4-1" value="b"><span class="option-dot"></span><span class="option-text">−77 dBm — Axient Digital (offset −120)</span></label>
+      <label class="option"><input type="radio" name="q4-1" value="c"><span class="option-dot"></span><span class="option-text">−85 dBm — ULX-D (offset −128). Wait: AD4D-A is Axient Digital so it uses RSSI not RX_RF_LVL. RX_RF_LVL is ULX-D specific. Offset = 43 − 128 = −85 dBm if this were ULX-D</span></label>
+      <label class="option"><input type="radio" name="q4-1" value="d"><span class="option-dot"></span><span class="option-text">−85 dBm — regardless of family, the offset is always −128</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! The key insight: RX_RF_LVL is a ULX-D parameter (offset −128). Axient Digital uses RSSI (offset −120). The AD4D-A is Axient Digital — so in practice it would send RSSI, not RX_RF_LVL. If it were ULX-D: 43 − 128 = −85 dBm. This is a weak signal — 1 bar.</div>
+    <div class="feedback wrong">✗ ULX-D uses RX_RF_LVL with offset −128. Axient Digital uses RSSI with offset −120. For ULX-D: 43 − 128 = −85 dBm (weak signal). For Axient: 43 − 120 = −77 dBm (acceptable).</div>
+  </div>
+
+  <div class="question" data-q="2" data-correct="b">
+    <span class="q-num">Question 2 of 5</span>
+    <p class="q-text">ETR-NodeScope receives: <code>&lt; SAMPLE 1 RSSI A 083 &gt;</code> from an Axient Digital receiver. What does it do with this message?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q4-2" value="a"><span class="option-dot"></span><span class="option-text">Ignores it — SAMPLE frames are for positional data only</span></label>
+      <label class="option"><input type="radio" name="q4-2" value="b"><span class="option-dot"></span><span class="option-text">Detects that parts[2] ("RSSI") is not numeric — this is a keyword SAMPLE frame — synthesises ["REP","1","RSSI","A","083"] and routes it through HandleRep() so the RSSI case parses it normally</span></label>
+      <label class="option"><input type="radio" name="q4-2" value="c"><span class="option-dot"></span><span class="option-text">Sends a GET command to request the full RSSI value from the receiver</span></label>
+      <label class="option"><input type="radio" name="q4-2" value="d"><span class="option-dot"></span><span class="option-text">Stores it in a separate buffer for post-show RF analysis</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! The keyword SAMPLE detection is elegant: if parts[2] is not a number, it's a keyword frame. Synthesise a REP array and reuse the existing HandleRep parser — no duplicate code needed.</div>
+    <div class="feedback wrong">✗ ETR-NodeScope detects keyword SAMPLE frames by checking if parts[2] is numeric. If not, it synthesises a REP frame array and routes it through HandleRep() — reusing the existing parser.</div>
+  </div>
+
+  <div class="question" data-q="3" data-correct="a">
+    <span class="q-num">Question 3 of 5</span>
+    <p class="q-text">What does Sennheiser's SSE subscription PUT request do and why is it necessary?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q4-3" value="a"><span class="option-dot"></span><span class="option-text">It tells the receiver exactly which resource paths to include in the event stream. Without it, the receiver would either send everything (wasteful bandwidth) or nothing. ETR-NodeScope subscribes to 10 specific paths per channel (battery, RF, mute, gain, etc.)</span></label>
+      <label class="option"><input type="radio" name="q4-3" value="b"><span class="option-dot"></span><span class="option-text">It registers ETR-NodeScope as an authorised controller to prevent unauthorised access to the receiver</span></label>
+      <label class="option"><input type="radio" name="q4-3" value="c"><span class="option-dot"></span><span class="option-text">It sets the polling interval for how frequently the receiver should check its own sensors</span></label>
+      <label class="option"><input type="radio" name="q4-3" value="d"><span class="option-dot"></span><span class="option-text">It upgrades the HTTP connection to a WebSocket for bidirectional communication</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! SSC v2 is designed for efficiency — the controller specifies exactly what it wants. ETR-NodeScope subscribes to 10 paths per channel. The receiver only streams changes to those paths, not its entire internal state.</div>
+    <div class="feedback wrong">✗ The PUT subscription tells the receiver which specific resource paths to include in the event stream. ETR-NodeScope subscribes to 10 paths per channel (battery, RF level, audio level, mute, gain, etc.).</div>
+  </div>
+
+  <div class="question" data-q="4" data-correct="d">
+    <span class="q-num">Question 4 of 5</span>
+    <p class="q-text">Why does Wisycom's ChannelDataReceived call use <code>chIndex - 1</code> when invoking the event?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q4-4" value="a"><span class="option-dot"></span><span class="option-text">Wisycom uses zero-based channel numbering in its JSON</span></label>
+      <label class="option"><input type="radio" name="q4-4" value="b"><span class="option-dot"></span><span class="option-text">The -1 accounts for the device channel header in the JSON array</span></label>
+      <label class="option"><input type="radio" name="q4-4" value="c"><span class="option-dot"></span><span class="option-text">ETR-NodeScope's tile system uses -1 as the first tile index for historical reasons</span></label>
+      <label class="option"><input type="radio" name="q4-4" value="d"><span class="option-dot"></span><span class="option-text">Wisycom's JSON array uses 1-based channel numbers (CH1, CH2) but ETR-NodeScope's internal tile system is 0-based — the subtraction converts between the two conventions</span></option></label>
+    </div>
+    <div class="feedback correct">✓ Correct! This is a classic off-by-one conversion. Wisycom counts channels from 1. ETR-NodeScope's tile indices start at 0. Without the -1, every Wisycom channel would appear on the wrong tile.</div>
+    <div class="feedback wrong">✗ It's a 1-based to 0-based conversion. Wisycom numbers channels starting from 1 (CH1, CH2). ETR-NodeScope tiles are 0-indexed. Subtracting 1 aligns them correctly.</div>
+  </div>
+
+  <div class="question" data-q="5" data-correct="b">
+    <span class="q-num">Question 5 of 5</span>
+    <p class="q-text">ETR-NodeScope discovers a Shure receiver at 169.254.158.222 via multicast and at 169.254.100.134 via TCP fingerprint. It connects to 169.254.100.134. Why?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q4-5" value="a"><span class="option-dot"></span><span class="option-text">169.254.100.x addresses are always preferred over 169.254.158.x by the IP routing table</span></label>
+      <label class="option"><input type="radio" name="q4-5" value="b"><span class="option-dot"></span><span class="option-text">The AD4D-A has two network interfaces: 169.254.158.222 is the Dante audio port (partial data only), 169.254.100.134 is the control port (full RF/battery/frequency data). ETR-NodeScope tags the multicast-discovered IP as "shure-multicast" and skips it when a TCP-fingerprinted control IP exists</span></label>
+      <label class="option"><input type="radio" name="q4-5" value="c"><span class="option-dot"></span><span class="option-text">The lower IP address (100.134) always has higher bandwidth than the higher address</span></label>
+      <label class="option"><input type="radio" name="q4-5" value="d"><span class="option-dot"></span><span class="option-text">Multicast-discovered devices are always ignored as they cannot be verified</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! The AD4D-A dual-interface problem is one of the most important practical details in ETR-NodeScope. The Dante audio port responds to some port 2202 commands but doesn't give full data. ETR-NodeScope's source-tagging system solves this automatically.</div>
+    <div class="feedback wrong">✗ The AD4D-A has two network interfaces — the Dante audio port (found via multicast) and the control port (found via mDNS + TCP fingerprint). ETR-NodeScope tags the multicast-only IP and skips it when a verified control IP exists.</div>
+  </div>
+
+  <div class="quiz-footer">
+    <button class="btn-check" onclick="checkQuiz(4)">Check Answers</button>
+    <span class="score-display" id="score-4"></span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     PART V — USING THE SOFTWARE
+═════════════════════════════════════════════════════════════════════ -->
+<div class="part-divider" id="part5">
+  <span class="part-label">Part V</span>
+  <h2>Using the Software</h2>
+</div>
+
+<section class="section" id="ch7">
+  <h2 class="section-title"><span class="ch">Chapter 7</span>Installation, Setup and Live Operation</h2>
+
+  <h3 class="sub-title">System Requirements</h3>
+  <table class="data-table">
+    <thead><tr><th>Requirement</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>OS</td><td>Windows 10 64-bit (1903+) or Windows 11</td></tr>
+      <tr><td>CPU</td><td>4-core minimum — i5/Ryzen 5. i7/Ryzen 7 recommended for 32+ channels</td></tr>
+      <tr><td>RAM</td><td>8 GB minimum, 16 GB recommended</td></tr>
+      <tr><td>Network</td><td>Wired Ethernet. Wi-Fi not recommended for ASIO audio</td></tr>
+      <tr><td>Dante Virtual Soundcard</td><td>DVS 4.x licensed and running. No other ASIO app open simultaneously</td></tr>
+      <tr><td>.NET 8</td><td>Bundled with the ETR-NodeScope installer</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title">First Launch — Step by Step</h3>
+  <p>1. Launch ETR-NodeScope.exe as Administrator &nbsp;→&nbsp; 2. File → Settings → Audio → select Dante Virtual Soundcard → Channel Count = 8 → Save &nbsp;→&nbsp; 3. Press F5 &nbsp;→&nbsp; 4. Watch Live Logs (Ctrl+L) for "Connected to x.x.x.x:2202"</p>
+
+  <div class="callout tip">
+    <span class="callout-label">💡 Tip</span>
+    <p>Use Actions → Demo Mode if you have no hardware. Simulated RF, battery, and audio will populate all tiles so you can explore the interface without a physical show.</p>
+  </div>
+
+  <h3 class="sub-title">Settings Reference</h3>
+  <table class="data-table">
+    <thead><tr><th>Setting</th><th>Default</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>ASIO Device</td><td>—</td><td>Must be set to Dante Virtual Soundcard</td></tr>
+      <tr><td>Channel Count</td><td>8</td><td>Maximum 64. Add more without restarting</td></tr>
+      <tr><td>Buffer Size</td><td>512 samples</td><td>10.7ms at 48 kHz</td></tr>
+      <tr><td>WebUI Port</td><td>8080</td><td>Browser access: http://[ip]:8080/</td></tr>
+      <tr><td>Allow Remote Clients</td><td>Off</td><td>Turn on for tablet access</td></tr>
+      <tr><td>Enable Remote Commands</td><td>Off</td><td>Allows browsers to send Start/Stop/mute</td></tr>
+      <tr><td>Shared Secret</td><td>empty</td><td>Token for remote command auth in URL</td></tr>
+      <tr><td>Battery Warning %</td><td>30</td><td>Per-talent override in Talent Manager</td></tr>
+      <tr><td>Battery Critical %</td><td>15</td><td>Per-talent override available</td></tr>
+      <tr><td>RF Warning dBm</td><td>−85</td><td>Per-talent override available</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title">Keyboard Shortcuts</h3>
+  <table class="data-table">
+    <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><code>F5</code></td><td>Start monitoring</td></tr>
+      <tr><td><code>F6</code></td><td>Stop monitoring</td></tr>
+      <tr><td><code>Ctrl+,</code></td><td>Open Settings</td></tr>
+      <tr><td><code>M</code></td><td>Toggle Mic Check Mode</td></tr>
+      <tr><td><code>Ctrl+L</code></td><td>Open Live Logs</td></tr>
+      <tr><td><code>Ctrl+S</code></td><td>Quick save Show Preset</td></tr>
+      <tr><td><code>Enter / Space</code></td><td>Monitor/unmonitor selected channel</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- QUIZ 5 -->
+<div class="quiz-section" data-quiz="5">
+  <div class="quiz-header">
+    <div class="quiz-icon">❓</div>
+    <div><h3>Part V Quiz</h3><p>Using the Software — 5 questions, pass mark 60%</p></div>
+  </div>
+
+  <div class="question" data-q="1" data-correct="c">
+    <span class="q-num">Question 1 of 5</span>
+    <p class="q-text">ETR-NodeScope's tiles are showing "---" for channel name, battery, and frequency after connecting. What is the most likely cause?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q5-1" value="a"><span class="option-dot"></span><span class="option-text">No Dante audio is flowing — the ASIO driver is not receiving any audio</span></label>
+      <label class="option"><input type="radio" name="q5-1" value="b"><span class="option-dot"></span><span class="option-text">The transmitters are switched off and not transmitting</span></label>
+      <label class="option"><input type="radio" name="q5-1" value="c"><span class="option-dot"></span><span class="option-text">ETR-NodeScope is connected to the Dante audio port (169.254.158.x) instead of the control port (169.254.100.x). The Dante port responds to some TCP/2202 commands but doesn't return CHAN_NAME, BATT_CHARGE, or FREQUENCY. Enable mDNS or add the control IP manually</span></label>
+      <label class="option"><input type="radio" name="q5-1" value="d"><span class="option-dot"></span><span class="option-text">The receivers need to be rebooted to send their configuration data</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! This is the most common Shure Axient connection problem. The Dante audio port gives partial data — RF bars may even work. But channel name, battery, and frequency come only from the control port.</div>
+    <div class="feedback wrong">✗ When tiles show --- for name/battery/frequency but RF might still work, the likely cause is connecting to the Dante audio port instead of the control port. Enable mDNS discovery or add the control IP manually.</div>
+  </div>
+
+  <div class="question" data-q="2" data-correct="a">
+    <span class="q-num">Question 2 of 5</span>
+    <p class="q-text">A Wisycom MCR42 is not appearing in ETR-NodeScope's Connected Devices panel. You have verified the IP is reachable. What should you check first?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q5-2" value="a"><span class="option-dot"></span><span class="option-text">Whether Wisycom Manager or any other tool is connected to port 32789 on that device — the single-controller restriction means only one client can hold the connection. Disconnect other tools, then add the IP manually in Settings → Wireless Devices</span></label>
+      <label class="option"><input type="radio" name="q5-2" value="b"><span class="option-dot"></span><span class="option-text">Whether the Wisycom receiver's multicast announcements are reaching ETR-NodeScope</span></label>
+      <label class="option"><input type="radio" name="q5-2" value="c"><span class="option-dot"></span><span class="option-text">Whether the receiver's HTTPS certificate is valid and trusted by Windows</span></label>
+      <label class="option"><input type="radio" name="q5-2" value="d"><span class="option-dot"></span><span class="option-text">Whether the receiver's firmware supports the JSON protocol version ETR-NodeScope expects</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! And remember: Wisycom doesn't use multicast. You must always add Wisycom IPs manually — they will never be auto-discovered. Then check no other tool (Wisycom Manager) holds port 32789.</div>
+    <div class="feedback wrong">✗ The first check for Wisycom is the single-controller restriction. Also remember: Wisycom has no multicast, so you must add the IP manually in Settings → Wireless Devices regardless.</div>
+  </div>
+
+  <div class="question" data-q="3" data-correct="d">
+    <span class="q-num">Question 3 of 5</span>
+    <p class="q-text">What is the purpose of the Release Readiness check in ETR-NodeScope?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q5-3" value="a"><span class="option-dot"></span><span class="option-text">It updates ETR-NodeScope to the latest version from the internet</span></label>
+      <label class="option"><input type="radio" name="q5-3" value="b"><span class="option-dot"></span><span class="option-text">It exports a compliance report for venue safety certification</span></label>
+      <label class="option"><input type="radio" name="q5-3" value="c"><span class="option-dot"></span><span class="option-text">It backs up the current show configuration to cloud storage</span></label>
+      <label class="option"><input type="radio" name="q5-3" value="d"><span class="option-dot"></span><span class="option-text">It runs automated pre-show checks including: settings writable, ASIO driver available, WebUI resources accessible, MQTT configured, licence valid, Shure multicast socket bindable on 8427, mDNS socket bindable on 5353, and debug logging disabled</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Run Release Readiness before every show. All checks should show green. A red check (e.g. port 8427 already bound) indicates a configuration problem that could prevent normal operation.</div>
+    <div class="feedback wrong">✗ Release Readiness is a pre-show automated checklist. It tests 12+ conditions that need to be right for ETR-NodeScope to function properly — socket bindings, licence validity, ASIO availability, and more.</div>
+  </div>
+
+  <div class="question" data-q="4" data-correct="b">
+    <span class="q-num">Question 4 of 5</span>
+    <p class="q-text">You want a tablet operator to view the WebUI and be able to send mute commands, protected by a password. What settings do you need?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q5-4" value="a"><span class="option-dot"></span><span class="option-text">Enable WebUI only — tablets can always access all features including mute commands by default</span></label>
+      <label class="option"><input type="radio" name="q5-4" value="b"><span class="option-dot"></span><span class="option-text">Allow Remote Clients ON, Enable Remote Commands ON, Shared Secret set to a password (e.g. "showday2026"). Give the tablet the URL http://[ip]:8080/?token=showday2026</span></label>
+      <label class="option"><input type="radio" name="q5-4" value="c"><span class="option-dot"></span><span class="option-text">Allow Remote Clients ON, Enable MQTT ON — MQTT handles the mute commands from tablets</span></label>
+      <label class="option"><input type="radio" name="q5-4" value="d"><span class="option-dot"></span><span class="option-text">Create a separate user account in ETR-NodeScope for the tablet operator with operator-level permissions</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Three settings needed: Allow Remote Clients (enables access from other devices), Enable Remote Commands (allows control, not just monitoring), and Shared Secret (token-based authentication). The token goes in the URL on first visit, then is stored locally in the browser.</div>
+    <div class="feedback wrong">✗ You need: Allow Remote Clients ON (opens access to other devices), Enable Remote Commands ON (allows mute/control — not just monitoring), and a Shared Secret. The token goes in the URL: http://[ip]:8080/?token=yourpassword.</div>
+  </div>
+
+  <div class="question" data-q="5" data-correct="c">
+    <span class="q-num">Question 5 of 5</span>
+    <p class="q-text">Why does the WebUI audio stream work in Chrome but a student reports no audio in their browser despite the connection indicator being green?</p>
+    <div class="options">
+      <label class="option"><input type="radio" name="q5-5" value="a"><span class="option-dot"></span><span class="option-text">The WebSocket audio format (PCM-16LE) is not supported by all browsers</span></label>
+      <label class="option"><input type="radio" name="q5-5" value="b"><span class="option-dot"></span><span class="option-text">The student's browser is blocking WebSocket connections on port 8080</span></label>
+      <label class="option"><input type="radio" name="q5-5" value="c"><span class="option-dot"></span><span class="option-text">Modern browsers (Chrome, Safari, Firefox) require a user gesture — a click or tap — before they allow audio to start playing. If the student navigated directly to a channel without first clicking the page, the Web Audio API will be blocked. Solution: click anywhere on the page, then double-click the tile</span></option></label>
+      <label class="option"><input type="radio" name="q5-5" value="d"><span class="option-dot"></span><span class="option-text">The audio buffer (200ms) is too small for a Wi-Fi connection and needs to be increased</span></label>
+    </div>
+    <div class="feedback correct">✓ Correct! Browser autoplay policy has been strict since 2018. The Web Audio API requires a user gesture (click, tap, or keypress) before audio context can be created and audio played. This applies to all browsers — Chrome, Safari, Firefox, Edge.</div>
+    <div class="feedback wrong">✗ This is the browser autoplay policy in action. All modern browsers require a user gesture before playing audio. The student needs to click anywhere on the page first, then double-click the tile to start monitoring.</div>
+  </div>
+
+  <div class="quiz-footer">
+    <button class="btn-check" onclick="checkQuiz(5)">Check Answers</button>
+    <span class="score-display" id="score-5"></span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     REVEAL BUTTON + FINAL RESULTS
+═════════════════════════════════════════════════════════════════════ -->
+<button id="reveal-btn" onclick="revealResults()">▶ REVEAL FINAL RESULTS</button>
+
+<div id="final-results">
+  <div class="result-icon" id="result-icon"></div>
+  <h2 id="result-heading"></h2>
+  <p id="final-score-text"></p>
+  <div class="result-breakdown">
+    <div class="rb-item correct"><span class="rb-num" id="rb-correct">0</span><span class="rb-label">Correct</span></div>
+    <div class="rb-item wrong"><span class="rb-num" id="rb-wrong">0</span><span class="rb-label">Wrong</span></div>
+    <div class="rb-item pct"><span class="rb-num" id="rb-pct">0%</span><span class="rb-label">Score</span></div>
+  </div>
+  <p id="result-message" style="color:#8899aa;max-width:600px;margin:1rem auto;line-height:1.7;"></p>
+  <button class="btn-retry" onclick="retryAll()">↺ Retry All Quizzes</button>
+</div>
+
+</main>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     JAVASCRIPT
+═════════════════════════════════════════════════════════════════════ -->
+<script>
+// ── Quiz state ────────────────────────────────────────────────────────
+const state = {
+  quizzes: { 1:{checked:false,score:0,total:5}, 2:{checked:false,score:0,total:5},
+             3:{checked:false,score:0,total:5}, 4:{checked:false,score:0,total:5},
+             5:{checked:false,score:0,total:5} }
+};
+
+// ── Progress bar ──────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const doc  = document.documentElement;
+  const pct  = (doc.scrollTop) / (doc.scrollHeight - doc.clientHeight) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+});
+
+// ── Check a single quiz ───────────────────────────────────────────────
+function checkQuiz(quizId) {
+  const section = document.querySelector(`.quiz-section[data-quiz="${quizId}"]`);
+  const questions = section.querySelectorAll('.question');
+  let score = 0;
+
+  questions.forEach(q => {
+    const correct = q.dataset.correct;
+    const selected = q.querySelector('input[type="radio"]:checked');
+    const options  = q.querySelectorAll('.option');
+    const feedbacks = q.querySelectorAll('.feedback');
+
+    // Mark all options
+    options.forEach(opt => {
+      const input = opt.querySelector('input');
+      if (input.value === correct) {
+        opt.classList.add('correct');
+      } else if (selected && input.value === selected.value) {
+        opt.classList.add('wrong');
+      }
+      opt.style.pointerEvents = 'none';
+    });
+
+    // Show feedback
+    if (selected) {
+      const fb = selected.value === correct ? feedbacks[0] : feedbacks[1];
+      fb.classList.add('visible');
+      if (selected.value === correct) score++;
+    } else {
+      feedbacks[1].classList.add('visible');
+      feedbacks[1].textContent = '✗ No answer selected. ' + feedbacks[1].textContent.replace(/^✗[^.]+\./,'');
+    }
+  });
+
+  state.quizzes[quizId] = { checked: true, score, total: 5 };
+
+  // Show score
+  const scoreEl = document.getElementById(`score-${quizId}`);
+  const pct = Math.round(score/5*100);
+  const pass = pct >= 60;
+  scoreEl.textContent = `${score}/5 (${pct}%) — ${pass ? '✓ PASS' : '✗ FAIL'}`;
+  scoreEl.className = `score-display ${pass?'pass':'fail'} visible`;
+
+  // Disable button
+  section.querySelector('.btn-check').disabled = true;
+}
+
+// ── Reveal final results ──────────────────────────────────────────────
+function revealResults() {
+  // Check any unchecked quizzes first
+  for (let i = 1; i <= 5; i++) {
+    if (!state.quizzes[i].checked) checkQuiz(i);
+  }
+
+  let totalCorrect = 0, totalWrong = 0;
+  for (let i = 1; i <= 5; i++) {
+    totalCorrect += state.quizzes[i].score;
+    totalWrong   += (state.quizzes[i].total - state.quizzes[i].score);
+  }
+  const total = totalCorrect + totalWrong;
+  const pct   = Math.round(totalCorrect / total * 100);
+  const pass  = pct >= 60;
+
+  document.getElementById('rb-correct').textContent = totalCorrect;
+  document.getElementById('rb-wrong').textContent   = totalWrong;
+  document.getElementById('rb-pct').textContent     = pct + '%';
+
+  const results = document.getElementById('final-results');
+  results.className = `visible ${pass ? 'pass' : 'fail'}`;
+  document.getElementById('result-icon').textContent  = pass ? '🎓' : '📖';
+  document.getElementById('result-heading').textContent = pass ? 'Congratulations — You Passed!' : 'Keep Studying';
+  document.getElementById('final-score-text').innerHTML =
+    `You scored <strong>${totalCorrect} / ${total}</strong> (${pct}%)`;
+  document.getElementById('result-message').textContent = pass
+    ? `You have demonstrated a solid understanding of Dante networking, protocol history, software architecture, and wireless device integration. You are ready to use ETR-NodeScope on a live show and understand what it is doing under the hood.`
+    : `You scored below 60%. Review the sections where you missed questions — particularly the history of protocols (who invented them and why) and the technical details of how Shure, Sennheiser, and Wisycom receivers communicate with ETR-NodeScope. Then try again.`;
+
+  results.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.getElementById('reveal-btn').style.display = 'none';
+}
+
+// ── Retry ─────────────────────────────────────────────────────────────
+function retryAll() {
+  // Reset state
+  for (let i = 1; i <= 5; i++) {
+    state.quizzes[i] = { checked: false, score: 0, total: 5 };
+  }
+
+  // Re-enable all options
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.classList.remove('correct','wrong');
+    opt.style.pointerEvents = '';
+    opt.querySelector('input').checked = false;
+    opt.querySelector('.option-dot').style.background = '';
+    opt.querySelector('.option-dot').style.borderColor = '';
+  });
+
+  // Hide all feedback
+  document.querySelectorAll('.feedback').forEach(f => {
+    f.classList.remove('visible');
+  });
+
+  // Reset scores
+  for (let i = 1; i <= 5; i++) {
+    const s = document.getElementById(`score-${i}`);
+    if (s) { s.className = 'score-display'; s.textContent = ''; }
+  }
+
+  // Re-enable buttons
+  document.querySelectorAll('.btn-check').forEach(b => b.disabled = false);
+
+  // Hide results
+  document.getElementById('final-results').className = '';
+  document.getElementById('reveal-btn').style.display = 'block';
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
