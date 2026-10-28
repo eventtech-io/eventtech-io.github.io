@@ -1,1 +1,0 @@
-Extract and upload these files to the root of your GitHub Pages repository. Images and stylesheet backgrounds are directly embedded. Keep media and papers folders for links and guides. CNAME retains eventresearch.io. Illustrative atmosphere images are generated, not photographs of completed client work.
